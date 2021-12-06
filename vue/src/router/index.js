@@ -53,6 +53,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    // {
+    //   path: "/menu",
+    //   name: "menu",
+    //   component: Menu,
+    //   meta: {
+    //     requiresAuth: false
+    //   }
+    // },
   ]
 })
 

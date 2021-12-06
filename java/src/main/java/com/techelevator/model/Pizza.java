@@ -21,17 +21,27 @@ public class Pizza {
     private Ingredient ingredient8;
     private Ingredient ingredient9;
     private Ingredient ingredient10;
-
-    public List<Ingredient> getPizzaIngredients() {
-        List<Ingredient> listOfPizzaIngredients = Arrays.asList(ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6,
-                ingredient7, ingredient8, ingredient9, ingredient10);
-
-        return listOfPizzaIngredients;
-    }
+    private List<Ingredient> pizzaIngredients = new ArrayList<>();
 
     public Pizza() {
 
     }
+
+    public Pizza(int pizzaId, BigDecimal price, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, Ingredient ingredient4, Ingredient ingredient5, Ingredient ingredient6, Ingredient ingredient7, Ingredient ingredient8, Ingredient ingredient9, Ingredient ingredient10) {
+        this.pizzaId = pizzaId;
+        this.price = price;
+        this.ingredient1 = ingredient1;
+        this.ingredient2 = ingredient2;
+        this.ingredient3 = ingredient3;
+        this.ingredient4 = ingredient4;
+        this.ingredient5 = ingredient5;
+        this.ingredient6 = ingredient6;
+        this.ingredient7 = ingredient7;
+        this.ingredient8 = ingredient8;
+        this.ingredient9 = ingredient9;
+        this.ingredient10 = ingredient10;
+    }
+
 
     public Pizza(int pizzaId, String pizzaName, String pizzaDescription, BigDecimal price, Ingredient ingredient1, Ingredient ingredient2, Ingredient ingredient3, Ingredient ingredient4, Ingredient ingredient5, Ingredient ingredient6, Ingredient ingredient7, Ingredient ingredient8, Ingredient ingredient9, Ingredient ingredient10) {
         this.pizzaId = pizzaId;
@@ -161,4 +171,16 @@ public class Pizza {
     public void setIngredient10(Ingredient ingredient10) {
         this.ingredient10 = ingredient10;
     }
+
+    public List<Ingredient> getPizzaIngredients() {
+        pizzaIngredients = Arrays.asList(ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6,
+                ingredient7, ingredient8, ingredient9, ingredient10);
+
+        return pizzaIngredients;
+    }
+
+    public void setPizzaIngredients(List<Ingredient> pizzaIngredients) {
+        this.pizzaIngredients = pizzaIngredients;
+    }
+
 }
