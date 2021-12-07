@@ -1,15 +1,24 @@
 <template>
-    <div>
-        <nav><h2>Categories</h2></nav>
-    </div>
+  <div>
+    <nav>
+      <h2>Categories</h2>
+      <p>Appetizers</p>
+      <p>Desserts</p>
+      <p>Drinks</p>
+      <p>Salads</p>
+      <p>Pizzas</p>
+    </nav>
+  </div>
 </template>
 
 <script>
 export default {
-
-}
+  name: "navigation",
+};
 </script>
 
-<style>
-
+<style scoped>
+div {
+  border: solid 1px red;
+}
 </style>

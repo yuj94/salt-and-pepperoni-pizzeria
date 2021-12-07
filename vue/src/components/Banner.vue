@@ -1,17 +1,21 @@
 <template>
   <div>
-    <h2>Cart</h2>
+    <h1>Salt & Pepperoni Pizzeria</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "cart",
+  name: "banner",
 };
 </script>
 
 <style scoped>
 div {
-  border: solid 1px brown;
+  border: solid 1px black;
+}
+
+h1 {
+  color: #D20201;
 }
 </style>
