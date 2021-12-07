@@ -9,11 +9,9 @@ public interface PizzaDao {
 
     List<Pizza> getPizzaList();
 
-    Pizza getPizza(int newPizzaId);
-
     Pizza getCustomPizza(int newPizzaId);
 
-    Ingredient getIngredient(String ingredientName);
+    List<Ingredient> getPizzaIngredients(int pizzaId);
 
     List<Ingredient> getIngredientList();
 
