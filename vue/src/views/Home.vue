@@ -2,17 +2,14 @@
   <div class="home">
     <h1>Home</h1>
     <p>You must be authenticated to see this</p>
-    <menu-items></menu-items>
   </div>
 </template>
 
 <script>
-import MenuItems from '@/components/MenuItems.vue';
+
 
 export default {
   name: "home",
-  components: {
-        MenuItems
-    }
+
 };
 </script>

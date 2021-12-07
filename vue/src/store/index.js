@@ -22,6 +22,18 @@ export default new Vuex.Store({
     user: currentUser || {},
     pizzaMenuItems: {
       pizzaName: '',
+      pizzaDescription: '',
+      price: '',
+      ingredient1: '',
+      ingredient2: '',
+      ingredient3: '',
+      ingredient4: '',
+      ingredient5: '',
+      ingredient6: '',
+      ingredient7: '',
+      ingredient8: '',
+      ingredient9: '',
+      ingredient10: ''
     },
   },
   mutations: {
