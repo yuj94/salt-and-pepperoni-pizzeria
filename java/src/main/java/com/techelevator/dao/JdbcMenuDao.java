@@ -1,43 +1,64 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Ingredient;
+import com.techelevator.model.MenuItem;
 import com.techelevator.model.Pizza;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcPizzaDao implements PizzaDao {
+public class JdbcMenuDao implements MenuDao {
 
     private JdbcTemplate jdbcTemplate;
+    private static final String PIZZA_CATEGORY = "Pizza";
+    private static final String APPETIZER_CATEGORY = "Appetizer";
+    private static final String DESSERT_CATEGORY = "Dessert";
+    private static final String SALAD_CATEGORY = "Salad";
+    private static final String DRINK_CATEGORY = "Drink";
     private static final String CUSTOM_PIZZA = "Custom";
     private static final String SPECIALTY_PIZZA = "Specialty";
     private static final int MAX_INGREDIENTS_ALLOWED = 10;
 
-    public JdbcPizzaDao(JdbcTemplate jdbcTemplate) {
+    public JdbcMenuDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public List<Pizza> getPizzaList() {
-        List<Pizza> pizzaList = new ArrayList<>();
+    public List<MenuItem> getAllMenuItems() {
+        List<MenuItem> menuItemList = new ArrayList<>();
 
-        String sql = "SELECT special_pizza.pizza_id, pizza_name, pizza_description, pizza.price FROM special_pizza\n" +
-                "FULL OUTER JOIN pizza ON pizza.pizza_id = special_pizza.pizza_id;";
+        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            menuItemList.add(mapRowToMenuItem(results));
+        }
+
+        return menuItemList;
+    }
+
+    @Override
+    public List<MenuItem> getSpecialtyPizzaList() {
+        List<MenuItem> pizzaList = new ArrayList<>();
+
+        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
+                "WHERE item_category = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, PIZZA_CATEGORY);
 
         while (results.next()) {
             pizzaList.add(mapRowToPizza(SPECIALTY_PIZZA, results));
         }
 
-        for (Pizza pizza: pizzaList) {
-//            pizza.setPrice(getPizzaPrice(pizza));
-            pizza.setPizzaIngredients(getPizzaIngredients(pizza.getPizzaId()));
+        for (MenuItem pizza: pizzaList) {
+            pizza.setIngredientList(getPizzaIngredients(pizza.getItemId()));
         }
 
         return pizzaList;
@@ -47,7 +68,7 @@ public class JdbcPizzaDao implements PizzaDao {
     public List<Ingredient> getPizzaIngredients(int pizzaId) {
         List<Ingredient> ingredients = new ArrayList<>();
 
-        String sql = "SELECT ingredient.ingredient_id, ingredient_name, ingredient_type, ingredient.price, ingredient.quantity AS total_quantity, pizza_ingredient.quantity AS order_quantity FROM ingredient\n" +
+        String sql = "SELECT ingredient.ingredient_id, ingredient_name, ingredient_type, ingredient.price, ingredient.total_quantity AS total_quantity, pizza_ingredient.quantity AS order_quantity FROM ingredient\n" +
                 "INNER JOIN pizza_ingredient ON pizza_ingredient.ingredient_id = ingredient.ingredient_id\n" +
                 "WHERE pizza_id = ?;";
 
@@ -76,8 +97,8 @@ public class JdbcPizzaDao implements PizzaDao {
     }
 
     @Override
-    public Pizza getCustomPizza(int customPizzaId) {
-        Pizza pizza = null;
+    public MenuItem getCustomPizza(int customPizzaId) {
+        MenuItem pizza = null;
 
         String sql = "SELECT pizza_id, price FROM pizza WHERE pizza_id = ?;";
 
@@ -87,7 +108,7 @@ public class JdbcPizzaDao implements PizzaDao {
             pizza = mapRowToPizza(CUSTOM_PIZZA, results);
         }
 
-        pizza.setPizzaIngredients(getPizzaIngredients(pizza.getPizzaId()));
+        pizza.setIngredientList(getPizzaIngredients(pizza.getItemId()));
 
         return pizza;
     }
@@ -122,36 +143,37 @@ public class JdbcPizzaDao implements PizzaDao {
 
     }
 
-    private void setPizzaPrice(Pizza pizza) {
-        String sql = "UPDATE pizza SET price = ? WHERE pizza_id = ?;";
+    private void setPizzaPrice(MenuItem pizza) {
+        String sql = "UPDATE menu SET price = ? WHERE item_id = ?;";
 
-        jdbcTemplate.update(sql, calculatePizzaPrice(pizza), pizza.getPizzaId());
+        jdbcTemplate.update(sql, calculatePizzaPrice(pizza), pizza.getItemId());
     }
 
-    private BigDecimal getPizzaPrice(Pizza pizza) {
+    private BigDecimal getPizzaPrice(MenuItem pizza) {
         setPizzaPrice(pizza);
-        String sql = "SELECT price FROM pizza WHERE pizza_id = ?;";
+        String sql = "SELECT price FROM menu WHERE item_id = ?;";
 
-        return jdbcTemplate.queryForObject(sql, BigDecimal.class, pizza.getPizzaId());
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class, pizza.getItemId());
     }
 
-    private BigDecimal calculatePizzaPrice(Pizza pizza) {
+    private BigDecimal calculatePizzaPrice(MenuItem pizza) {
         String sql = "SELECT SUM(price) FROM ingredient\n" +
                 "INNER JOIN pizza_ingredient ON pizza_ingredient.ingredient_id = ingredient.ingredient_id\n" +
                 "WHERE pizza_id = ?;";
 
-        return jdbcTemplate.queryForObject(sql, BigDecimal.class, pizza.getPizzaId());
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class, pizza.getItemId());
     }
 
-    private Pizza mapRowToPizza(String pizzaType, SqlRowSet rowSet) {
-        Pizza pizza = new Pizza();
+    private MenuItem mapRowToPizza(String pizzaType, SqlRowSet rowSet) {
+        MenuItem pizza = new MenuItem();
 
-        pizza.setPizzaId(rowSet.getInt("pizza_id"));
+        pizza.setItemId(rowSet.getInt("item_id"));
         pizza.setPrice(getPizzaPrice(pizza));
+        pizza.setItemCategory(rowSet.getString("item_category"));
 
         if (pizzaType == SPECIALTY_PIZZA) {
-            pizza.setPizzaName(rowSet.getString("pizza_name"));
-            pizza.setPizzaDescription(rowSet.getString("pizza_description"));
+            pizza.setItemName(rowSet.getString("item_name"));
+            pizza.setItemDescription(rowSet.getString("item_description"));
         }
 
         return pizza;
@@ -168,6 +190,19 @@ public class JdbcPizzaDao implements PizzaDao {
         ingredient.setOrderQuantity(rowSet.getDouble("order_quantity"));
 
         return ingredient;
+    }
+
+    private MenuItem mapRowToMenuItem(SqlRowSet rowSet) {
+        MenuItem menuItem = new MenuItem();
+
+        menuItem.setItemId(rowSet.getInt("item_id"));
+        menuItem.setPrice(rowSet.getBigDecimal("price"));
+        menuItem.setItemCategory(rowSet.getString("item_category"));
+        menuItem.setItemName(rowSet.getString("item_name"));
+        menuItem.setItemDescription(rowSet.getString("item_description"));
+        menuItem.setTotalQuantity(rowSet.getDouble("total_quantity"));
+
+        return menuItem;
     }
 
 }

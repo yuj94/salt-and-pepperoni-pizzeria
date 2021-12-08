@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pizza {
+public class Pizza extends MenuItem {
 
     private int pizzaId;
     private String pizzaName;
