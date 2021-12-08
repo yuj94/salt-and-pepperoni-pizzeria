@@ -5,9 +5,12 @@ DROP SEQUENCE IF EXISTS seq_user_id;
 DROP TABLE IF EXISTS order_items;
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS pizza_ingredient;
-DROP TABLE IF EXISTS special_pizza;
-DROP TABLE IF EXISTS pizza;
+DROP TABLE IF EXISTS custom_pizza;
 DROP TABLE IF EXISTS ingredient;
+DROP TABLE IF EXISTS menu;
+
+
+
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -27,15 +30,28 @@ CREATE TABLE users (
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
+
+CREATE TABLE menu (
+        item_id serial,
+        item_name varchar(64) NOT NULL,
+        item_description varchar(512) NOT NULL,
+        item_category varchar(32) NOT NULL CHECK(item_category = 'Pizza' OR item_category = 'Appetizer' OR item_category = 'Salad' OR item_category = 'Drink' OR item_category = 'Dessert'),
+        price decimal (4,2),
+        total_quantity decimal (6,2),
+        
+        CONSTRAINT PK_menu PRIMARY KEY (item_id)
+);
+
 CREATE TABLE ingredient (
         ingredient_id serial,
 	ingredient_name varchar(32) NOT NULL UNIQUE,
 	ingredient_type varchar(32) NOT NULL,
 	price decimal (3, 2),
-	quantity decimal (6, 2),
+	total_quantity decimal (6, 2),
 
 	CONSTRAINT PK_ingredient PRIMARY KEY (ingredient_id)
 );
+
 
 INSERT INTO ingredient (ingredient_name, ingredient_type) 
 VALUES ('Dough', 'Dough'),
@@ -98,71 +114,40 @@ WHERE ingredient_type = 'Veggies';
 UPDATE ingredient SET price = 1.50
 WHERE ingredient_type = 'Meat';
            
-CREATE TABLE pizza (
+CREATE TABLE custom_pizza (
 	pizza_id serial,
-	pizza_type varchar(12) NOT NULL CHECK (pizza_type = 'Custom' OR pizza_type = 'Specialty'),
         price decimal (4, 2),
 
-	CONSTRAINT PK_pizza PRIMARY KEY (pizza_id)
+	CONSTRAINT PK_custom_pizza PRIMARY KEY (pizza_id)
 );
 
-INSERT INTO pizza (pizza_type)
-VALUES ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty'),
-       ('Specialty');
-
-CREATE TABLE special_pizza (
-	pizza_id int,
-	pizza_name varchar(64) NOT NULL,
-	pizza_description varchar(512) NOT NULL,
-
-	CONSTRAINT PK_custom_pizza PRIMARY KEY (pizza_id),
-	CONSTRAINT FK_custom_pizza_id FOREIGN KEY (pizza_id) REFERENCES pizza(pizza_id)
-);
-
-INSERT INTO special_pizza (pizza_id, pizza_name, pizza_description)
-VALUES (1, 'Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with pepperoni, this is one of our most popular pizzas.'),
-       (2, 'Sausage Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with sausage, this is our clasic Italian sausage pizza.');
-
-INSERT INTO special_pizza (pizza_id, pizza_name, pizza_description)
-VALUES (3, '3-Cheese Pizza', 'Our base pizza with rich tomato sauce base and a delightful 3-cheese blend.');
-
-INSERT INTO special_pizza (pizza_id, pizza_name, pizza_description)
-VALUES (4, 'The Works Pizza', 'It is everything you want on a pizza and then some with pepperoni, Canadian bacon, spicy Italian sausage, fresh-cut onions, crisp green peppers, mushrooms, ripe black olives, and real cheese made from mozzarella.'),
-       (5, 'Fresh Spinach & Tomato Alfredo Pizza', 'Crafted with fresh cream and Parmesan and Romano cheeses, topped with fresh baby spinach, fresh-cut Roma tomatoes, sun-dried tomatoes, crisp green peppers, mushrooms, ripe black olives, real cheese made from mozzarella, plus classic Italian seasoning for an extra dash of flavor.'),
-       (6, 'The Meats Pizza', 'Meat lovers dreams come true with this pizza. We start with a tomato base, pack on all the hearty meats (pepperoni, sweet sausage, spicy Italian sausage, salami, and meatballs), and top it off with some onions and black olives.'),
-       (7, 'Zesty Italian Trio Pizza', 'A tasty trio of zesty Italian sausage, salami, and pepperoni, plus banana peppers, green olives, a three-cheese blend, and real cheese made from mozzarella on our signature sauce and original fresh dough. Sprinkled with classic Italian seasoning for an extra dash of flavor.'),
-       (8, 'Garden Fresh Pizza', 'All your favorite veggies together on a delightfully delicious pizza. Loaded with crisp green peppers, fresh-cut onions, mushrooms, ripe black and green olives, vine-ripened Roma tomatoes, and real cheese made from mozzarella.'),
-       (9, 'Super Hawaiian Pizza', 'Although some find it controversial, we believe pineapple belongs on pizza. We take it to the next level by combining sweet, juicy pineapple tidbits, julienne-cut Canadian bacon, onions, banana peppers, hickory-smoked bacon, a three-cheese blend, and real cheese made from mozzarella on our signature sauce and original fresh dough.'),
-       (10, 'Meatball Pepperoni Pizza', 'Savory meatballs and pepperoni make for a tasty combination, especially when we add onions, black olives, sun-dried tomatoes, a three-cheese blend, and real cheese made from mozzarella on our original crust, then sprinkle it all with classic Italian seasoning for an extra dash of flavor.');
-
-INSERT INTO special_pizza (pizza_id, pizza_name, pizza_description)    
-VALUES (11, 'BBQ Chicken Bacon Ranch Pizza', 'We had you at bacon, right? It gets even better. Ranch dresssing base with a smoky Southern-style BBQ sauce add a tangy twist to this irresistible pizza topped with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella. Round one up today.'),
-       (12, 'Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella.'), 
-       (13, 'Pesto Pizza', 'Hand sliced mozzarella with spinach, onion, and olive oil and basil pesto sauce drizzle. Topped with our signature cheese and spice blend.');
-
-INSERT INTO special_pizza (pizza_id, pizza_name, pizza_description)    
-VALUES (14, 'Margherita Pizza', 'Traditional margherita pizza with our extra famous sauce, fresh basil, and mozzarella.');
+INSERT INTO menu (item_name, item_description, item_category)
+VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with pepperoni, this is one of our most popular pizzas.', 'Pizza'),
+       ('Sausage Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with sausage, this is our clasic Italian sausage pizza.', 'Pizza'),
+       ('3-Cheese Pizza', 'Our base pizza with rich tomato sauce base and a delightful 3-cheese blend.', 'Pizza'),
+       ('The Works Pizza', 'It is everything you want on a pizza and then some with pepperoni, Canadian bacon, spicy Italian sausage, fresh-cut onions, crisp green peppers, mushrooms, ripe black olives, and real cheese made from mozzarella.', 'Pizza'),
+       ('Fresh Spinach & Tomato Alfredo Pizza', 'Crafted with fresh cream and Parmesan and Romano cheeses, topped with fresh baby spinach, fresh-cut Roma tomatoes, sun-dried tomatoes, crisp green peppers, mushrooms, ripe black olives, real cheese made from mozzarella, plus classic Italian seasoning for an extra dash of flavor.', 'Pizza'),
+       ('The Meats Pizza', 'Meat lovers dreams come true with this pizza. We start with a tomato base, pack on all the hearty meats (pepperoni, sweet sausage, spicy Italian sausage, salami, and meatballs), and top it off with some onions and black olives.', 'Pizza'),
+       ('Zesty Italian Trio Pizza', 'A tasty trio of zesty Italian sausage, salami, and pepperoni, plus banana peppers, green olives, a three-cheese blend, and real cheese made from mozzarella on our signature sauce and original fresh dough. Sprinkled with classic Italian seasoning for an extra dash of flavor.', 'Pizza'),
+       ('Garden Fresh Pizza', 'All your favorite veggies together on a delightfully delicious pizza. Loaded with crisp green peppers, fresh-cut onions, mushrooms, ripe black and green olives, vine-ripened Roma tomatoes, and real cheese made from mozzarella.', 'Pizza'),
+       ('Super Hawaiian Pizza', 'Although some find it controversial, we believe pineapple belongs on pizza. We take it to the next level by combining sweet, juicy pineapple tidbits, julienne-cut Canadian bacon, onions, banana peppers, hickory-smoked bacon, a three-cheese blend, and real cheese made from mozzarella on our signature sauce and original fresh dough.', 'Pizza'),
+       ('Meatball Pepperoni Pizza', 'Savory meatballs and pepperoni make for a tasty combination, especially when we add onions, black olives, sun-dried tomatoes, a three-cheese blend, and real cheese made from mozzarella on our original crust, then sprinkle it all with classic Italian seasoning for an extra dash of flavor.', 'Pizza'),
+       ('BBQ Chicken Bacon Ranch Pizza', 'We had you at bacon, right? It gets even better. Ranch dresssing base with a smoky Southern-style BBQ sauce add a tangy twist to this irresistible pizza topped with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella. Round one up today.', 'Pizza'),
+       ('Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella.', 'Pizza'), 
+       ('Pesto Pizza', 'Hand sliced mozzarella with spinach, onion, and olive oil and basil pesto sauce drizzle. Topped with our signature cheese and spice blend.', 'Pizza'),
+       ('Margherita Pizza', 'Traditional margherita pizza with our extra famous sauce, fresh basil, and mozzarella.', 'Pizza');
 
 CREATE TABLE pizza_ingredient (
-        pizza_id int NOT NULL,
+        pizza_ingredient_id serial,
+        pizza_id int CHECK((custom_pizza_id IS NULL AND pizza_id IS NOT NULL) OR (pizza_id IS NULL AND custom_pizza_id IS NOT NULL)),
+        custom_pizza_id int CHECK((custom_pizza_id IS NULL AND pizza_id IS NOT NULL) OR (pizza_id IS NULL AND custom_pizza_id IS NOT NULL)),
         ingredient_id int NOT NULL,
         quantity int NOT NULL CHECK (quantity >= 1),
         
-        CONSTRAINT PK_pizza_ingredient PRIMARY KEY (pizza_id, ingredient_id, quantity),
-        CONSTRAINT FK_pizza_ingredient_pizza_id FOREIGN KEY (pizza_id) REFERENCES pizza(pizza_id),
-        CONSTRAINT FK_pizza_ingredient_name FOREIGN KEY (ingredient_id) REFERENCES ingredient(ingredient_id)
+        CONSTRAINT PK_pizza_ingredient PRIMARY KEY (pizza_ingredient_id),
+        CONSTRAINT FK_pizza_ingredient_pizza_id FOREIGN KEY (pizza_id) REFERENCES menu(item_id),
+        CONSTRAINT FK_pizza_ingredient_name FOREIGN KEY (ingredient_id) REFERENCES ingredient(ingredient_id),
+        CONSTRAINT FK_pizza_ingredient_custom_pizza_id FOREIGN KEY (custom_pizza_id) REFERENCES custom_pizza(pizza_id)
 );
 
 INSERT INTO pizza_ingredient (pizza_id, ingredient_id, quantity)
@@ -292,13 +277,15 @@ CREATE TABLE orders (
 
 CREATE TABLE order_items (
         order_id int NOT NULL,
-        item_type varchar(12) NOT NULL,
-        item_id int NOT NULL,
+        item_type varchar(12) NOT NULL CHECK (item_type = 'Menu' OR item_type = 'Custom'),
+        menu_item_id int CHECK((custom_pizza_id IS NULL AND menu_item_id IS NOT NULL) OR (menu_item_id IS NULL AND custom_pizza_id IS NOT NULL)),
+        custom_pizza_id int CHECK((custom_pizza_id IS NULL AND menu_item_id IS NOT NULL) OR (menu_item_id IS NULL AND custom_pizza_id IS NOT NULL)),
         item_size varchar(12),
         quantity int NOT NULL,
         
         CONSTRAINT FK_order_items_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id),
-        CONSTRAINT FK_order_items_item_id FOREIGN KEY (item_id) REFERENCES pizza(pizza_id)
+        CONSTRAINT FK_order_items_menu_item_id FOREIGN KEY (menu_item_id) REFERENCES menu(item_id),
+        CONSTRAINT FK_order_items_custom_pizza_id FOREIGN KEY (custom_pizza_id) REFERENCES custom_pizza(pizza_id)
 );
 
 
