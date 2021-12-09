@@ -39,7 +39,6 @@ public class OrderController {
         return orderDao.getOrdersBySearch(parameterType, searchText);
     }
 
-    @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/order/cart", method = RequestMethod.GET)
     public List<Order> getCart() {
         return orderDao.getCart();

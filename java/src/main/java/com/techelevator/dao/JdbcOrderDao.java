@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import com.techelevator.model.Order;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +127,24 @@ public class JdbcOrderDao implements OrderDao {
 
         // String sql =
         return pendingOrderList;
+    }
+
+    @Override
+    public boolean createOrder(Menu menuItem) {
+        boolean isCreated = false;
+
+//        String sql = "INSERT INTO custom_pizza (price) " +
+//                "VALUES (0.00) RETURNING pizza_id;";
+//
+//        customPizza.setPizzaId(jdbcTemplate.queryForObject(sql, Integer.class));
+//
+//        addIngredientsToPizzaIngredientTable(customPizza);
+//
+//        if (getCustomPizza(customPizza.getPizzaId()) != null) {
+//            isCreated = true;
+//        }
+
+        return isCreated;
     }
 
 

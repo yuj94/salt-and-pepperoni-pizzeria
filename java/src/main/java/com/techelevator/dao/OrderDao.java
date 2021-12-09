@@ -4,6 +4,7 @@ import com.techelevator.model.CustomPizza;
 import com.techelevator.model.MenuItem;
 import com.techelevator.model.Order;
 
+import java.awt.*;
 import java.util.List;
 
 
@@ -20,4 +21,7 @@ public interface OrderDao {
         List<MenuItem> getMenuItemsByOrderId(int orderId);
 
         List<CustomPizza> getCustomPizzasByOrderId(int orderId);
+
+        boolean createOrder(Menu menuItem);
+
 }
