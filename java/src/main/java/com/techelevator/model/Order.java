@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Order {
 
@@ -13,6 +14,8 @@ public class Order {
     private int addressZipCode;
     private String email;
     private String phoneNumber;
+    private List<MenuItem> menuItems;
+    private List<CustomPizza> customPizza;
     private boolean isDelivery;
     private boolean isCompleted;
     private int creditCardNumber;
