@@ -100,6 +100,22 @@ public class Order {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
+    }
+
+    public List<CustomPizza> getCustomPizza() {
+        return customPizza;
+    }
+
+    public void setCustomPizza(List<CustomPizza> customPizza) {
+        this.customPizza = customPizza;
+    }
+
     public boolean isDelivery() {
         return isDelivery;
     }
