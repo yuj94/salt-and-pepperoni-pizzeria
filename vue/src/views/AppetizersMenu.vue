@@ -1,5 +1,5 @@
 <template>
-  <div class="menuDiv">
+  <div class="appetizersMenuDiv">
     <banner class="banner"></banner>
     <navigation class="navigation"></navigation>
     <menu-list class="menuList"></menu-list>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.menuDiv {
+.appetizersMenuDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   gap: 10px;
@@ -52,5 +52,4 @@ export default {
 .cart {
   grid-area: cart;
 }
-
 </style>

@@ -6,6 +6,12 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Menu from '../views/Menu.vue'
+import PizzasMenu from '../views/PizzasMenu.vue'
+import DrinksMenu from '../views/DrinksMenu.vue'
+import AppetizersMenu from '../views/AppetizersMenu.vue'
+import DessertsMenu from '../views/DessertsMenu.vue'
+import SaladsMenu from '../views/SaladsMenu.vue'
+
 
 Vue.use(Router)
 
@@ -27,7 +33,7 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -58,6 +64,46 @@ const router = new Router({
       path: "/menu",
       name: "menu",
       component: Menu,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/menu/pizzas",
+      name: "pizzas-menu",
+      component: PizzasMenu,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/menu/drinks",
+      name: "drinks-menu",
+      component: DrinksMenu,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/menu/appetizers",
+      name: "appetizers-menu",
+      component: AppetizersMenu,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/menu/desserts",
+      name: "desserts-menu",
+      component: DessertsMenu,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/menu/salads",
+      name: "salads-menu",
+      component: SaladsMenu,
       meta: {
         requiresAuth: false
       }

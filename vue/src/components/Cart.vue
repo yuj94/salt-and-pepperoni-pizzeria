@@ -13,5 +13,7 @@ export default {
 <style scoped>
 div {
   border: solid 1px brown;
+  align-content: top;
+  text-align: center;
 }
 </style>

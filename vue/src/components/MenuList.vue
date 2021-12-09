@@ -3,12 +3,15 @@
     <div class="loading" v-if="isLoading">
       <img src="../assets/loader.gif" />
     </div>
-   <!-- <div v-for="category in this.itemCategories" v-bind:key="category.name">
-      <h1>{{category.itemCategories}}</h1>
-    </div> -->
-  <div>
-    <menu-details v-for="item in this.$store.state.menuItems" v-bind:key="item.itemId" v-bind:menuObj="item"></menu-details>
-  </div>
+    <div class="loaded" v-for="item in this.$store.state.menuItems" v-bind:key="item.itemId" v-else>
+      <div class="allMenuItems">
+        <menu-details class="menuDetails" v-bind:menuObj="item"></menu-details>
+      </div>
+      <div class="categoryMenuItems">
+
+      </div>
+    </div>
+ 
   </div>
 </template>
 
@@ -42,8 +45,9 @@ export default {
 </script>
 
 <style scoped>
-div {
+.allMenuItems {
   border: solid 1px green;
   margin: 30px 0;
 }
+
 </style>
