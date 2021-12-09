@@ -22,7 +22,7 @@ public class JdbcOrderDao implements OrderDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+    @Override
     public List<Order> getAllPendingOrders() {
         List<Order> pendingOrderList = new ArrayList<>();
 
@@ -37,12 +37,35 @@ public class JdbcOrderDao implements OrderDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {
-            pendingOrderList.add(mapRowToPendingOrders(results));
+            pendingOrderList.add(mapRowToOrdersList(results));
         }
 
         return pendingOrderList;
     }
 
+    @Override
+    public List<Order> getAllOrderHistory() {
+        List<Order> orderHistoryList = new ArrayList<>();
+
+        String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
+                "FROM order_items\n" +
+                "FULL OUTER JOIN orders\n" +
+                "ON order_items.order_id = orders.order_id\n" +
+                "FULL OUTER JOIN menu\n" +
+                "ON order_items.menu_item_id = menu.item_id\n" +
+                "WHERE orders.completed = TRUE;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            orderHistoryList.add(mapRowToOrdersList(results));
+        }
+
+        return orderHistoryList;
+
+    }
+
+    @Override
     public List<Order> getUncompletedOrdersByOrderId() {
         List<Order> uncompletedOrderList = new ArrayList<>();
 
@@ -59,6 +82,7 @@ public class JdbcOrderDao implements OrderDao {
         return uncompletedOrderList;
     }
 
+    @Override
     public List<MenuItem> getMenuItemsByOrderId(int orderId) {
         List<MenuItem> orderMenuItemList = new ArrayList<>();
 
@@ -77,6 +101,7 @@ public class JdbcOrderDao implements OrderDao {
         return orderMenuItemList;
     }
 
+    @Override
     public List<CustomPizza> getCustomPizzasByOrderId(int orderId) {
         List<CustomPizza> customPizzasList = new ArrayList<>();
 
@@ -95,6 +120,7 @@ public class JdbcOrderDao implements OrderDao {
         return customPizzasList;
     }
 
+    @Override
     public List<Order> getCart() {
         List<Order> pendingOrderList = new ArrayList<>();
 
@@ -143,7 +169,7 @@ public class JdbcOrderDao implements OrderDao {
         return jdbcTemplate.queryForObject(sql, BigDecimal.class, pizza.getItemId());
     }
 
-    private Order mapRowToPendingOrders(SqlRowSet rowSet) {
+    private Order mapRowToOrdersList(SqlRowSet rowSet) {
         Order order = new Order();
 
         order.setOrderId(rowSet.getInt("order_id"));

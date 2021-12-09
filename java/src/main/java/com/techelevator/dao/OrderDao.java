@@ -11,6 +11,8 @@ public interface OrderDao {
 
         List<Order> getAllPendingOrders();
 
+        public List<Order> getAllOrderHistory();
+
         List<Order> getCart();
 
         List<Order> getUncompletedOrdersByOrderId();

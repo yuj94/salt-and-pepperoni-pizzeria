@@ -32,6 +32,11 @@ public class OrderController {
         return orderDao.getAllPendingOrders();
     }
 
+    @RequestMapping(path = "/order/history", method = RequestMethod.GET)
+    public List<Order> getAllOrderHistory() {return orderDao.getAllOrderHistory();
+    }
+
+
     @RequestMapping(path = "/order/cart", method = RequestMethod.GET)
     public List<Order> getCart() {
         return orderDao.getCart();
