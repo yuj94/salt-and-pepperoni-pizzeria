@@ -44,30 +44,30 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getAllOrderHistory() {
-        List<Order> orderHistoryList = new ArrayList<>();
+    public List<Order> getOrdersBySearch(String parameterType, String searchText) {
+        List<Order> orderSearchList = new ArrayList<>();
 
         String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
-                "FROM order_items\n" +
-                "FULL OUTER JOIN orders\n" +
-                "ON order_items.order_id = orders.order_id\n" +
-                "FULL OUTER JOIN menu\n" +
-                "ON order_items.menu_item_id = menu.item_id\n" +
-                "WHERE orders.completed = TRUE;";
+                     "FROM order_items\n" +
+                     "FULL OUTER JOIN orders\n" +
+                     "ON order_items.order_id = orders.order_id\n" +
+                     "FULL OUTER JOIN menu\n" +
+                     "ON order_items.menu_item_id = menu.item_id\n" +
+                     "WHERE orders.completed = TRUE AND WHERE ? = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {
-            orderHistoryList.add(mapRowToOrdersList(results));
+            orderSearchList.add(mapRowToOrdersList(results));
         }
 
-        return orderHistoryList;
+        return orderSearchList;
 
     }
 
     @Override
-    public List<Order> getUncompletedOrdersByOrderId() {
-        List<Order> uncompletedOrderList = new ArrayList<>();
+    public List<Order> getIncompleteOrdersByOrderId() {
+        List<Order> incompleteOrderList = new ArrayList<>();
 
         String sql = "SELECT orders.order_id\n" +
                      "FROM orders\n" +
@@ -76,10 +76,10 @@ public class JdbcOrderDao implements OrderDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {
-            uncompletedOrderList.add(mapRowToUncompletedOrder(results));
+            incompleteOrderList.add(mapRowToIncompleteOrder(results));
         }
 
-        return uncompletedOrderList;
+        return incompleteOrderList;
     }
 
     @Override
@@ -188,7 +188,7 @@ public class JdbcOrderDao implements OrderDao {
         return order;
     }
 
-    private Order mapRowToUncompletedOrder(SqlRowSet rowSet) {
+    private Order mapRowToIncompleteOrder(SqlRowSet rowSet) {
         Order order = new Order();
 
         order.setOrderId(rowSet.getInt("order_id"));

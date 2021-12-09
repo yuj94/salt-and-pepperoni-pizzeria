@@ -5,6 +5,7 @@ import com.techelevator.dao.MenuDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.MenuItem;
 import com.techelevator.model.Order;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,20 +27,21 @@ public class OrderController {
         this.orderDao = orderDao;
     }
 
-
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/order/pending", method = RequestMethod.GET)
     public List<Order> getAllPendingOrders() {
         return orderDao.getAllPendingOrders();
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/order/history", method = RequestMethod.GET)
-    public List<Order> getAllOrderHistory() {return orderDao.getAllOrderHistory();
+    public List<Order> getOrdersBySearch(String parameterType, String searchText) {
+        return orderDao.getOrdersBySearch(parameterType, searchText);
     }
 
-
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/order/cart", method = RequestMethod.GET)
     public List<Order> getCart() {
         return orderDao.getCart();
     }
-
 }

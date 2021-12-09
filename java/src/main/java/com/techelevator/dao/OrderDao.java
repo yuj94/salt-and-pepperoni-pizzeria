@@ -11,11 +11,11 @@ public interface OrderDao {
 
         List<Order> getAllPendingOrders();
 
-        public List<Order> getAllOrderHistory();
+        List<Order> getOrdersBySearch(String parameterType, String searchText);
 
         List<Order> getCart();
 
-        List<Order> getUncompletedOrdersByOrderId();
+        List<Order> getIncompleteOrdersByOrderId();
 
         List<MenuItem> getMenuItemsByOrderId(int orderId);
 
