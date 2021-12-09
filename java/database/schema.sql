@@ -34,7 +34,7 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 CREATE TABLE menu (
         item_id serial,
         item_name varchar(64) NOT NULL,
-        item_description varchar(512) NOT NULL,
+        item_description varchar(512),
         item_category varchar(32) NOT NULL CHECK(item_category = 'Pizza' OR item_category = 'Appetizer' OR item_category = 'Salad' OR item_category = 'Drink' OR item_category = 'Dessert'),
         price decimal (4,2),
         total_quantity decimal (6,2),
@@ -138,22 +138,28 @@ VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on r
        ('Margherita Pizza', 'Traditional margherita pizza with our extra famous sauce, fresh basil, and mozzarella.', 'Pizza');
        
 INSERT INTO menu (item_name, item_description, item_category, price)
-VALUES ('Cinnamon Bread Twists', 'asdasd', 'Dessert', 4.5),
-       ('Chocolate Lava Crunch', 'asdasds', 'Dessert', 6.25),
-       ('Cookie Bownie', 'asdasds', 'Dessert', 3.25),
-       ('Chicken Caesar Salad', 'asdasds', 'Salad', 13.25),
-       ('Lobster and Steak Salad', 'asdasds', 'Salad', 16.25),
-       ('House Salad', 'asdasds', 'Salad', 11.25),
-       ('Coka', 'asdasds', 'Drink', 1.90),
-       ('Sprite', 'asdasds', 'Drink', 1.90),
-       ('Dr. Pepper', 'asdasds', 'Drink', 1.90),
-       ('Sweet Tea', 'asdasds', 'Drink', 1.90),
-       ('BBQ Chicken Wings', 'asdasds', 'Appetizer', 2.25),
-       ('Buffalo Chicken Wings', 'asdasds', 'Appetizer', 6.25),
-       ('Honey Chipotle Chicken Wings', 'asdasds', 'Appetizer', 12.25),
-       ('Plain Chicken Wings', 'asdasds', 'Appetizer', 16.25),
-       ('Jalepneo Poppers', 'asdasds', 'Appetizer', 9.25),
-       ('Garlic Parmesan Chicken Wings', 'asdasds', 'Appetizer', 8.25);
+VALUES ('Antipasto, Fresh mozzarella', 'oven roasted sweet red peppers, genoa salami, kalamata olives, green sicilian olives, drizzle of extra virgin olive oil, basil leaf garnish & bread', 'Appetizer', 13),
+       ('Bruschetta', 'Our bruschetta is served trio style, select three options to personalize your platter', 'Appetizer', 12), 
+       ('Caprese','Slices of fresh mozzarella, tomatoes, fresh basil, drizzled with extra virgin olive oil & fresh cracked black pepper','Appetizer', 10),
+       ('Mediterranean Salad', 'Romaine lettuce, cucumbers, tomatoes, Kalamata olives, feta cheese, red onion served with house vinaigrette dressing on the side', 'Salad', 10),
+       ('Spinach Salad', 'Baby spinach, red onion, cherry tomatoes, bacon, crumbled Gorgonzola cheese served with balsamic vinaigrette dressing on the side', 'Salad', 11),
+       ('Caesar Salad','Romaine lettuce, imported Parmesan Cheese, coal oven baked croutons served with traditional caesar dressing on the side','Salad',10),
+       ('House Salad','Romaine lettuce, red onion, cherry tomatoes, oven roasted sweet red peppers, mushrooms, Sicilian green olives served with house vinaigrette dressing on the side','Salad', 9),
+       ('Lemon Arugula Salad','Arugula, shaved Italian cheese, coal oven baked croutons served with lemon vinaigrette dressing on the side and garnished with lemon wedges.','Salad', 10),
+       ('Cannoli','Fried pastry dough filled with sweet ricotta cheese and chocolate chips','Dessert', 5),
+       ('Tiramisu','Espresso soaked ladyfingers, layered with sweet mascarpone. Finished with a dusting of cocoa powder','Dessert', 6),
+       ('Oreo Cheesecake','Traditional New York style cheesecake with crumbled Oreo cookies, on an Oreo cookie crust','Dessert', 6),
+       ('New York Cheesecake','Traditional New York style cheesecake, on a sugar cookie crust','Dessert', 6),
+       ('Coke','','Drink', 3),
+       ('Diet Coke','','Drink', 3),
+       ('Coke Zero','','Drink', 3),
+       ('Sprite','','Drink', 3),
+       ('Iced Tea','','Drink', 3),
+       ('Fanta','','Drink', 3),
+       ('Powerade','','Drink', 3),
+       ('Dasani','','Drink', 3),
+       ('AW Root Beer','','Drink', 3),
+       ('Dr. Pepper','','Drink', 3);
 
 CREATE TABLE pizza_ingredient (
         pizza_ingredient_id serial,
