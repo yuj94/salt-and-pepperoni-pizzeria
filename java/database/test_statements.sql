@@ -37,4 +37,9 @@ FULL OUTER JOIN custom_pizza
 ON order_items.custom_pizza_id = custom_pizza.pizza_id;
 WHERE order_items.order_id = ?;
 
+INSERT INTO order_items (order_items.order_id, item_type, menu_item_id, custom_pizza_id, item_size, quantity)
+VALUES (1, 'Pizza', 1, 1, 'small', 1)
+INNER JOIN menu ON order_items.menu_item_id = menu.item_id
+INNER JOIN orders ON order_items.order_id = orders.order_id
+
 --everything from ingredient where pizza-ingredient.pizza_id = pizza.pizza_id
