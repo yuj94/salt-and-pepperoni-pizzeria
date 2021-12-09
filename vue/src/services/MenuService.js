@@ -8,6 +8,10 @@ export default {
 
   getAllMenuItems() {
     return http.get('/menu');
+  },
+
+  getPizzaItems() {
+    return http.get('/menu/pizza');
   }
 
 }

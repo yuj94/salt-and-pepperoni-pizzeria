@@ -3,8 +3,12 @@
     <div class="loading" v-if="isLoading">
       <img src="../assets/loader.gif" />
     </div>
-    <h1>Pizza</h1>
-    <menu-details v-for="pizza in this.$store.state.pizzaMenuItems" v-bind:key="pizza.pizzaId" v-bind:menuObj="pizza"></menu-details>
+   <!-- <div v-for="category in this.itemCategories" v-bind:key="category.name">
+      <h1>{{category.itemCategories}}</h1>
+    </div> -->
+  <div>
+    <menu-details v-for="item in this.$store.state.menuItems" v-bind:key="item.itemId" v-bind:menuObj="item"></menu-details>
+  </div>
   </div>
 </template>
 
@@ -20,18 +24,19 @@ export default {
   data() {
     return {
       isLoading: true,
+      // itemCategories: this.$store.state.menuItems.itemCategories.removeD,
     }
   },
   methods: {
-    getPizzas() {
+    getMenuItems() {
       menuService.getAllMenuItems().then((response) => {
-        this.$store.commit("SET_PIZZA_MENU_ITEMS", response.data);
+        this.$store.commit("SET_MENU_ITEMS", response.data);
         this.isLoading = false;
       });
     },
   },
   created() {
-    this.getPizzas();
+    this.getMenuItems();
   },
 };
 </script>

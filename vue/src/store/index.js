@@ -20,20 +20,14 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    pizzaMenuItems: {
-      pizzaName: '',
-      pizzaDescription: '',
+    menuItems: {
+      itemId: '',
+      itemName: '',
+      itemDescription: '',
+      itemCategory: '',
       price: '',
-      ingredient1: '',
-      ingredient2: '',
-      ingredient3: '',
-      ingredient4: '',
-      ingredient5: '',
-      ingredient6: '',
-      ingredient7: '',
-      ingredient8: '',
-      ingredient9: '',
-      ingredient10: ''
+      ingredients: {},
+      quantity: '',
     },
   },
   mutations: {
@@ -53,8 +47,8 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_PIZZA_MENU_ITEMS(state, data) {
-      state.pizzaMenuItems = data;
+    SET_MENU_ITEMS(state, data) {
+      state.menuItems = data;
     }
   }
 })

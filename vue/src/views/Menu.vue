@@ -1,9 +1,9 @@
 <template>
   <div>
-    <banner></banner>
-    <navigation></navigation>
-    <menu-list></menu-list>
-    <cart></cart>
+    <banner class="banner"></banner>
+    <navigation class="navigation"></navigation>
+    <menu-list class="menuList"></menu-list>
+    <cart class="cart"></cart>
   </div>
 </template>
 
@@ -25,5 +25,30 @@ export default {
 </script>
 
 <style scoped>
+div {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 10px;
+  grid-template-areas: 
+    "banner banner banner"
+    "navigation menu-list cart"
+    "footer footer footer";
+}
+
+.banner {
+  grid-area: banner;
+}
+
+.navigation {
+  grid-area: navigation;
+}
+
+.menu-list {
+  grid-area: menu-list;
+}
+
+.cart {
+  grid-area: cart;
+}
 
 </style>

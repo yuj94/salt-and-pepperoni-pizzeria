@@ -2,22 +2,30 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Ingredient;
 import com.techelevator.model.MenuItem;
-import com.techelevator.model.Pizza;
+import com.techelevator.model.CustomPizza;
 
 import java.util.List;
 
 public interface MenuDao {
 
-    public List<MenuItem> getAllMenuItems();
+    List<MenuItem> getAllMenuItems();
 
     List<MenuItem> getSpecialtyPizzaList();
 
+    List<MenuItem> getAppetizerList();
+
+    List<MenuItem> getSaladList();
+
+    List<MenuItem> getDessertList();
+
+    List<MenuItem> getDrinkList();
+
     MenuItem getCustomPizza(int newPizzaId);
 
-    List<Ingredient> getPizzaIngredients(int pizzaId);
+    List<Ingredient> getMenuPizzaIngredients(int pizzaId);
 
     List<Ingredient> getIngredientList();
 
-    boolean createCustomPizza(Pizza pizza);
+    boolean createCustomPizza(CustomPizza customPizza);
 
 }

@@ -25,12 +25,13 @@ public class OrderController {
         this.orderDao = orderDao;
     }
 
-    @RequestMapping(path = "/menu", method = RequestMethod.GET)
+
+    @RequestMapping(path = "/order", method = RequestMethod.POST)
     public List<MenuItem> getAllMenuItems() {
         return menuDao.getAllMenuItems();
     }
 
-    @RequestMapping(path = "/menu/pizza", method = RequestMethod.GET)
+    @RequestMapping(path = "/cart", method = RequestMethod.GET)
     public List<MenuItem> getPizzas() {
         return menuDao.getSpecialtyPizzaList();
     }

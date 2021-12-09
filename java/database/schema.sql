@@ -136,6 +136,24 @@ VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on r
        ('Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella.', 'Pizza'), 
        ('Pesto Pizza', 'Hand sliced mozzarella with spinach, onion, and olive oil and basil pesto sauce drizzle. Topped with our signature cheese and spice blend.', 'Pizza'),
        ('Margherita Pizza', 'Traditional margherita pizza with our extra famous sauce, fresh basil, and mozzarella.', 'Pizza');
+       
+INSERT INTO menu (item_name, item_description, item_category, price)
+VALUES ('Cinnamon Bread Twists', 'asdasd', 'Dessert', 4.5),
+       ('Chocolate Lava Crunch', 'asdasds', 'Dessert', 6.25),
+       ('Cookie Bownie', 'asdasds', 'Dessert', 3.25),
+       ('Chicken Caesar Salad', 'asdasds', 'Salad', 13.25),
+       ('Lobster and Steak Salad', 'asdasds', 'Salad', 16.25),
+       ('House Salad', 'asdasds', 'Salad', 11.25),
+       ('Coka', 'asdasds', 'Drink', 1.90),
+       ('Sprite', 'asdasds', 'Drink', 1.90),
+       ('Dr. Pepper', 'asdasds', 'Drink', 1.90),
+       ('Sweet Tea', 'asdasds', 'Drink', 1.90),
+       ('BBQ Chicken Wings', 'asdasds', 'Appetizer', 2.25),
+       ('Buffalo Chicken Wings', 'asdasds', 'Appetizer', 6.25),
+       ('Honey Chipotle Chicken Wings', 'asdasds', 'Appetizer', 12.25),
+       ('Plain Chicken Wings', 'asdasds', 'Appetizer', 16.25),
+       ('Jalepneo Poppers', 'asdasds', 'Appetizer', 9.25),
+       ('Garlic Parmesan Chicken Wings', 'asdasds', 'Appetizer', 8.25);
 
 CREATE TABLE pizza_ingredient (
         pizza_ingredient_id serial,

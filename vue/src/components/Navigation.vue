@@ -21,4 +21,14 @@ export default {
 div {
   border: solid 1px red;
 }
+
+nav {
+  display: flex;
+  flex-direction: column;
+  /* align-content: justify; */
+  align-items: center;
+  justify-content: top;
+}
+
+
 </style>

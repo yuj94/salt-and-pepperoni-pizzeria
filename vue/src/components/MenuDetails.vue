@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- router-link -->
-    <div v-bind:key="menuObj.pizzaId">
-      <h2>{{ menuObj.pizzaName }}</h2>
-      <h2>{{ menuObj.price }}</h2>
-      <p>{{ menuObj.pizzaDescription }}</p>
+    <div v-bind:key="menuObj.itemId">
+      <h2>{{ menuObj.itemName }}</h2>
+      <h2>${{ menuObj.price }}</h2>
+      <p>{{ menuObj.itemDescription }}</p>
     </div>
   </div>
 </template>
