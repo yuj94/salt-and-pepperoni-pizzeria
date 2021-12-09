@@ -55,7 +55,7 @@ public class JdbcOrderDao implements OrderDao {
                      "ON order_items.menu_item_id = menu.item_id\n" +
                      "WHERE orders.completed = TRUE AND WHERE ? = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, parameterType, searchText);
 
         while (results.next()) {
             orderSearchList.add(mapRowToOrdersList(results));
