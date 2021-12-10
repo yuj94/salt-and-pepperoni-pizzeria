@@ -29,7 +29,16 @@ export default new Vuex.Store({
       ingredients: {},
       quantity: '',
     },
-    categories: ['Appetizers', 'Desserts', 'Drinks', 'Salads', 'Pizzas'],
+    ingredients: {
+      ingredientId: '',
+      ingredientName: '',
+      ingredientType: '',
+      price: '',
+      orderQuantity: '',
+      totalQuantity: '',
+    },
+    categories: ['Pizzas', 'Appetizers', 'Salads', 'Desserts', 'Drinks'],
+    
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -50,6 +59,9 @@ export default new Vuex.Store({
     },
     SET_MENU_ITEMS(state, data) {
       state.menuItems = data;
+    },
+    SET_INGREDIENTS(state, data) {
+      state.ingredients = data;
     }
   }
 })

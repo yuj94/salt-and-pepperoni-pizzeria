@@ -1,8 +1,8 @@
 <template>
-  <div class="menuDiv">
+  <div class="pizzasMenuDiv">
     <banner class="banner"></banner>
     <navigation class="navigation"></navigation>
-    <menu-list class="menuList"></menu-list>
+    <ingredient-list class="ingredients"></ingredient-list>
     <cart class="cart"></cart>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 import Banner from "@/components/Banner.vue";
 import Navigation from "@/components/Navigation.vue";
-import MenuList from "@/components/MenuList.vue";
+import IngredientList from "@/components/IngredientList.vue";
 import Cart from "@/components/Cart.vue";
 
 export default {
@@ -18,14 +18,14 @@ export default {
   components: {
     Banner,
     Navigation,
-    MenuList,
+    IngredientList,
     Cart,
   },
 };
 </script>
 
 <style scoped>
-.menuDiv {
+.pizzasMenuDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   gap: 10px;
@@ -52,5 +52,4 @@ export default {
 .cart {
   grid-area: cart;
 }
-
 </style>

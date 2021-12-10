@@ -5,12 +5,13 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import Menu from '../views/Menu.vue'
-import PizzasMenu from '../views/PizzasMenu.vue'
-import DrinksMenu from '../views/DrinksMenu.vue'
-import AppetizersMenu from '../views/AppetizersMenu.vue'
-import DessertsMenu from '../views/DessertsMenu.vue'
-import SaladsMenu from '../views/SaladsMenu.vue'
+import MenuCategory from '../views/MenuCategory.vue'
+import CustomPizza from '../views/CustomPizza.vue'
+import PendingOrders from '../views/PendingOrders.vue'
+import HistoricalOrders from '../views/HistoricalOrders.vue'
+import EmployeePortal from '../views/EmployeePortalHome.vue'
+import ManageInventory from '../views/ManageInventory.vue'
+import ManageMenuItems from '../views/ManageMenu.vue'
 
 
 Vue.use(Router)
@@ -57,53 +58,61 @@ const router = new Router({
       name: "register",
       component: Register,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: "/menu",
-      name: "menu",
-      component: Menu,
+      path: "/custom-pizza",
+      name: "custom-pizza",
+      component: CustomPizza,
       meta: {
         requiresAuth: false
       }
     },
     {
-      path: "/menu/pizzas",
-      name: "pizzas-menu",
-      component: PizzasMenu,
+      path: "/employee-portal",
+      name: "employee-portal",
+      component: EmployeePortal,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: "/menu/drinks",
-      name: "drinks-menu",
-      component: DrinksMenu,
+      path: "/employee-portal/pending-orders",
+      name: "pending-orders",
+      component: PendingOrders,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: "/menu/appetizers",
-      name: "appetizers-menu",
-      component: AppetizersMenu,
+      path: "/employee-portal/historical-orders",
+      name: "historical-orders",
+      component: HistoricalOrders,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: "/menu/desserts",
-      name: "desserts-menu",
-      component: DessertsMenu,
+      path: "/employee-portal/menu-items",
+      name: "manage-menu-items",
+      component: ManageMenuItems,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: "/menu/salads",
-      name: "salads-menu",
-      component: SaladsMenu,
+      path: "/employee-portal/inventory",
+      name: "manage-inventory",
+      component: ManageInventory,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/:category",
+      name: "menu-category",
+      component: MenuCategory,
       meta: {
         requiresAuth: false
       }

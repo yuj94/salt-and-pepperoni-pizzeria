@@ -10,16 +10,6 @@ public interface MenuDao {
 
     List<MenuItem> getAllMenuItems();
 
-    List<MenuItem> getSpecialtyPizzaList();
-
-    List<MenuItem> getAppetizerList();
-
-    List<MenuItem> getSaladList();
-
-    List<MenuItem> getDessertList();
-
-    List<MenuItem> getDrinkList();
-
     MenuItem getCustomPizza(int newPizzaId);
 
     List<Ingredient> getMenuPizzaIngredients(int pizzaId);

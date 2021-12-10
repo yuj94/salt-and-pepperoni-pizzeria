@@ -42,86 +42,6 @@ public class JdbcMenuDao implements MenuDao {
     }
 
     @Override
-    public List<MenuItem> getSpecialtyPizzaList() {
-        List<MenuItem> pizzaList = new ArrayList<>();
-
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
-                "WHERE item_category = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, PIZZA_CATEGORY);
-
-        while (results.next()) {
-            pizzaList.add(mapRowToMenuItem(results));
-        }
-
-        return pizzaList;
-    }
-
-    @Override
-    public List<MenuItem> getAppetizerList() {
-        List<MenuItem> appetizerList = new ArrayList<>();
-
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
-                "WHERE item_category = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, APPETIZER_CATEGORY);
-
-        while (results.next()) {
-            appetizerList.add(mapRowToMenuItem(results));
-        }
-
-        return appetizerList;
-    }
-
-    @Override
-    public List<MenuItem> getSaladList() {
-        List<MenuItem> saladList = new ArrayList<>();
-
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
-                "WHERE item_category = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, SALAD_CATEGORY);
-
-        while (results.next()) {
-            saladList.add(mapRowToMenuItem(results));
-        }
-
-        return saladList;
-    }
-
-    @Override
-    public List<MenuItem> getDessertList() {
-        List<MenuItem> dessertList = new ArrayList<>();
-
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
-                "WHERE item_category = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, DESSERT_CATEGORY);
-
-        while (results.next()) {
-            dessertList.add(mapRowToMenuItem(results));
-        }
-
-        return dessertList;
-    }
-
-    @Override
-    public List<MenuItem> getDrinkList() {
-        List<MenuItem> drinkList = new ArrayList<>();
-
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu\n" +
-                "WHERE item_category = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, DRINK_CATEGORY);
-
-        while (results.next()) {
-            drinkList.add(mapRowToMenuItem(results));
-        }
-
-        return drinkList;
-    }
-
-    @Override
     public List<Ingredient> getMenuPizzaIngredients(int pizzaId) {
         List<Ingredient> ingredients = new ArrayList<>();
 
@@ -239,7 +159,7 @@ public class JdbcMenuDao implements MenuDao {
         ingredient.setIngredientType(rowSet.getString("ingredient_type"));
         ingredient.setPrice(rowSet.getBigDecimal("price"));
         ingredient.setTotalQuantity(rowSet.getDouble("total_quantity"));
-        ingredient.setOrderQuantity(rowSet.getDouble("order_quantity"));
+        //ingredient.setOrderQuantity(rowSet.getDouble("order_quantity"));
 
         return ingredient;
     }

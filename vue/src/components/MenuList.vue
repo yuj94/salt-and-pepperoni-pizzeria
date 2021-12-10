@@ -3,15 +3,18 @@
     <div class="loading" v-if="isLoading">
       <img src="../assets/loader.gif" />
     </div>
-    <div class="loaded" v-for="item in this.$store.state.menuItems" v-bind:key="item.itemId" v-else>
-      <div class="allMenuItems">
-        <menu-details class="menuDetails" v-bind:menuObj="item"></menu-details>
-      </div>
-      <div class="categoryMenuItems">
 
+    <div class="loaded" v-else>
+      <h1 class="categoryHeader">{{this.$route.params.category.toUpperCase()}}</h1>
+      <div v-for="item in currentCategoryItems" v-bind:key="item.itemId">
+        <div class="allMenuItems">
+          <menu-details
+            class="menuDetails"
+            v-bind:menuObj="item"
+          ></menu-details>
+        </div>
       </div>
     </div>
- 
   </div>
 </template>
 
@@ -24,11 +27,17 @@ export default {
   components: {
     menuDetails,
   },
+  computed: {
+    currentCategoryItems() {
+      return this.$store.state.menuItems.filter((item) => {
+        return item.itemCategory.toLowerCase() == this.$route.params.category.substring(0, this.$route.params.category.length - 1);
+      })
+    },
+  },
   data() {
     return {
       isLoading: true,
-      // itemCategories: this.$store.state.menuItems.itemCategories.removeD,
-    }
+    };
   },
   methods: {
     getMenuItems() {
@@ -47,7 +56,11 @@ export default {
 <style scoped>
 .allMenuItems {
   border: solid 1px green;
-  margin: 30px 0;
+  margin: 0 0 10px 0;
 }
 
+.categoryHeader {
+  color: #d20201;
+  text-align: center;
+}
 </style>

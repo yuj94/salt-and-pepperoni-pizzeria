@@ -1,11 +1,14 @@
 <template>
   <div class="navigationDiv">
-    <router-link :to="{name: 'menu'}"><h1>Categories</h1> </router-link>
+    <h1>Categories</h1>
     <nav class="navigationNav" v-for="category in this.$store.state.categories" v-bind:key="category.name">
-      <router-link :to="{name: `${category.toLowerCase()}-menu`}">
+      <router-link :to="{path: `/${category.substring(0, category.length - 1).toLowerCase()}s`}">
           <h2>{{category}}</h2>
         </router-link>
     </nav>
+    <router-link :to="{path: '/custom-pizza'}">
+          <h2>Custom Pizza</h2>
+    </router-link>
   </div>
 </template>
 
@@ -18,15 +21,8 @@ export default {
 <style scoped>
 .navigationDiv {
   border: solid 1px red;
-  display: flexbox;
-  flex-direction: column;
+  color: #d20201;
   text-align: center;
-}
-
-.navigationNav {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
 }
 
 

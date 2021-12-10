@@ -12,6 +12,11 @@ export default {
   components: {
     Banner,
   },
+  methods: {
+      created() {
+        this.$store.state.isLoading = false;
+      },
+    },
 };
 </script>
 
@@ -21,14 +26,11 @@ export default {
   grid-template-columns: 1fr 3fr 1fr;
   gap: 10px;
   grid-template-areas: 
-    "banner banner cart";
+    "banner banner banner";
 }
 
 .banner {
   grid-area: banner;
 }
 
-.cart {
-  grid-area: cart;
-}
 </style>
