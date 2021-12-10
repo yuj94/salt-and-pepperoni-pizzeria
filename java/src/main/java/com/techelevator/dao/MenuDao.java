@@ -18,4 +18,15 @@ public interface MenuDao {
 
     boolean createCustomPizza(CustomPizza customPizza);
 
+    int updateIngredientQuantity(int ingredientId, double quantity);
+
+    int updateIngredientPrice(int ingredientId, double price);
+
+    int updateMenuItemQuantity(int itemId, double quantity);
+
+    int updateMenuItemPrice(int itemId, double price);
+
+    int addIngredient (Ingredient ingredient);
+
+    int createMenuItem(MenuItem menuItem);
 }

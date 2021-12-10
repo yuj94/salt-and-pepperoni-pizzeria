@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.Ingredient;
 import com.techelevator.model.MenuItem;
 import com.techelevator.model.CustomPizza;
+import com.techelevator.model.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -150,6 +151,59 @@ public class JdbcMenuDao implements MenuDao {
 //
 //        return pizza;
 //    }
+
+    @Override
+    public int createMenuItem(MenuItem menuItem) {
+        String sql = "INSERT INTO menu (item_name, item_description, item_category, price, total_quantity)\n"+
+                "Values(?,?,?,?,?) RETURNING item_id;";
+        int itemId = jdbcTemplate.queryForObject(sql, Integer.class, menuItem.getItemName(), menuItem.getItemDescription(), menuItem.getItemCategory(), menuItem.getPrice(), menuItem.getTotalQuantity());
+        return itemId;
+    }
+
+
+    @Override
+    public int updateIngredientQuantity (int ingredientId, double quantity){
+        String sql = "UPDATE total_quantity\n" +
+                "FROM ingredient\n" +
+                "SET quantity = ?\n" +
+                "WHERE ingredient_id = ?;";
+        return jdbcTemplate.update(sql, quantity, ingredientId);
+    }
+
+    @Override
+    public int updateIngredientPrice (int ingredientId, double price){
+        String sql = "UPDATE price\n" +
+                "FROM ingredient\n" +
+                "SET price = ?\n" +
+                "WHERE ingredient_id = ?;";
+        return jdbcTemplate.update(sql, price, ingredientId);
+    }
+
+    @Override
+    public int updateMenuItemQuantity (int itemId, double quantity){
+        String sql = "UPDATE total_quantity\n" +
+                "FROM menu\n" +
+                "SET quantity = ?\n" +
+                "WHERE item_id = ?;";
+        return jdbcTemplate.update(sql, quantity, itemId);
+    }
+
+    @Override
+    public int updateMenuItemPrice (int itemId, double price){
+        String sql = "UPDATE price\n" +
+                "FROM menu\n" +
+                "SET price = ?\n" +
+                "WHERE item_id = ?;";
+        return jdbcTemplate.update(sql, price, itemId);
+    }
+
+    @Override
+    public int addIngredient (Ingredient ingredient){
+        String sql = "INSERT INTO ingredient (ingredient_name, ingredient_type, price, total_quantity)\n"+
+                "Values(?,?,?,?) RETURNING ingredient_id;";
+        int ingredientId = jdbcTemplate.queryForObject(sql, Integer.class, ingredient.getIngredientName(), ingredient.getIngredientType(), ingredient.getPrice(), ingredient.getTotalQuantity());
+        return ingredientId;
+    }
 
     private Ingredient mapRowToIngredient(SqlRowSet rowSet) {
         Ingredient ingredient = new Ingredient();

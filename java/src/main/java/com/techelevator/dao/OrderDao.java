@@ -20,6 +20,6 @@ public interface OrderDao {
 
         List<CustomPizza> getCustomPizzasByOrderId(int orderId);
 
-        boolean createOrder(Menu menuItem);
+        int createOrder(Order order);
 
 }

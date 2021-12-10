@@ -121,24 +121,16 @@ public class JdbcOrderDao implements OrderDao {
         return customPizzasList;
     }
 
+
+
+
     @Override
-    public boolean createOrder(Menu menuItem) {
-        boolean isCreated = false;
-
-        String sql = "INSERT INTO custom_pizza (price) " +
-                "VALUES (0.00) RETURNING pizza_id;";
-
-        customPizza.setPizzaId(jdbcTemplate.queryForObject(sql, Integer.class));
-
-        addIngredientsToPizzaIngredientTable(customPizza);
-
-        if (getCustomPizza(customPizza.getPizzaId()) != null) {
-            isCreated = true;
-        }
-
-        return isCreated;
+    public int createOrder(Order order) {
+        String sql = "INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, delivery, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv, order_total)\n"+
+                "Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING order_id;";
+        int orderId = jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getAddressLine(), order.getAddressState(), order.getAddressCity(), order.getAddressZipCode(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getCreditCardNumber(), order.getCreditCardExpMonth(), order.getCreditCardExpYear(), order.getCreditCardCcv(), order.getOrderTotal());
+        return orderId;
     }
-
 
 
     //everything below is an import from JdbcMenuDao

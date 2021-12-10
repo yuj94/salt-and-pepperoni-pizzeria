@@ -42,4 +42,14 @@ VALUES (1, 'Pizza', 1, 1, 'small', 1)
 INNER JOIN menu ON order_items.menu_item_id = menu.item_id
 INNER JOIN orders ON order_items.order_id = orders.order_id
 
+SELECT item_name, total_quantity, price
+FROM menu
+WHERE item_category = 'Salad' OR item_category = 'Appetizer' OR item_category = 'Dessert' OR item_category = 'Drink';
+
+SELECT ingredient_name, total_quantity, price
+FROM ingredient;
+
+INSERT INTO menu (item_name, item_description, item_category, price, total_quantity)
+Values(1,1,'Salad',1,1) RETURNING item_id;
+
 --everything from ingredient where pizza-ingredient.pizza_id = pizza.pizza_id
