@@ -3,7 +3,6 @@ package com.techelevator.controller;
 import com.techelevator.dao.OrderDao;
 import com.techelevator.dao.MenuDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.MenuItem;
 import com.techelevator.model.Order;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,11 +37,4 @@ public class OrderController {
     public List<Order> getOrdersBySearch(String parameterType, String searchText) {
         return orderDao.getOrdersBySearch(parameterType, searchText);
     }
-
-    @RequestMapping(path = "/order/cart", method = RequestMethod.GET)
-    public List<Order> getCart() {
-        return orderDao.getCart();
-    }
-
-
 }

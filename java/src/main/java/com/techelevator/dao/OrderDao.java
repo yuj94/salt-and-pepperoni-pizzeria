@@ -14,8 +14,6 @@ public interface OrderDao {
 
         List<Order> getOrdersBySearch(String parameterType, String searchText);
 
-        List<Order> getCart();
-
         List<Order> getIncompleteOrdersByOrderId();
 
         List<MenuItem> getMenuItemsByOrderId(int orderId);
