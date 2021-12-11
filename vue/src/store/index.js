@@ -28,6 +28,25 @@ export default new Vuex.Store({
       price: '',
       ingredients: {},
       totalQuantity: '',
+      imageUrl: '',
+    },
+    customPizzas: {
+      ingredients: {
+
+      }
+    },
+    cart: {
+      menuItems: {
+
+      },
+      customPizzas: {
+
+      },
+      totalPrice: 0,
+      
+      // cart.menuItems.array.forEach(element => { 
+      //   return element.price
+      // });
     },
     ingredients: {
       ingredientId: '',
@@ -38,10 +57,38 @@ export default new Vuex.Store({
       totalQuantity: '',
     },
     categories: ['Pizzas', 'Appetizers', 'Salads', 'Desserts', 'Drinks'],
-    pizzaImage: {
-      
-    }
-    
+    pendingOrders: {
+      orderId: "",
+      firstName: "",
+      lastName: "",
+      addressLine: "",
+      addressState: "",
+      addressCity: "",
+      addressZipCode: "",
+      email: "",
+      phoneNumber: "",
+      menuItems: {},
+      customPizza: {},
+      isDelivery: "",
+      isCompleted: false,
+      orderTotal: ""
+    },
+    historicalOrders: {
+        orderId: "",
+        firstName: "",
+        lastName: "",
+        addressLine: "",
+        addressState: "",
+        addressCity: "",
+        addressZipCode: "",
+        email: "",
+        phoneNumber: "",
+        menuItems: {},
+        customPizza: {},
+        isDelivery: "",
+        isCompleted: true,
+        orderTotal: ""
+      }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

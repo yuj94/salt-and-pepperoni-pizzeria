@@ -4,10 +4,10 @@
       <!-- <h2>{{ menuObj.itemCategory}}</h2> -->
         <h2 id="itemName">{{ menuObj.itemName }}</h2>
         <h2 id="itemPrice">${{ menuObj.price }}</h2>
-          <!-- <form action="">
+          <form action="">
             
             <button type="button" class="cartButton">Add to Cart</button>
-          </form> -->
+          </form>
         <p id="itemDescription">{{ menuObj.itemDescription }}</p>
     </div>
   </div>

@@ -7,6 +7,16 @@
     <div class="loaded" v-else>
       <div class="manageIngredientBanner">
       <h2>Manage Inventory Ingredients</h2>
+      <div
+            class="ingredient"
+            id="doughs"
+            v-for="ingredient in dough"
+            v-bind:key="ingredient.ingredientId"
+          >
+            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            <p id="ingredientPrice">Price: ${{ ingredient.price }} </p>&nbsp;
+            <p id="ingredientOrderQuantity">Quantity: {{ ingredient.orderQuantity }}</p>
+          </div>
       <button type="submit">Add Ingredient</button>
       </div>
       <div class="ingredientList">
@@ -18,6 +28,9 @@
             v-for="ingredient in meats"
             v-bind:key="ingredient.ingredientId"
           >
+          <form action="">
+
+          </form>
             <input
               type="checkbox"
               id="ingredientId"
@@ -121,6 +134,11 @@ export default {
       return this.$store.state.ingredients.filter((ingredient) => {
         return ingredient.ingredientType == "Cheese";
       });
+    },
+    dough() {
+      return this.$store.state.ingredients.filter((ingredient) => {
+        return ingredient.ingredientType == "Dough";
+        });
     },
   },
   methods: {
