@@ -27,7 +27,7 @@ export default new Vuex.Store({
       itemCategory: '',
       price: '',
       ingredients: {},
-      quantity: '',
+      totalQuantity: '',
     },
     ingredients: {
       ingredientId: '',
@@ -38,6 +38,9 @@ export default new Vuex.Store({
       totalQuantity: '',
     },
     categories: ['Pizzas', 'Appetizers', 'Salads', 'Desserts', 'Drinks'],
+    pizzaImage: {
+      
+    }
     
   },
   mutations: {

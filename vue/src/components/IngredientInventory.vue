@@ -5,13 +5,16 @@
     </div>
 
     <div class="loaded" v-else>
-      <h2>Create your own custom pizza.</h2>
-      <p>For our 12" custom pizzas, our prices start at ${{this.$store.state.ingredients.price}}</p>
+      <div class="manageIngredientBanner">
+      <h2>Manage Inventory Ingredients</h2>
+      <button type="submit">Add Ingredient</button>
+      </div>
       <div class="ingredientList">
         <div>
           <h2 id="meatId">Meats</h2>
           <div
-            class="meats"
+            class="ingredient"
+            id="meats"
             v-for="ingredient in meats"
             v-bind:key="ingredient.ingredientId"
           >
@@ -21,15 +24,16 @@
               name="ingredientName"
               value="ingredient"
             />
-            <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }}</h3>&nbsp;
+            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
             <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
           </div>
         </div>
         <div>
           <h2 id="veggieId">Veggies</h2>
           <div
-            class="veggies"
+            class="ingredient"
+            id="veggies"
             v-for="ingredient in veggies"
             v-bind:key="ingredient.ingredientId"
           >
@@ -39,15 +43,16 @@
               name="ingredientName"
               value="ingredient"
             />
-            <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }}</h3>&nbsp;
+            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
             <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
           </div>
         </div>
         <div>
           <h2 id="sauceId">Sauces</h2>
           <div
-            class="sauces"
+            class="ingredient"
+            id="sauces"
             v-for="ingredient in sauces"
             v-bind:key="ingredient.ingredientId"
           >
@@ -57,15 +62,16 @@
               name="ingredientName"
               value="ingredient"
             />
-            <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }}</h3>&nbsp;
+            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
             <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
           </div>
         </div>
         <div>
           <h2 id="cheeseId">Cheeses</h2>
           <div
-            class="cheeses"
+            class="ingredient"
+            id="cheeses"
             v-for="ingredient in cheeses"
             v-bind:key="ingredient.ingredientId"
           >
@@ -75,8 +81,8 @@
               name="ingredientName"
               value="ingredient"
             />
-            <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }}</h3>&nbsp;
+            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
             <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
           </div>
         </div>
@@ -132,10 +138,16 @@ export default {
 </script>
 
 <style scoped>
+.manageIngredientBanner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .ingredientList {
   font-size: 12px;
-  margin: 0;
-  padding: 0;
+  margin: 10px;
+  padding: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
@@ -143,32 +155,26 @@ export default {
     "meat veggies sauce cheese";
 }
 
-.meats {
+.ingredient {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+}
+
+#meats {
   grid-area: meat;
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
 }
 
-.veggies {
+#veggies {
   grid-area: veggies;
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
 }
 
-.sauces {
+#sauces {
   grid-area: sauce;
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
 }
 
-.cheeses {
+#cheeses {
   grid-area: cheese;
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
 }
 
 #meatId {
