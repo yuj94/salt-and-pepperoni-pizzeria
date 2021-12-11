@@ -11,6 +11,15 @@ public class MenuItem {
     private String itemCategory;
     private BigDecimal price;
     private double totalQuantity;
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     private List<Ingredient> ingredientList = new ArrayList<>();
 

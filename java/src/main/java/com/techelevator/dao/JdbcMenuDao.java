@@ -30,7 +30,7 @@ public class JdbcMenuDao implements MenuDao {
     public List<MenuItem> getAllMenuItems() {
         List<MenuItem> menuItemList = new ArrayList<>();
 
-        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity FROM menu;";
+        String sql = "SELECT item_id, item_name, item_description, item_category, price, total_quantity, image_url FROM menu;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -226,6 +226,7 @@ public class JdbcMenuDao implements MenuDao {
         menuItem.setItemName(rowSet.getString("item_name"));
         menuItem.setItemDescription(rowSet.getString("item_description"));
         menuItem.setTotalQuantity(rowSet.getDouble("total_quantity"));
+        menuItem.setImageUrl(rowSet.getString("image_url"));
 
         if (rowSet.getString("item_category").equals(PIZZA_CATEGORY)) {
             menuItem.setPrice(getMenuItemPrice(menuItem));
