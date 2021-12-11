@@ -10,9 +10,9 @@
         <button>Add to Cart</button>
         <label for="pizzaSize">Choose a pizza size:</label>
         <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
-          <option value="12">12"</option>
-          <option value="16">16"</option>
-          <option value="18">18"</option>
+          <option value=12>12"</option>
+          <option value=16>16"</option>
+          <option value=18>18"</option>
         </select>
       </div>
       <p>
@@ -36,14 +36,15 @@
               id="ingredientId"
               name="ingredientName"
               value="ingredient"
-              v-model="customPizza.ingredients"
+              v-bind="customPizza.ingredients"
             />
             <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
             <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
             &nbsp;
-            <select name="ingredientQuantity" id="ingredientQuantity">
-              <option value="1">Regular</option>
-              <option value="2">Double</option>
+           <select name="ingredientQuantity" id="ingredientQuantity">
+              <option value=0>None</option>
+              <option value=1>Regular</option>
+              <option value=2>Double</option>
             </select>
           </div>
         </div>
@@ -59,13 +60,16 @@
               id="ingredientId"
               name="ingredientName"
               value="ingredient"
+              v-bind="customPizza.ingredients"
             />
             <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
             <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
             &nbsp;
-            <p id="ingredientOrderQuantity">
-              Order quantity: {{ ingredient.orderQuantity }}
-            </p>
+            <select name="ingredientQuantity" id="ingredientQuantity">
+              <option value=0>None</option>
+              <option value=1>Regular</option>
+              <option value=2>Double</option>
+            </select>
           </div>
         </div>
         <div>
@@ -80,13 +84,16 @@
               id="ingredientId"
               name="ingredientName"
               value="ingredient"
+              v-bind="customPizza.ingredients"
             />
             <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
             <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
             &nbsp;
-            <p id="ingredientOrderQuantity">
-              Order quantity: {{ ingredient.orderQuantity }}
-            </p>
+            <select name="ingredientQuantity" id="ingredientQuantity">
+              <option value=0>None</option>
+              <option value=1>Regular</option>
+              <option value=2>Double</option>
+            </select>
           </div>
         </div>
         <div>
@@ -101,13 +108,16 @@
               id="ingredientId"
               name="ingredientName"
               value="ingredient"
+              v-bind="customPizza.ingredients"
             />
             <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
             <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
             &nbsp;
-            <p id="ingredientOrderQuantity">
-              Order quantity: {{ ingredient.orderQuantity }}
-            </p>
+            <select name="ingredientQuantity" id="ingredientQuantity">
+              <option value=0>None</option>
+              <option value=1>Regular</option>
+              <option value=2>Double</option>
+            </select>
           </div>
         </div>
       </div>
@@ -123,6 +133,7 @@ export default {
   data() {
     return {
       isLoading: true,
+      pizzaSize: 12,
       customPizza: {
         ingredients: {},
       },
@@ -166,9 +177,6 @@ export default {
       }
       return basePrice;
     },
-    pizzaSize() {
-      return 16;
-    },
   },
   methods: {
     getIngredients() {
@@ -206,6 +214,10 @@ export default {
 
 .customHeaderDiv > #pizzaSize {
   width: 50px;
+}
+
+#ingredientQuantity {
+  width: 80px;
 }
 
 .meats {
