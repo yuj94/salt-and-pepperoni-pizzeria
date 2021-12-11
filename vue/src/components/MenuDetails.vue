@@ -1,14 +1,23 @@
 <template>
   <div>
-    <div class="categoryHeaderDiv" >
-      <!-- <h2>{{ menuObj.itemCategory}}</h2> -->
-        <h2 id="itemName">{{ menuObj.itemName }}</h2>
+    <div class="categoryHeaderDiv">
+      <img src="menuObj.imageUrl" alt="Picture of menu item." />
+      <h2 id="itemName">{{ menuObj.itemName }}</h2>
+
+      <h2 id="itemPrice" v-if="!isPizza">${{ menuObj.price }}</h2>
+      <div v-if="isPizza">
+        <label for="pizzaSize">Choose a size:</label>
+        <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
+          <option value="12">12"</option>
+          <option value="16">16"</option>
+          <option value="18">18"</option>
+        </select>
         <h2 id="itemPrice">${{ menuObj.price }}</h2>
-          <form action="">
-            
-            <button type="button" class="cartButton">Add to Cart</button>
-          </form>
-        <p id="itemDescription">{{ menuObj.itemDescription }}</p>
+      </div>
+      <form action="">
+        <button type="button" class="cartButton">Add to Cart</button>
+      </form>
+      <p id="itemDescription">{{ menuObj.itemDescription }}</p>
     </div>
   </div>
 </template>
@@ -16,20 +25,31 @@
 <script>
 export default {
   name: "menu-details",
+  data() {
+    return {
+      pizzaSize: 12,
+      isPizza: true,
+      pizzaPrice: "",
+    };
+  },
   props: ["menuObj"],
 };
 </script>
 
 <style scoped>
-
 .categoryHeaderDiv {
-  /* border: solid 1px navy; */
   margin: none;
   display: grid;
-  grid-template-columns: 6fr 1fr;
-  grid-template-areas: 
-    "name price"
-    "description cartButton";
+  grid-template-columns: 2fr 4fr 1fr;
+  grid-template-areas:
+    "img name price"
+    "img description cartButton";
+}
+
+img {
+  grid-area: img;
+  align-content: center;
+  justify-content: center;
 }
 
 .cartButton {
@@ -49,5 +69,4 @@ export default {
 #itemDescription {
   grid-area: description;
 }
-
 </style>
