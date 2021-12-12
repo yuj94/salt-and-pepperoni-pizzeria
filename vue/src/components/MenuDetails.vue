@@ -4,19 +4,17 @@
       <img v-bind:src="menuObj.imageUrl" alt="Picture of menu item." />
       <h2 id="itemName">{{ menuObj.itemName }}</h2>
 
-      <h2 id="itemPrice" v-if="!isPizza">${{ menuObj.price }}</h2>
+      <h2 id="itemPrice" v-if="!isPizza">$ {{ menuObj.price }}</h2>
       <div v-if="isPizza">
-        <label for="pizzaSize">Choose a size:</label>
+        <label for="pizzaSize">Choose a size: </label>
         <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
           <option value=12>12"</option>
           <option value=16>16"</option>
           <option value=18>18"</option>
         </select>
-        <h2 id="itemPrice">${{ pizzaPrice(menuObj.price) }}</h2>
+        <h2 id="itemPrice">$ {{ pizzaPrice(menuObj.price) }}</h2>
       </div>
-      <form action="">
-        <button type="button" class="cartButton">Add to Cart</button>
-      </form>
+      <button type="button" class="cartButton" v-on:click="addItemToCart(`${menuObj}`)">Add to Cart</button>
       <p id="itemDescription">{{ menuObj.itemDescription }}</p>
     </div>
   </div>
@@ -50,6 +48,9 @@ export default {
         return originalPrice + 6;
       }
     },
+    addItemToCart(item) {
+      this.$store.commit("ADD_MENU_ITEM_TO_CART", item);
+    },
   }
 };
 </script>
@@ -58,7 +59,7 @@ export default {
 .categoryHeaderDiv {
   margin: none;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas:
     "img name price"
     "img description cartButton";

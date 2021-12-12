@@ -31,23 +31,33 @@ export default new Vuex.Store({
       imageUrl: '',
     },
     customPizzas: {
+      pizzaId: '',
       ingredients: {
 
-      }
+      },
+      price: '',
     },
     cart: {
-      menuItems: {
-
-      },
-      customPizzas: {
-
+      items: {
+        menuItems: {
+          itemId: '',
+          itemName: '',
+          itemCategory: '',
+          price: '',
+          itemSize: '',
+          orderQuantity: '',
+        },
+        customPizzas: {
+          itemId: '',
+          ingredients: {},
+          price: '',
+          itemSize: '',
+          quantity: '',
+        },
       },
       totalPrice: 0,
-      
-      // cart.menuItems.array.forEach(element => { 
-      //   return element.price
-      // });
     },
+    
     ingredients: {
       ingredientId: '',
       ingredientName: '',
@@ -112,6 +122,9 @@ export default new Vuex.Store({
     },
     SET_INGREDIENTS(state, data) {
       state.ingredients = data;
-    }
+    },
+    ADD_MENU_ITEM_TO_CART(state, data) {
+      state.cart.items.menuItems += data;
+    },
   }
 })

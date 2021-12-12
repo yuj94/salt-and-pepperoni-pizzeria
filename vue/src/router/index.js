@@ -12,6 +12,7 @@ import HistoricalOrders from '../views/HistoricalOrders.vue'
 import EmployeePortal from '../views/EmployeePortalHome.vue'
 import ManageInventory from '../views/ManageInventory.vue'
 import ManageMenuItems from '../views/ManageMenu.vue'
+import Checkout from '../views/Checkout.vue'
 
 
 Vue.use(Router)
@@ -107,6 +108,14 @@ const router = new Router({
       component: ManageInventory,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: "/checkout",
+      name: "checkout",
+      component: Checkout,
+      meta: {
+        requiresAuth: false
       }
     },
     {
