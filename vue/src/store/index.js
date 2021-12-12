@@ -12,7 +12,7 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
@@ -38,24 +38,13 @@ export default new Vuex.Store({
       price: '',
     },
     cart: [],
-      // items: {
-      //   menuItems: {
-      //     itemId: '',
-      //     itemName: '',
-      //     itemCategory: '',
-      //     price: '',
-      //     itemSize: '',
-      //     orderQuantity: '',
-      //   },
-      //   customPizzas: {
-      //     itemId: '',
-      //     ingredients: {},
-      //     price: '',
-      //     itemSize: '',
-      //     quantity: '',
-      //   },
-      // },
-      // totalPrice: 0,
+    // cartItems: {
+    //   itemId: '',
+    //   itemName: '',
+    //   itemCategory: '',
+    //   price: '',
+    //   itemSize: '',
+    //   orderQuantity: '',
     // },
     ingredients: {
       ingredientId: '',
@@ -66,38 +55,40 @@ export default new Vuex.Store({
       totalQuantity: '',
     },
     categories: ['Pizzas', 'Appetizers', 'Salads', 'Desserts', 'Drinks'],
-    pendingOrders: {
-      orderId: "",
-      firstName: "",
-      lastName: "",
-      addressLine: "",
-      addressState: "",
-      addressCity: "",
-      addressZipCode: "",
-      email: "",
-      phoneNumber: "",
-      menuItems: {},
-      customPizza: {},
-      isDelivery: "",
-      isCompleted: false,
-      orderTotal: ""
-    },
-    historicalOrders: {
-        orderId: "",
-        firstName: "",
-        lastName: "",
-        addressLine: "",
-        addressState: "",
-        addressCity: "",
-        addressZipCode: "",
-        email: "",
-        phoneNumber: "",
-        menuItems: {},
-        customPizza: {},
-        isDelivery: "",
-        isCompleted: true,
-        orderTotal: ""
-      }
+    pendingOrders: [],
+    // pendingOrder: {
+    //   orderId: "",
+    //   firstName: "",
+    //   lastName: "",
+    //   addressLine: "",
+    //   addressState: "",
+    //   addressCity: "",
+    //   addressZipCode: "",
+    //   email: "",
+    //   phoneNumber: "",
+    //   menuItems: {},
+    //   customPizza: {},
+    //   isDelivery: "",
+    //   isCompleted: false,
+    //   orderTotal: ""
+    // },
+    historicalOrders: [],
+    // historicalOrder: {
+    //   orderId: "",
+    //   firstName: "",
+    //   lastName: "",
+    //   addressLine: "",
+    //   addressState: "",
+    //   addressCity: "",
+    //   addressZipCode: "",
+    //   email: "",
+    //   phoneNumber: "",
+    //   menuItems: {},
+    //   customPizza: {},
+    //   isDelivery: "",
+    //   isCompleted: true,
+    //   orderTotal: ""
+    // }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -107,7 +98,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -125,5 +116,11 @@ export default new Vuex.Store({
     ADD_MENU_ITEM_TO_CART(state, data) {
       state.cart = data;
     },
+    SET_PENDING_ORDERS(state, data) {
+      state.pendingOrders = data;
+    },
+    SET_HISTORICAL_ORDERS(state, data) {
+      state.historicalOrders = data;
+    }
   }
 })
