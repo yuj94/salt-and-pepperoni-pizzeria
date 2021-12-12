@@ -14,7 +14,7 @@
         </select>
         <h2 id="itemPrice">$ {{ pizzaPrice(menuObj.price) }}</h2>
       </div>
-      <button type="button" class="cartButton" v-on:click="addItemToCart(`${menuObj}`)">Add to Cart</button>
+      <button type="button" class="cartButton" v-on:click="addItemToCart('My item')">Add to Cart</button>
       <p id="itemDescription">{{ menuObj.itemDescription }}</p>
     </div>
   </div>

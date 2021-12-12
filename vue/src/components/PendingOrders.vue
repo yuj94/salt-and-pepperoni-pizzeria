@@ -92,11 +92,12 @@ export default {
         phoneNumber: "",
         orderTotal: "",
       },
+      pendingOrders: [],
     };
   },
   computed: {
     filteredList() {
-      return this.$store.state.pendingOrders.filter((order) => {
+      return this.pendingOrders.filter((order) => {
         return order.firstName.toLowerCase().includes(this.filter.firstName.toLowerCase()) &&
           order.lastName.toLowerCase().includes(this.filter.lastName.toLowerCase()) &&
           order.addressLine.toLowerCase().includes(this.filter.addressLine.toLowerCase()) &&
@@ -109,6 +110,14 @@ export default {
       })
     }
   },
+  methods: {
+    updateOrdersArray() {
+      this.orders = this.$store.state.pendingOrders;
+    }
+  },
+  created() {
+    this.updateOrdersArray;
+  }
 };
 </script>
 

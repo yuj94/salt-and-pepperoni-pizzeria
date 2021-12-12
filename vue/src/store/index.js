@@ -37,27 +37,26 @@ export default new Vuex.Store({
       },
       price: '',
     },
-    cart: {
-      items: {
-        menuItems: {
-          itemId: '',
-          itemName: '',
-          itemCategory: '',
-          price: '',
-          itemSize: '',
-          orderQuantity: '',
-        },
-        customPizzas: {
-          itemId: '',
-          ingredients: {},
-          price: '',
-          itemSize: '',
-          quantity: '',
-        },
-      },
-      totalPrice: 0,
-    },
-    
+    cart: [],
+      // items: {
+      //   menuItems: {
+      //     itemId: '',
+      //     itemName: '',
+      //     itemCategory: '',
+      //     price: '',
+      //     itemSize: '',
+      //     orderQuantity: '',
+      //   },
+      //   customPizzas: {
+      //     itemId: '',
+      //     ingredients: {},
+      //     price: '',
+      //     itemSize: '',
+      //     quantity: '',
+      //   },
+      // },
+      // totalPrice: 0,
+    // },
     ingredients: {
       ingredientId: '',
       ingredientName: '',
@@ -124,7 +123,7 @@ export default new Vuex.Store({
       state.ingredients = data;
     },
     ADD_MENU_ITEM_TO_CART(state, data) {
-      state.cart.items.menuItems += data;
+      state.cart = data;
     },
   }
 })

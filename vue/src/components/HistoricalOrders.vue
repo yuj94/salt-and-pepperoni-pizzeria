@@ -49,7 +49,7 @@
             />
           </td>
         </tr>
-        <tr v-for= "order in filteredList" v-bind:key= "order.orderId">
+       <tr v-for="order in filteredList" v-bind:key="order.orderId">
           <td>{{ order.firstName }}</td>
           <td>{{ order.lastName }}</td>
           <td>{{ order.addressLine }}</td>
@@ -59,7 +59,7 @@
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.orderTotal }}</td>
-        </tr>
+        </tr> 
       </tbody>
     </table>
   </div>
@@ -81,12 +81,12 @@ export default {
         phoneNumber: "",
         orderTotal: "",
       },
+      historicalOrders: [],
     };
   },
-
   computed: {
     filteredList() {
-      return this.$store.state.historicalOrders.filter((order) => {
+      return this.historicalOrders.filter((order) => {
         return order.firstName.toLowerCase().includes(this.filter.firstName.toLowerCase()) &&
           order.lastName.toLowerCase().includes(this.filter.lastName.toLowerCase()) &&
           order.addressLine.toLowerCase().includes(this.filter.addressLine.toLowerCase()) &&
@@ -99,6 +99,14 @@ export default {
       });
     },
   },
+  methods: {
+    updateOrdersArray() {
+      this.orders = this.$store.state.historicalOrders;
+    }
+  },
+  created() {
+    this.updateOrdersArray;
+  }
 };
 </script>
 

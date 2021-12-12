@@ -9,7 +9,6 @@ import MenuCategory from '../views/MenuCategory.vue'
 import CustomPizza from '../views/CustomPizza.vue'
 import PendingOrders from '../views/PendingOrders.vue'
 import HistoricalOrders from '../views/HistoricalOrders.vue'
-import EmployeePortal from '../views/EmployeePortalHome.vue'
 import ManageInventory from '../views/ManageInventory.vue'
 import ManageMenuItems from '../views/ManageMenu.vue'
 import Checkout from '../views/Checkout.vue'
@@ -68,14 +67,6 @@ const router = new Router({
       component: CustomPizza,
       meta: {
         requiresAuth: false
-      }
-    },
-    {
-      path: "/employee-portal",
-      name: "employee-portal",
-      component: EmployeePortal,
-      meta: {
-        requiresAuth: true
       }
     },
     {
