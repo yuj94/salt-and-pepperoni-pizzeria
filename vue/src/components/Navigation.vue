@@ -1,6 +1,6 @@
 <template>
   <div class="navigationDiv">
-    <h1>Categories</h1>
+    <h2>Categories</h2>
     <nav class="navigationNav" v-for="category in this.$store.state.categories" v-bind:key="category.name">
       <router-link :to="{path: `/${category.substring(0, category.length - 1).toLowerCase()}s`}">
           <h2>{{category}}</h2>
