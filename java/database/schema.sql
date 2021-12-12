@@ -135,9 +135,7 @@ VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on r
        ('Meatball Pepperoni Pizza', 'Savory meatballs and pepperoni make for a tasty combination, especially when we add onions, black olives, sun-dried tomatoes, a three-cheese blend, and real cheese made from mozzarella on our original crust, then sprinkle it all with classic Italian seasoning for an extra dash of flavor', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/meatball-pepp-slate-compressed.png'),
        ('BBQ Chicken Bacon Ranch Pizza', 'We had you at bacon, right? It gets even better. Ranch dresssing base with a smoky Southern-style BBQ sauce add a tangy twist to this irresistible pizza topped with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella. Round one up today', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/bbq-chicken-bacon-slate-compressed.png'),
        ('Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/fiery-buffalo-chicken-slate-compressed.png'), 
-       ('Pesto Pizza', 'Hand sliced mozzarella with spinach, onion, and olive oil and basil pesto sauce drizzle. Topped with our signature cheese and spice blend', 'Pizza' , 'https://www.acouplecooks.com/wp-content/uploads/2010/09/Pizza-057.jpg'),
-       ('Margherita Pizza', 'Traditional margherita pizza with our extra famous sauce, fresh basil, and mozzarella', 'Pizza', 'https://www.acouplecooks.com/wp-content/uploads/2018/10/Margherita-Pizza-018.jpg');
-       
+             
 INSERT INTO menu (item_name, item_description, item_category, price, image_url)
 VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa salami, kalamata olives, green sicilian olives, drizzle of extra virgin olive oil, basil leaf garnish & bread', 'Appetizer', 13, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240dc2b7eContent_ContentFile_mobile_Antipasto_1170.png_companyCode_GRPI001_designId_1'),
        ('Bruschetta', 'Our bruschetta is served trio styler', 'Appetizer', 12, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240df2c18Content_ContentFile_mobile_BruschettaTrio_1170.png_companyCode_GRPI001_designId_1'), 
@@ -263,19 +261,7 @@ VALUES (1, 1, 1),
        (12, 4, 1),
        (12, 6, 1),
        (12, 25, 1),
-       (12, 34, 1),
-       (13, 1, 1),
-       (13, 37, 1),
-       (13, 39, 1),
-       (13, 34, 1),
-       (13, 23, 1),
-       (13, 25, 1),
-       (13, 20, 1),
-       (14, 1, 1),
-       (14, 38, 1),
-       (14, 37, 1),
-       (14, 17, 1),
-       (14, 20, 1);
+       (12, 34, 1);
 
 CREATE TABLE orders (
         order_id serial,
@@ -300,6 +286,18 @@ CREATE TABLE orders (
         CONSTRAINT PK_orders PRIMARY KEY (order_id)
 );
 
+INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
+VALUES ('Han', 'Solo', 'Corellia Street', 'CO','Corellia Central', 12345, 'SanHolo@hmail.com', 923-123-4323, 45.54, 1234567890123456, 12, 25, 4356),
+       ('Leia', 'Skywalker', 'Alderaan Drive', 'AL', 'Alderaan Square', 54321, 'I<3SanHolo@gmail.com', 832-425-6178, 98.21, 1234567890123456, 12, 25, 4356),
+       ('Chewnacca', 'Wookie', 'Kashyyyk Court', 'KA', 'Kashyyyk Central', 31234, 'Chewie@gmail.com', 111-111-1111, 1.23, 1234567890123456, 12, 25, 4356);
+       
+INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, completed, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
+VALUES ('Anakin','Skywalker', 'Tatooine', 'TA', 'Tatooine Circle', 31253, 'ILoveMySister@gmail.com', 222-333-4444, 65.43, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Yoda', 'Shrek', 'Dagobah', 'DA', 'Dagobah Bog', 41265, 'JediMasterIAm@gmail.com', 232-546-2364, 54.32, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Mace', 'Windu', 'Haruun Kal', 'HK', 'Haruun Kal Circle', 12353, 'HaveYouSeenMyPurpleLightSabre@gmail.com', 125-543-6433, 878.43, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Obi-Wan', 'Kenobi', 'Stewjon', 'SJ', 'Stew And Beans', 55932, 'YouWereMyBrotherAnakin@gmail.com', 521-542-7653, 97.23, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Qui-Gon', 'Jinn', 'Coruscant', 'CO', 'Crossant', 12353, 'BeatBySomeHornedDude@gmail.com', 234-251-7647, 75.43, TRUE, 1234567890123456, 12, 25, 4356);
+       
 CREATE TABLE order_items (
         order_id int NOT NULL,
         item_type varchar(12) NOT NULL CHECK (item_type = 'Menu' OR item_type = 'Custom'),
