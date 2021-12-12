@@ -45,7 +45,7 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrdersBySearch(String parameterType, String searchText) {
+    public List<Order> getAllHistoricalOrders() {
         List<Order> orderSearchList = new ArrayList<>();
 
         String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
@@ -54,9 +54,9 @@ public class JdbcOrderDao implements OrderDao {
                      "ON order_items.order_id = orders.order_id\n" +
                      "FULL OUTER JOIN menu\n" +
                      "ON order_items.menu_item_id = menu.item_id\n" +
-                     "WHERE orders.completed = TRUE AND WHERE ? = ?;";
+                     "WHERE orders.completed = TRUE;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, parameterType, searchText);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {
             orderSearchList.add(mapRowToOrdersList(results));

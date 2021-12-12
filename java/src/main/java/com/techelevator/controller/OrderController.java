@@ -35,6 +35,6 @@ public class OrderController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/order/history", method = RequestMethod.GET)
     public List<Order> getOrdersBySearch(String parameterType, String searchText) {
-        return orderDao.getOrdersBySearch(parameterType, searchText);
+        return orderDao.getAllHistoricalOrders();
     }
 }

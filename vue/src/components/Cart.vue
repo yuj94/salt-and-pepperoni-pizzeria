@@ -1,17 +1,17 @@
 <template>
   <div class="cartDiv">
     <h2>Cart</h2>
-    <ul class="customerCart" v-for="item in this.$store.state.cart.items.menuItems" v-bind:key="item.itemId">
+    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
       <li class="cartItem">
-        {{item.itemSize}} {{item.itemName}} - $ {{item.price}}
+        {{item}} {{item}} - $ {{item}}
       </li>
     </ul>
-    <ul class="customerCart" v-for="item in this.$store.state.cart.items.customPizzas" v-bind:key="item.itemId">
+    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
       <li class="cartItem">
-        Custom {{item.itemSize}} Pizza - $ {{item.price}}
+        Custom {{item}} Pizza - $ {{item}}
       </li>
     </ul>
-    <h3>Total Price: ${{this.$store.state.cart.totalPrice}}</h3>
+    <h3>Total Price: ${{this.$store.state.cart}}</h3>
     
     <button type="button" v-on:click="goToRoute">{{(!isAtCheckout) ? 'Proceed to Checkout' : 'Back to Menu'}}</button>
   </div>

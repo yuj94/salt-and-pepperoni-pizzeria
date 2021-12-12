@@ -12,7 +12,7 @@ public interface OrderDao {
 
         List<Order> getAllPendingOrders();
 
-        List<Order> getOrdersBySearch(String parameterType, String searchText);
+        List<Order> getAllHistoricalOrders();
 
         List<Order> getIncompleteOrdersByOrderId();
 

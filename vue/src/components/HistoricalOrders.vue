@@ -17,8 +17,9 @@
       </thead>
       <tbody>
         <tr>
+          <td></td>
           <td>
-            <input type="text" id="orderIdFilter" v-model="filter.firstName" />
+            <input type="text" id="firstNameFilter" v-model="filter.firstName" />
           </td>
           <td>
             <input type="text" id="lastNameFilter" v-model="filter.lastName" />
@@ -36,20 +37,13 @@
           <td>
             <input type="text" id="cityFilter" v-model="filter.addressCity" />
           </td>
-          <td>
-            <input type="text" id="zipCodeFilter" v-model="filter.addressZipCode"/>
-          </td>
+           <td></td>
           <td><input type="text" id="EmailFilter" v-model="filter.email" /></td>
           <td><input type="text" id="phoneNumberFilter" v-model="filter.phoneNumber"/></td>
-          <td>
-            <input
-              type="text"
-              id="orderTotalFilter"
-              v-model="filter.orderTotal"
-            />
-          </td>
+           <td></td>
         </tr>
-        <tr v-for= "order in filteredList" v-bind:key= "order.orderId">
+       <tr v-for="order in filteredList" v-bind:key="order.orderId">
+          <td>{{ order.orderId }}</td>
           <td>{{ order.firstName }}</td>
           <td>{{ order.lastName }}</td>
           <td>{{ order.addressLine }}</td>
@@ -59,18 +53,21 @@
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.orderTotal }}</td>
-        </tr>
+        </tr> 
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
+import orderService from '@/services/OrderService.js';
+
 export default {
   name: "historical-orders-list",
   data() {
     return {
       filter: {
+        orderId: "",
         firstName: "",
         lastName: "",
         addressLine: "",
@@ -83,7 +80,6 @@ export default {
       },
     };
   },
-
   computed: {
     filteredList() {
       return this.$store.state.historicalOrders.filter((order) => {
@@ -92,12 +88,20 @@ export default {
           order.addressLine.toLowerCase().includes(this.filter.addressLine.toLowerCase()) &&
           order.addressState.toLowerCase().includes(this.filter.addressState.toLowerCase()) &&
           order.addressCity.toLowerCase().includes(this.filter.addressCity.toLowerCase()) &&
-          order.addressZipCode.toLowerCase().includes(this.filter.addressZipCode.toLowerCase()) &&
           order.email.toLowerCase().includes(this.filter.email.toLowerCase()) &&
-          order.phoneNumber.toLowerCase().includes(this.filter.phoneNumber.toLowerCase()) &&
-          order.orderTotal.toLowerCase().includes(this.filter.orderTotal.toLowerCase());
+          order.phoneNumber.toLowerCase().includes(this.filter.phoneNumber.toLowerCase()); 
       });
     },
+  },
+ methods: {
+    getHistoricalOrders() {
+      orderService.getAllHistoricalOrders().then((response) => {
+        this.$store.commit("SET_HISTORICAL_ORDERS", response.data);
+      });
+    },
+  },
+  created() {
+    this.getHistoricalOrders();
   },
 };
 </script>
