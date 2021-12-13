@@ -93,8 +93,7 @@ export default {
 #itemCart {
   grid-area: cart;
   border: none;
-  width: 112px;
-  height: 40px;
+  padding: 16px 24px;
   border-radius: 8px;
   margin: auto;
   background-color: #d20201;

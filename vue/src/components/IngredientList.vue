@@ -1,7 +1,7 @@
 <template>
   <div class="ingredientListDiv">
-    <div class="customHeaderDiv">
-      <h2>Create your own custom pizza.</h2>
+    <div class="customPizzaHeader">
+      <h2>Create Your Own</h2>
       <button v-on:click="addToCart">Add to Cart</button>
       <label for="pizzaSize">Choose a pizza size:</label>
       <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
@@ -10,41 +10,18 @@
         <option value="18">18"</option>
       </select>
     </div>
-    <p>
-      For our {{ this.pizzaSize }}" custom pizzas, our prices start at ${{
-        this.basePrice
-      }}
-      for the dough plus the cost of the ingredients selected.
-    </p>
+    <p>For our {{ this.pizzaSize }}" custom pizzas, our prices start at ${{ this.basePrice }}for the dough plus the cost of the ingredients selected.</p>
     <p>Your current custom pizza costs: ${{this.computedPrice}}.</p>
-    <p>
-      You can select up to {{ this.toppingsRemaining }} more ingredients for
-      your custom pizza.
-    </p>
-
+    <p> You can select up to {{ this.toppingsRemaining }} more ingredients for your custom pizza.</p>
     <div class="ingredientList">
       <div>
-        <h2 id="meatId">Meats</h2>
-        <div
-          class="meats"
-          v-for="ingredient in meats"
-          v-bind:key="ingredient.ingredientId"
-        >
-          <input
-            type="checkbox"
-            id="ingredientId"
-            name="ingredientName"
-            value="ingredient"
-            v-bind="ingredients"
-          />
+        <h3 id="meatId">Meats</h3>
+        <div class="meats" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId">
+          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
           <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
           <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
           &nbsp;
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-bind="ingredients"
-          >
+          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
             <option value="0">None</option>
             <option value="1">Regular</option>
             <option value="2">Double</option>
@@ -52,27 +29,13 @@
         </div>
       </div>
       <div>
-        <h2 id="veggieId">Veggies</h2>
-        <div
-          class="veggies"
-          v-for="ingredient in veggies"
-          v-bind:key="ingredient.ingredientId"
-        >
-          <input
-            type="checkbox"
-            id="ingredientId"
-            name="ingredientName"
-            value="ingredient"
-            v-bind="ingredients"
-          />
+        <h3 id="veggieId">Veggies</h3>
+        <div class="veggies" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId">
+          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
           <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
           <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
           &nbsp;
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-bind="ingredients"
-          >
+          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
             <option value="0">None</option>
             <option value="1">Regular</option>
             <option value="2">Double</option>
@@ -80,27 +43,13 @@
         </div>
       </div>
       <div>
-        <h2 id="sauceId">Sauces</h2>
-        <div
-          class="sauces"
-          v-for="ingredient in sauces"
-          v-bind:key="ingredient.ingredientId"
-        >
-          <input
-            type="checkbox"
-            id="ingredientId"
-            name="ingredientName"
-            value="ingredient"
-            v-bind="ingredients"
-          />
+        <h3 id="sauceId">Sauces</h3>
+        <div class="sauces" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId">
+          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
           <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
           <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
           &nbsp;
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-bind="ingredients"
-          >
+          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
             <option value="0">None</option>
             <option value="1">Regular</option>
             <option value="2">Double</option>
@@ -108,28 +57,13 @@
         </div>
       </div>
       <div>
-        <h2 id="cheeseId">Cheeses</h2>
-        <div
-          class="cheeses"
-          v-for="ingredient in cheeses"
-          v-bind:key="ingredient.ingredientId"
-        >
-       
-          <input
-            type="checkbox"
-            id="ingredientId"
-            name="ingredientName"
-            value="ingredient"
-            v-bind="ingredients"
-          />
+        <h3 id="cheeseId">Cheeses</h3>
+        <div class="cheeses" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId">
+          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
           <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
           <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
           &nbsp;
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-bind="ingredients"
-          >
+          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
             <option value="0">None</option>
             <option value="1">Regular</option>
             <option value="2">Double</option>
@@ -217,16 +151,15 @@ export default {
 </script>
 
 <style scoped>
-.ingredientList {
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "meatId veggieId sauceId cheeseId"
-    "meat veggies sauce cheese";
+.customPizzaHeader > h2 {
+  background-color: #d20201;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  padding: 16px;
 }
+
+
 
 .customHeaderDiv {
   display: flex;
@@ -239,6 +172,32 @@ export default {
 
 #ingredientQuantity {
   width: 80px;
+}
+
+
+
+.ingredientList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "meatId veggieId sauceId cheeseId"
+    "meat veggies sauce cheese";
+}
+
+#meatId {
+  grid-area: meatId;
+}
+
+#veggieId {
+  grid-area: veggieId;
+}
+
+#sauceId {
+  grid-area: sauceId;
+}
+
+#cheeseId {
+  grid-area: cheeseId;
 }
 
 .meats {
@@ -269,19 +228,6 @@ export default {
   align-content: space-around;
 }
 
-#meatId {
-  grid-area: meatId;
-}
 
-#veggieId {
-  grid-area: veggieId;
-}
 
-#sauceId {
-  grid-area: sauceId;
-}
-
-#cheeseId {
-  grid-area: cheeseId;
-}
 </style>
