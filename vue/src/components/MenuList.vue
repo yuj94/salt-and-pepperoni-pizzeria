@@ -1,9 +1,9 @@
 <template>
   <div class="menuListDiv">
-    <h2 class="categoryHeader">{{ this.$route.params.category.toUpperCase() }}</h2>
+    <h2 class="categoryHeader">{{ capitalizeFirstLetter(this.$route.params.category) }}</h2>
     <div v-for="item in currentCategoryItems" v-bind:key="item.itemId">
       <div class="allMenuItems">
-        <menu-details class="menuDetails" v-bind:menuObj="item"></menu-details>
+        <menu-details v-bind:menuObj="item"></menu-details>
       </div>
     </div>
   </div>
@@ -31,9 +31,9 @@ export default {
         this.$store.commit("SET_MENU_ITEMS", response.data);
       });
     },
-    // capitalizeFirstLetter(string) {
-    //   return string.charAt(0).toUpperCase() + string.slice(1);
-    // },
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
   },
   created() {
     this.getMenuItems();
@@ -44,17 +44,12 @@ export default {
 <style scoped>
 .menuListDiv > h2 {
   background-color: #d20201;
-  border-radius: 8px;
   color: #fff;
+  border-radius: 8px;
+  text-align: center;
   padding: 16px;
 }
 .allMenuItems {
-  border: solid 1px green;
-  margin: 0 0 10px 0;
-}
-
-.categoryHeader {
-  color: #d20201;
-  text-align: center;
+  margin-top: 16px;
 }
 </style>
