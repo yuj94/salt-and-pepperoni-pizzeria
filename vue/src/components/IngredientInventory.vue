@@ -1,21 +1,52 @@
 <template>
   <div class="ingredientListDiv">
-
-
-      <div class="manageIngredientBanner">
+    <div class="manageIngredientBanner">
       <h2>Manage Inventory Ingredients</h2>
+
       <div
             class="ingredient"
             id="doughs"
             v-for="ingredient in dough"
-            v-bind:key="ingredient.ingredientId"
-          >
+            v-bind:key="ingredient.ingredientId">
             <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             <p id="ingredientPrice">Price: ${{ ingredient.price }} </p>&nbsp;
             <p id="ingredientOrderQuantity">Quantity: {{ ingredient.orderQuantity }}</p>
-          </div>
-      <button type="submit">Add Ingredient</button>
       </div>
+
+      <div>
+      <button id ="addIngredientButton" v-if="showForm === false" v-on:click.prevent="showForm = true">Add Ingredient</button>
+        <form v-on:submit.prevent="addNewIngredient" v-if="showForm === true">
+          <div class="form-element">
+            <label for="name">Name: </label>
+            <input id="name" type="text" v-model="newIngredient.ingredientName" />
+          </div>
+
+          <div class="form-element">
+            <label for="type">Type: </label>
+            <select name="type" id="type" v-model="newIngredient.type">
+              <option value="meat">Meat</option>
+              <option value="veggie">Veggie</option>
+              <option value="sauce">Sauce</option>
+              <option value="cheese">Cheese</option>
+            </select>
+          </div>  
+
+          <div class="form-element">
+            <label for="price">Price: </label>
+            <input id="price" type="number" min="0" v-model="newIngredient.price" />
+          </div>
+
+          <div class="form-element">
+            <label for="quantity">Quantity: </label>
+            <input id="quantity" type="number" min="0" v-model.number="newIngredient.totalQuantity">
+          </div>
+
+          <input type="submit" value="Save" />
+          <input type="button" value="Cancel" v-on:click.prevent="resetForm" /> 
+        </form>
+      </div>
+    </div>
+
       <div class="ingredientList">
         <div>
           <h2 id="meatId">Meats</h2>
@@ -23,81 +54,115 @@
             class="ingredient"
             id="meats"
             v-for="ingredient in meats"
-            v-bind:key="ingredient.ingredientId"
-          >
-          <form action="">
+            v-bind:key="ingredient.ingredientId">
+            <div>
+              <input
+                type="text"
+                id="ingredientId"
+                name="ingredientName"
+                value ="Change Meat Name"/>
+              <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            </div>
 
-          </form>
-            <input
-              type="checkbox"
-              id="ingredientId"
-              name="ingredientName"
-              value="ingredient"
-            />
-            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
-            <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+            <div>
+              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <label for="price">Update Price: ${{ ingredient.quantity }}</label>
+              <input id="price" name="price" type="number" min="0" max="9.99"/>
+            </div>
+
+            <div>
+            <h3 id="ingredientOrderQuantity">{{ ingredient.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
+            </div>
           </div>
         </div>
+
         <div>
           <h2 id="veggieId">Veggies</h2>
           <div
             class="ingredient"
             id="veggies"
             v-for="ingredient in veggies"
-            v-bind:key="ingredient.ingredientId"
-          >
-            <input
-              type="checkbox"
-              id="ingredientId"
-              name="ingredientName"
-              value="ingredient"
-            />
-            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
-            <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+            v-bind:key="ingredient.ingredientId">
+            <div>
+              <input
+                type="text"
+                id="ingredientId"
+                name="ingredientName"
+                value="Change Veggie Name"/>
+              <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            </div>
+            <div>
+              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <label for="price">Update Price: ${{ ingredient.price }}</label>
+              <input id="price" name="price" type="number" min="0" max="9.99"/>
+            </div>
+          <div>
+            <h3 id="ingredientOrderQuantity">{{ ingredient.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
+          </div>
           </div>
         </div>
+
         <div>
           <h2 id="sauceId">Sauces</h2>
           <div
             class="ingredient"
             id="sauces"
             v-for="ingredient in sauces"
-            v-bind:key="ingredient.ingredientId"
-          >
-            <input
-              type="checkbox"
-              id="ingredientId"
-              name="ingredientName"
-              value="ingredient"
-            />
-            <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
-            <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+            v-bind:key="ingredient.ingredientId">
+            <div>
+              <input
+                type="text"
+                id="ingredientId"
+                name="ingredientName"
+                value="Change Sauce Name"/>
+              <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+            </div>
+            <div>
+              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <label for="price">Update Price: ${{ ingredient.price }}</label>
+              <input id="price" name="price" type="number" min="0" max="9.99"/>
+            </div>
+            <div>
+              <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+              <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
+              <input id="quantity" name="quantity" type="number" min="0"/>
+            </div>
           </div>
         </div>
+
         <div>
           <h2 id="cheeseId">Cheeses</h2>
           <div
             class="ingredient"
             id="cheeses"
             v-for="ingredient in cheeses"
-            v-bind:key="ingredient.ingredientId"
-          >
+            v-bind:key="ingredient.ingredientId">
+            <div>
             <input
-              type="checkbox"
+              type="text"
               id="ingredientId"
               name="ingredientName"
-              value="ingredient"
-            />
+              value="Change Cheese Name"/>
             <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
+          </div>
+          <div>
             <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+            <label for="price">Update Price: ${{ ingredient.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
             <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -108,6 +173,8 @@ export default {
   data() {
     return {
       isLoading: true,
+      showForm: false,
+      newIngredient: {}
     };
   },
   computed: {
@@ -143,6 +210,14 @@ export default {
         this.$store.commit("SET_INGREDIENTS", response.data);
         this.isLoading = false;
       });
+    },
+    addNewIngredient() {
+      this.$store.commit("ADD_INGREDIENT",this.newIngredient);
+      this.resetForm();
+    },
+    resetForm() {
+      this.showForm = false;
+      this.newReview = {};
     },
   },
   created() {
