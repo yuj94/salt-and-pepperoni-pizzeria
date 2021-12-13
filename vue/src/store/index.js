@@ -20,75 +20,13 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    menuItems: {
-      itemId: '',
-      itemName: '',
-      itemDescription: '',
-      itemCategory: '',
-      price: '',
-      ingredients: {},
-      totalQuantity: '',
-      imageUrl: '',
-    },
-    customPizzas: {
-      pizzaId: '',
-      ingredients: {
-
-      },
-      price: '',
-    },
+    menuItems: [],
+    customPizzas: [],
     cart: [],
-    // cartItems: {
-    //   itemId: '',
-    //   itemName: '',
-    //   itemCategory: '',
-    //   price: '',
-    //   itemSize: '',
-    //   orderQuantity: '',
-    // },
-    ingredients: {
-      ingredientId: '',
-      ingredientName: '',
-      ingredientType: '',
-      price: '',
-      orderQuantity: '',
-      totalQuantity: '',
-    },
+    ingredients: [],
     categories: ['Pizzas', 'Appetizers', 'Salads', 'Desserts', 'Drinks'],
     pendingOrders: [],
-    // pendingOrder: {
-    //   orderId: "",
-    //   firstName: "",
-    //   lastName: "",
-    //   addressLine: "",
-    //   addressState: "",
-    //   addressCity: "",
-    //   addressZipCode: "",
-    //   email: "",
-    //   phoneNumber: "",
-    //   menuItems: {},
-    //   customPizza: {},
-    //   isDelivery: "",
-    //   isCompleted: false,
-    //   orderTotal: ""
-    // },
     historicalOrders: [],
-    // historicalOrder: {
-    //   orderId: "",
-    //   firstName: "",
-    //   lastName: "",
-    //   addressLine: "",
-    //   addressState: "",
-    //   addressCity: "",
-    //   addressZipCode: "",
-    //   email: "",
-    //   phoneNumber: "",
-    //   menuItems: {},
-    //   customPizza: {},
-    //   isDelivery: "",
-    //   isCompleted: true,
-    //   orderTotal: ""
-    // }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

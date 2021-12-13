@@ -1,10 +1,5 @@
 <template>
   <div class="menuInventoryDiv">
-    <div class="loading" v-if="isLoading">
-      <img src="../assets/loader.gif" />
-    </div>
-
-    <div class="loaded" v-else>
        <div class="manageItemBanner">
         <h2>Manage Menu Items</h2>
       <button type="submit">Add Menu Item</button>
@@ -98,7 +93,6 @@
 
       </div>
     </div>
-  </div>
 </template>
 
 <script>

@@ -3,11 +3,13 @@
     <h2>Cart</h2>
     <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
       <li class="cartItem">{{ item }} {{ item }} - $ {{ item }}</li>
+      <button>Delete Item</button>
     </ul>
     <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
       <li class="cartItem">Custom {{ item }} Pizza - $ {{ item }}</li>
+      <button>Delete Item</button>
     </ul>
-    <h3>Total Price: ${{ this.$store.state.cart }}</h3>
+    <h3>Total Price: ${{ this.totalPrice }}</h3>
     <button type="button" v-on:click="goToRoute">
       {{ !isAtCheckout ? "Proceed to Checkout" : "Back to Menu" }}
     </button>
@@ -21,6 +23,13 @@ export default {
     isAtCheckout() {
       return this.$route.path == "/checkout" ? true : false;
     },
+    totalPrice() {
+      let totalPrice = 0;
+      this.$store.state.cart.forEach((item) => {
+        totalPrice += item.price;
+      });
+      return totalPrice;
+    }
   },
   methods: {
     goToRoute() {

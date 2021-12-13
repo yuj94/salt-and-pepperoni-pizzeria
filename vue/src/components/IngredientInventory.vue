@@ -1,10 +1,7 @@
 <template>
   <div class="ingredientListDiv">
-    <div class="loading" v-if="isLoading">
-      <img src="../assets/loader.gif" />
-    </div>
 
-    <div class="loaded" v-else>
+
       <div class="manageIngredientBanner">
       <h2>Manage Inventory Ingredients</h2>
       <div
@@ -101,7 +98,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
