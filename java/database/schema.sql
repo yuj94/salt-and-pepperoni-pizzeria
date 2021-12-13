@@ -287,16 +287,16 @@ CREATE TABLE orders (
 );
 
 INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
-VALUES ('Han', 'Solo', 'Corellia Street', 'CO','Corellia Central', 12345, 'SanHolo@hmail.com', 923-123-4323, 45.54, 1234567890123456, 12, 25, 4356),
-       ('Leia', 'Skywalker', 'Alderaan Drive', 'AL', 'Alderaan Square', 54321, 'I<3SanHolo@gmail.com', 832-425-6178, 98.21, 1234567890123456, 12, 25, 4356),
-       ('Chewnacca', 'Wookie', 'Kashyyyk Court', 'KA', 'Kashyyyk Central', 31234, 'Chewie@gmail.com', 111-111-1111, 1.23, 1234567890123456, 12, 25, 4356);
+VALUES ('Han', 'Solo', 'Corellia Street', 'CO','Corellia Central', 12345, 'SanHolo@hmail.com', '9231234323', 45.54, 1234567890123456, 12, 25, 4356),
+       ('Leia', 'Skywalker', 'Alderaan Drive', 'AL', 'Alderaan Square', 54321, 'I<3SanHolo@gmail.com', '8324256178', 98.21, 1234567890123456, 12, 25, 4356),
+       ('Chewnacca', 'Wookie', 'Kashyyyk Court', 'KA', 'Kashyyyk Central', 31234, 'Chewie@gmail.com', '1111111111', 1.23, 1234567890123456, 12, 25, 4356);
        
 INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, completed, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
-VALUES ('Anakin','Skywalker', 'Tatooine', 'TA', 'Tatooine Circle', 31253, 'ILoveMySister@gmail.com', 222-333-4444, 65.43, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Yoda', 'Shrek', 'Dagobah', 'DA', 'Dagobah Bog', 41265, 'JediMasterIAm@gmail.com', 232-546-2364, 54.32, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Mace', 'Windu', 'Haruun Kal', 'HK', 'Haruun Kal Circle', 12353, 'HaveYouSeenMyPurpleLightSabre@gmail.com', 125-543-6433, 878.43, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Obi-Wan', 'Kenobi', 'Stewjon', 'SJ', 'Stew And Beans', 55932, 'YouWereMyBrotherAnakin@gmail.com', 521-542-7653, 97.23, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Qui-Gon', 'Jinn', 'Coruscant', 'CO', 'Crossant', 12353, 'BeatBySomeHornedDude@gmail.com', 234-251-7647, 75.43, TRUE, 1234567890123456, 12, 25, 4356);
+VALUES ('Anakin','Skywalker', 'Tatooine', 'TA', 'Tatooine Circle', 31253, 'ILoveMySister@gmail.com', '2223334444', 65.43, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Yoda', 'Shrek', 'Dagobah', 'DA', 'Dagobah Bog', 41265, 'JediMasterIAm@gmail.com', '2325462364', 54.32, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Mace', 'Windu', 'Haruun Kal', 'HK', 'Haruun Kal Circle', 12353, 'HaveYouSeenMyPurpleLightSabre@gmail.com', '1255436433', 878.43, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Obi-Wan', 'Kenobi', 'Stewjon', 'SJ', 'Stew And Beans', 55932, 'YouWereMyBrotherAnakin@gmail.com', '5215427653', 97.23, TRUE, 1234567890123456, 12, 25, 4356),
+       ('Qui-Gon', 'Jinn', 'Coruscant', 'CO', 'Crossant', 12353, 'BeatBySomeHornedDude@gmail.com', '2342517647', 75.43, TRUE, 1234567890123456, 12, 25, 4356);
        
 CREATE TABLE order_items (
         order_id int NOT NULL,
