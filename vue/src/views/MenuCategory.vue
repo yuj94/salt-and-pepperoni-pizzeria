@@ -4,6 +4,7 @@
     <navigation class="navigation"></navigation>
     <menu-list class="menuList"></menu-list>
     <cart class="cart"></cart>
+    <foot class="foot"></foot>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import Banner from "@/components/Banner.vue";
 import Navigation from "@/components/Navigation.vue";
 import MenuList from "@/components/MenuList.vue";
 import Cart from "@/components/Cart.vue";
+import Foot from "@/components/Foot.vue";
 
 export default {
   name: "menu-view",
@@ -20,6 +22,7 @@ export default {
     Navigation,
     MenuList,
     Cart,
+    Foot,
   },
 };
 </script>
@@ -28,8 +31,7 @@ export default {
 .menuDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  gap: 10px;
-  grid-template-areas: 
+  grid-template-areas:
     "banner banner banner"
     "navigation menu-list cart"
     "footer footer footer";
@@ -43,17 +45,17 @@ export default {
   grid-area: navigation;
   display: flexbox;
   flex-direction: column;
-
 }
 
 .menuList {
   grid-area: menu-list;
-
 }
 
 .cart {
   grid-area: cart;
-
 }
 
+.foot {
+  grid-area: footer;
+}
 </style>

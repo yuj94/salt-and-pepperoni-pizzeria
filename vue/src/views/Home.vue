@@ -3,7 +3,7 @@
     <banner></banner>
     <div class="homeText">
       <h1>Salt & Pepperoni Pizzeria</h1>
-      <router-link v-bind:to="{ path: '/pizzas' }">Menu</router-link>
+      <router-link v-bind:to="{ path: '/pizzas' }">VIEW MENU</router-link>
     </div>
     <foot></foot>
   </div>
@@ -18,12 +18,7 @@ export default {
   components: {
     Banner,
     Foot,
-  },
-  methods: {
-    created() {
-      this.$store.state.isLoading = false;
-    },
-  },
+  }
 };
 </script>
 
@@ -44,5 +39,26 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 32px;
+}
+
+.homeText > h1 {
+  color: #fff;
+  font-size: 80px;
+}
+
+.homeText > a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #d20201;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin-top: 32px;
+  transition: all 0.5s;
+}
+
+.homeText > a:hover {
+  background-color: rgba(210, 2, 1, 0.5);
 }
 </style>

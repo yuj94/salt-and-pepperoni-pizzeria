@@ -23,7 +23,7 @@ export default {
   name: "banner",
   computed: {
     isHomePage() {
-      if (this.$route.path === "/") {
+      if (this.$route.path == "/") {
         return true;
       } else {
         return false;
@@ -38,8 +38,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "logo logo login";
-  height: 75px;
-  padding: 0 40px;
+  height: 100px;
+  padding: 0 24px;
 }
 
 #logo {

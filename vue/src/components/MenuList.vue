@@ -1,18 +1,9 @@
 <template>
-  <div>
-    <div class="loading" v-if="isLoading">
-      <img src="../assets/loader.gif" />
-    </div>
-
-    <div class="loaded" v-else>
-      <h1 class="categoryHeader">{{this.$route.params.category.toUpperCase()}}</h1>
-      <div v-for="item in currentCategoryItems" v-bind:key="item.itemId">
-        <div class="allMenuItems">
-          <menu-details
-            class="menuDetails"
-            v-bind:menuObj="item"
-          ></menu-details>
-        </div>
+  <div class="menuListDiv">
+    <h2 class="categoryHeader">{{ capitalizeFirstLetter(this.$route.params.category) }}</h2>
+    <div v-for="item in currentCategoryItems" v-bind:key="item.itemId">
+      <div class="allMenuItems">
+        <menu-details class="menuDetails" v-bind:menuObj="item"></menu-details>
       </div>
     </div>
   </div>
@@ -30,21 +21,18 @@ export default {
   computed: {
     currentCategoryItems() {
       return this.$store.state.menuItems.filter((item) => {
-        return item.itemCategory.toLowerCase() == this.$route.params.category.substring(0, this.$route.params.category.length - 1);
-      })
+        return (item.itemCategory.toLowerCase() == this.$route.params.category.substring(0, this.$route.params.category.length - 1));
+      });
     },
-  },
-  data() {
-    return {
-      isLoading: true,
-    };
   },
   methods: {
     getMenuItems() {
       menuService.getAllMenuItems().then((response) => {
         this.$store.commit("SET_MENU_ITEMS", response.data);
-        this.isLoading = false;
       });
+    },
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     },
   },
   created() {
@@ -54,6 +42,12 @@ export default {
 </script>
 
 <style scoped>
+.menuListDiv > h2 {
+  background-color: #d20201;
+  border-radius: 8px;
+  color: #fff;
+  padding: 16px;
+}
 .allMenuItems {
   border: solid 1px green;
   margin: 0 0 10px 0;

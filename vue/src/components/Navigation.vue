@@ -3,11 +3,11 @@
     <h2>Categories</h2>
     <nav class="navigationNav" v-for="category in this.$store.state.categories" v-bind:key="category.name">
       <router-link :to="{path: `/${category.substring(0, category.length - 1).toLowerCase()}s`}">
-          <h2>{{category}}</h2>
-        </router-link>
+        <h3>{{ category }}</h3>
+      </router-link>
     </nav>
-    <router-link :to="{path: '/custom-pizza'}">
-          <h2>Custom Pizza</h2>
+    <router-link :to="{ path: '/custom-pizza' }">
+      <h3>Custom Pizza</h3>
     </router-link>
   </div>
 </template>
@@ -20,10 +20,46 @@ export default {
 
 <style scoped>
 .navigationDiv {
-  border: solid 1px red;
-  color: #d20201;
   text-align: center;
+  padding: 0 24px;
 }
 
+.navigationDiv > h2 {
+  background-color: #d20201;
+  border-radius: 8px;
+  color: #fff;
+  padding: 16px;
+}
 
+.navigationNav > a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.5s;
+}
+
+.navigationNav > a:hover {
+  color: #d20201;
+}
+
+.navigationNav > a > h3 {
+  padding: 16px;
+}
+
+.navigationDiv > a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.5s;
+}
+
+.navigationDiv > a:hover {
+  color: #d20201;
+}
+
+.navigationDiv > a > h3 {
+  padding: 16px;
+}
+
+.router-link-exact-active {
+  color: #d20201 !important;
+}
 </style>
