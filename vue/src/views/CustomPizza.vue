@@ -1,5 +1,5 @@
 <template>
-  <div class="pizzasMenuDiv">
+  <div class="customPizzaDiv">
     <banner class="banner"></banner>
     <navigation class="navigation"></navigation>
     <ingredient-list class="ingredients"></ingredient-list>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped>
-.pizzasMenuDiv {
+.customPizzaDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   gap: 10px;

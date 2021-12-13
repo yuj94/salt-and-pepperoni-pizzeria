@@ -10,7 +10,7 @@
       <button>Delete Item</button>
     </ul>
     <h3>Total Price: ${{ this.totalPrice }}</h3>
-    <button type="button" v-on:click="goToRoute">
+    <button type="button" id="buttonCart" v-on:click="goToRoute">
       {{ !isAtCheckout ? "Proceed to Checkout" : "Back to Menu" }}
     </button>
   </div>
@@ -60,5 +60,21 @@ export default {
 
 .customerCart {
   list-style-type: none;
+}
+
+#buttonCart {
+  border: none;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin: auto;
+  background-color: #d20201;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+#buttonCart:hover {
+  background-color: rgba(210, 2, 1, 0.5);
 }
 </style>

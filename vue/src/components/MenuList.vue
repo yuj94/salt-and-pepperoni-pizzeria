@@ -49,6 +49,7 @@ export default {
   text-align: center;
   padding: 16px;
 }
+
 .allMenuItems {
   margin-top: 16px;
 }

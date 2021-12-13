@@ -52,6 +52,7 @@ export default {
   text-decoration: none;
   color: #fff;
   background-color: #d20201;
+  font-weight: bold;
   padding: 16px 24px;
   border-radius: 8px;
   margin-top: 32px;
