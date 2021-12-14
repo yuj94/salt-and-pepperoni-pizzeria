@@ -43,6 +43,7 @@ export default {
 
 .navigationNav > a > h3 {
   padding: 16px;
+  margin: 16px 0;
 }
 
 .navigationDiv > a {
@@ -61,5 +62,10 @@ export default {
 
 .router-link-exact-active {
   color: #d20201 !important;
+}
+
+.router-link-exact-active > h3 {
+  background-color: #fff;
+  border-radius: 8px;
 }
 </style>

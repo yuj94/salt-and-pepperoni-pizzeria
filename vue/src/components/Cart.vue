@@ -1,13 +1,15 @@
 <template>
   <div class="cartDiv">
     <h2>Cart</h2>
-    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
-      <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-      <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-      <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }} each</li>
-      <button v-on:click="removeItem(item)">Delete Item</button>
-    </ul>
-    <h3>Total Price: ${{ this.totalPrice }}</h3>
+    <div class="customerCart">
+      <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
+        <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+        <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+        <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }} each</li>
+        <button v-on:click="removeItem(item)">Delete Item</button>
+      </ul>
+    </div>
+    <h3 class="cartPrice">Total Price: ${{ this.totalPrice }}</h3>
     <button type="button" id="buttonCart" v-on:click="goToRoute">
       {{ !isAtCheckout ? "Proceed to Checkout" : "Back to Menu" }}
     </button>
@@ -74,7 +76,38 @@ export default {
 }
 
 .customerCart {
+  background-color: #fff;
+  min-height: 72px;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.cartList {
   list-style-type: none;
+}
+
+.cartItem {
+  margin: 16px 0;
+}
+
+.cartList > button {
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background-color: #d20201;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.cartList > button:hover {
+  background-color: rgba(210, 2, 1, 0.5);
+}
+
+.cartPrice {
+  margin: 16px 0;
 }
 
 #buttonCart {
