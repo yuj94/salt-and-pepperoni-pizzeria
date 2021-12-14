@@ -15,62 +15,152 @@
       </div>
     </div>
     <div class="pizzaDescription">
-      <p>For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas, our prices start at <span class="bold">${{ this.basePrice }}</span> for the dough plus the cost of the ingredients selected.</p>
-      <p>Your current custom pizza costs: <span class="bold">${{this.computedPrice}}</span>.</p>
-      <p> You can select up to <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients for your custom pizza.</p>
+      <p>
+        For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas,
+        our prices start at <span class="bold">${{ this.basePrice }}</span> for
+        the dough plus the cost of the ingredients selected.
+      </p>
+      <p>
+        Your current custom pizza costs:
+        <span class="bold">${{ this.computedPrice }}</span
+        >.
+      </p>
+      <p>
+        You can select up to
+        <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients
+        for your custom pizza.
+      </p>
     </div>
     <div class="ingredientList">
       <div>
         <h3 id="meatId">Meats</h3>
-        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId">
-          <p id="ingredientName"> {{ ingredient.ingredientName }}</p>
-          <p id="ingredientPrice">Price: ${{ ingredient.price.toFixed(2) }}</p>
-          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
-            <option value="0">None</option>
-            <option value="1">Regular</option>
-            <option value="2">Double</option>
+        <div
+          class="meats ingredientCategory"
+          v-for="ingredient in meats"
+          v-bind:key="ingredient.ingredientId"
+        >
+          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
+          <p id="ingredientPrice">
+            Price: ${{ Number(ingredient.price).toFixed(2) }}
+          </p>
+          <label for="ingredient"></label>
+          <select
+            name="ingredientQuantity"
+            id="ingredientQuantity"
+            v-model="ingredients"
+          >
+            <option value="0"></option>
+            <option
+              :value="ingredient"
+              v-on:click="addToIngredients(ingredient)"
+            >
+              Regular
+            </option>
+            <option
+              :value="ingredient"
+              v-on:click="addDoubleIngredients(ingredient)"
+            >
+              Double
+            </option>
           </select>
         </div>
       </div>
       <div>
         <h3 id="veggieId">Veggies</h3>
-        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId">
-          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
-          <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-          <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
-          &nbsp;
-          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
-            <option value="0">None</option>
-            <option value="1">Regular</option>
-            <option value="2">Double</option>
+        <div
+          class="veggies ingredientCategory"
+          v-for="ingredient in veggies"
+          v-bind:key="ingredient.ingredientId"
+        >
+          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
+          <p id="ingredientPrice">
+            Price: ${{ Number(ingredient.price).toFixed(2) }}
+          </p>
+          <label for="ingredient"></label>
+          <select
+            name="ingredientQuantity"
+            id="ingredientQuantity"
+            v-model="ingredients"
+          >
+            <option value="0"></option>
+            <option
+              :value="ingredient"
+              v-on:click="addToIngredients(ingredient)"
+            >
+              Regular
+            </option>
+            <option
+              :value="ingredient"
+              v-on:click="addDoubleIngredients(ingredient)"
+            >
+              Double
+            </option>
           </select>
         </div>
       </div>
       <div>
         <h3 id="sauceId">Sauces</h3>
-        <div class="sauces ingredientCategory" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId">
-          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
-          <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-          <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
-          &nbsp;
-          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
-            <option value="0">None</option>
-            <option value="1">Regular</option>
-            <option value="2">Double</option>
+        <div
+          class="sauces ingredientCategory"
+          v-for="ingredient in sauces"
+          v-bind:key="ingredient.ingredientId"
+        >
+          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
+          <p id="ingredientPrice">
+            Price: ${{ Number(ingredient.price).toFixed(2) }}
+          </p>
+          <label for="ingredient"></label>
+          <select
+            name="ingredientQuantity"
+            id="ingredientQuantity"
+            v-model="ingredients"
+          >
+            <option value="0"></option>
+            <option
+              :value="ingredient"
+              v-on:click="addToIngredients(ingredient)"
+            >
+              Regular
+            </option>
+            <option
+              :value="ingredient"
+              v-on:click="addDoubleIngredients(ingredient)"
+            >
+              Double
+            </option>
           </select>
         </div>
       </div>
       <div>
         <h3 id="cheeseId">Cheeses</h3>
-        <div class="cheeses ingredientCategory" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId">
-          <input type="checkbox" id="ingredientId" name="ingredientName" value="ingredient" v-bind="ingredients"/>
-          <label for="ingredientId"> {{ ingredient.ingredientName }}</label>
-          <p id="ingredientPrice">Price: ${{ ingredient.price }}</p>
-          &nbsp;
-          <select name="ingredientQuantity" id="ingredientQuantity" v-bind="ingredients">
-            <option value="0">None</option>
-            <option value="1">Regular</option>
-            <option value="2">Double</option>
+        <div
+          class="cheeses ingredientCategory"
+          v-for="ingredient in cheeses"
+          v-bind:key="ingredient.ingredientId"
+        >
+          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
+          <p id="ingredientPrice">
+            Price: ${{ Number(ingredient.price).toFixed(2) }}
+          </p>
+          <label for="ingredient"></label>
+          <select
+            name="ingredientQuantity"
+            id="ingredientQuantity"
+            v-model="ingredients"
+          >
+            <option value="0"></option>
+            <option
+              :value="ingredient"
+              v-on:click="addToIngredients(ingredient)"
+            >
+              Regular
+            </option>
+            <option
+              :value="ingredient"
+              v-on:click="addDoubleIngredients(ingredient)"
+            >
+              Double
+            </option>
           </select>
         </div>
       </div>
@@ -86,19 +176,20 @@ export default {
   data() {
     return {
       pizzaSize: 12,
-      customPizza: {
-        ingredients: this.ingredients,
-        size: this.pizzaSize,
-        price: this.computedPrice,
-      },
+      customPizza: {},
       ingredients: [],
-      quantities: [],
-      toppingsRemaining: 9,
     };
   },
   computed: {
     computedPrice() {
-      return this.basePrice;
+      let totalPrice = this.basePrice;
+      this.ingredients.forEach(
+        (ingredient) => (totalPrice += ingredient.price)
+      );
+      return Number(totalPrice).toFixed(2);
+    },
+    toppingsRemaining() {
+      return 9 - this.ingredients.length;
     },
     sauces() {
       return this.$store.state.ingredients.filter((ingredient) => {
@@ -143,9 +234,27 @@ export default {
         this.$store.commit("SET_INGREDIENTS", response.data);
       });
     },
-    adjustToppingsRemaining() {},
+    getCustomPizzaId(pizza) {
+      menuService.createCustomPizza(pizza).then((response) => {
+        this.customPizza.pizzaId = response.data;
+      });
+    },
     addToCart() {
-      this.$store.state.cart.push(this.customPizza);
+      this.customPizza.price = this.computedPrice;
+      this.customPizza.ingredients = this.ingredients;
+      this.getCustomPizzaId(this.customPizza);
+      this.customPizza.itemSize = this.pizzaSize;
+      this.customPizza.itemCategory = "Custom";
+      this.customPizza.quantity = 1;
+      this.customPizza.cartItemId = this.$store.state.currentCartItemId;
+      this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);
+      this.$store.state.currentCartItemId++;
+    },
+    addToIngredients(ingredient) {
+      this.ingredients.push(ingredient);
+    },
+    addDoubleIngredients(ingredient) {
+      this.ingredients.push(ingredient, ingredient);
     },
   },
   created() {
@@ -241,7 +350,7 @@ export default {
   margin-top: 16px;
   border-radius: 8px;
   padding: 16px;
- }
+}
 
 .ingredientCategory > label,
 #ingredientName,

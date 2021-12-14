@@ -12,6 +12,10 @@ export default {
 
   getPizzaIngredients() {
     return http.get('/ingredients')
+  },
+
+  createCustomPizza(pizza) {
+    return http.post('/custom-pizza', pizza)
   }
 
 }

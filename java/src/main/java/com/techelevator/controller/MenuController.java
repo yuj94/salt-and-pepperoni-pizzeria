@@ -3,12 +3,10 @@ package com.techelevator.controller;
 import com.techelevator.dao.MenuDao;
 import com.techelevator.dao.OrderDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.CustomPizza;
 import com.techelevator.model.Ingredient;
 import com.techelevator.model.MenuItem;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,6 @@ public class MenuController {
         return menuDao.getIngredientList();
     }
 
+    @RequestMapping(path = "/custom-pizza", method = RequestMethod.POST)
+    public int createCustomPizza(@RequestBody CustomPizza customPizza) { return menuDao.createCustomPizza(customPizza);}
 }

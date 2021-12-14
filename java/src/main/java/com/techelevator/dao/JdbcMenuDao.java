@@ -16,10 +16,6 @@ public class JdbcMenuDao implements MenuDao {
 
     private JdbcTemplate jdbcTemplate;
     private static final String PIZZA_CATEGORY = "Pizza";
-    private static final String APPETIZER_CATEGORY = "Appetizer";
-    private static final String DESSERT_CATEGORY = "Dessert";
-    private static final String SALAD_CATEGORY = "Salad";
-    private static final String DRINK_CATEGORY = "Drink";
     private static final int MAX_INGREDIENTS_ALLOWED = 10;
 
     public JdbcMenuDao(JdbcTemplate jdbcTemplate) {
@@ -91,23 +87,23 @@ public class JdbcMenuDao implements MenuDao {
     }
 
     @Override
-    public boolean createCustomPizza(CustomPizza customPizza) {
-        boolean isCreated = false;
+    public int createCustomPizza(CustomPizza customPizza) {
+
+        int customPizzaId = 0;
 
         if (customPizza.getPizzaIngredients().size() <= MAX_INGREDIENTS_ALLOWED) {
             String sql = "INSERT INTO custom_pizza (price) " +
-                         "VALUES (0.00) RETURNING pizza_id;";
+                         "VALUES (?) RETURNING pizza_id;";
 
-            customPizza.setPizzaId(jdbcTemplate.queryForObject(sql, Integer.class));
+            customPizza.setPizzaId(jdbcTemplate.queryForObject(sql, Integer.class, customPizza.getPrice()));
 
             addIngredientsToPizzaIngredientTable(customPizza);
 
-            if (getCustomPizza(customPizza.getPizzaId()) != null) {
-                isCreated = true;
-            }
+            customPizzaId = customPizza.getPizzaId();
+
         }
 
-        return isCreated;
+        return customPizzaId;
     }
 
     private void addIngredientsToPizzaIngredientTable(CustomPizza customPizza) {

@@ -6,16 +6,16 @@
       <div id="pizzaSize">
         <label for="pizzaSize">Choose a size: </label>
         <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
-          <option value="12">12"</option>
-          <option value="16">16"</option>
-          <option value="18">18"</option>
+            <option value=12>12"</option>
+            <option value=16>16"</option>
+            <option value=18>18"</option>
         </select>
       </div>
     </div>
     <h3 id="itemName" v-if="!isPizza">{{ menuObj.itemName }}</h3>
-    <h3 id="itemPrice">$ {{ pizzaPrice(menuObj.price) }}</h3>
+    <h3 id="itemPrice">$ {{ Number(pizzaPrice(menuObj.price)).toFixed(2) }}</h3>
     <p id="itemDescription">{{ menuObj.itemDescription }}</p>
-    <button type="button" id="itemCart" v-on:click="addItemToCart('My item')">Add to Cart</button>
+    <button type="button" id="itemCart" v-on:click="addItemToCart(menuObj)">Add to Cart</button>
   </div>
 </template>
 
@@ -24,7 +24,9 @@ export default {
   name: "menu-details",
   data() {
     return {
-      pizzaSize: 12,
+      pizzaSize: "12",
+      itemToAddToCart: {
+      },
     };
   },
   props: ["menuObj"],
@@ -40,15 +42,38 @@ export default {
   methods: {
     pizzaPrice(originalPrice) {
       if (this.pizzaSize == 12) {
-        return originalPrice.toFixed(2);
+        return Number(originalPrice).toFixed(2);
       } else if (this.pizzaSize == 16) {
-        return (originalPrice + 4).toFixed(2);
+        return Number(originalPrice + 4).toFixed(2);
       } else {
-        return (originalPrice + 6).toFixed(2);
+        return Number(originalPrice + 6).toFixed(2);
       }
     },
     addItemToCart(item) {
-      this.$store.commit("ADD_MENU_ITEM_TO_CART", item);
+      let filteredCartArray = this.$store.state.cart.filter((e) => { return e.itemId === item.itemId});
+      let filteredPizzaArray = this.$store.state.cart.filter((e) => { return e.itemId === item.itemId && e.itemSize == this.pizzaSize});
+      if (filteredPizzaArray.length >= 1 && item.Category === "Pizza") {
+        this.$store.commit("UPDATE_PIZZA_QUANTITY", item.itemId, this.pizzaSize);
+      } else if (filteredCartArray.length >= 1) {
+        this.$store.commit("UPDATE_MENU_ITEM_QUANTITY", item.itemId);
+      } else {
+        if (this.isPizza) {
+          this.itemToAddToCart.price = this.pizzaPrice(item.price);
+          this.itemToAddToCart.itemSize = this.pizzaSize;
+        } else {
+          this.itemToAddToCart.price = item.price;
+          this.itemToAddToCart.itemSize = "0";
+        }
+        this.itemToAddToCart.menuItemCategory = this.$route.params.category.substring(0, this.$route.params.category.length - 1);
+        this.itemToAddToCart.itemName = item.itemName;
+        this.itemToAddToCart.itemId = item.itemId;
+        this.itemToAddToCart.itemCategory = "Menu";
+        this.itemToAddToCart.quantity = 1;
+        this.itemToAddToCart.cartItemId = this.$store.state.currentCartItemId;
+        this.$store.commit("ADD_MENU_ITEM_TO_CART", this.itemToAddToCart);
+        this.$store.state.currentCartItemId ++;
+      }
+
     },
   },
 };
