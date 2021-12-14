@@ -65,7 +65,7 @@ export default {
 <style scoped>
 .cartDiv {
   text-align: center;
-  padding: 0 24px;
+  padding-right: 24px;
 }
 
 .cartDiv > h2 {
@@ -98,6 +98,7 @@ export default {
   background-color: #d20201;
   color: #fff;
   font-weight: bold;
+  margin-bottom: 16px;
   cursor: pointer;
   transition: background-color 0.5s;
 }

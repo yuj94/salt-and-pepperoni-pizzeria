@@ -3,6 +3,7 @@
     <banner class="banner"></banner>
     <checkout class="checkout"></checkout>
     <cart class="cart"></cart>
+    <foot class="foot"></foot>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import Banner from "@/components/Banner.vue";
 import Checkout from "@/components/Checkout.vue";
 import Cart from "@/components/Cart.vue";
+import Foot from "@/components/Foot.vue";
 
 export default {
   name: "menu-view",
@@ -17,6 +19,7 @@ export default {
     Banner,
     Checkout,
     Cart,
+    Foot,
   },
 };
 </script>
@@ -26,10 +29,11 @@ export default {
 .checkoutDiv {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 10px;
   grid-template-areas: 
     "banner banner"
-    "checkout cart";
+    "checkout cart"
+    "footer footer";
+  gap: 24px;
 }
 
 .banner {
@@ -42,5 +46,9 @@ export default {
 
 .cart {
   grid-area: cart;
+}
+
+.foot {
+  grid-area: footer;
 }
 </style>

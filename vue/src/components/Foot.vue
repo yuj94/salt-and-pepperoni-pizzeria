@@ -1,6 +1,6 @@
 <template>
   <div class="footerDiv">
-    <div class="homepageFooter" v-if="isHomePage">
+    <div class="homepageFooter" v-if="isHomePage || isLoginPage">
       <p>
         &copy;2021 | 
         <a href="https://www.linkedin.com/in/andrew-pero-b652871b4/" target="_blank">Andrew Pero</a> | 
@@ -31,6 +31,13 @@ export default {
   computed: {
     isHomePage() {
       if (this.$route.path == "/") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isLoginPage() {
+      if (this.$route.path == "/login") {
         return true;
       } else {
         return false;
