@@ -6,6 +6,11 @@
         <router-link v-bind:to="{ name: 'logout' }" v-else>Logout</router-link>
       </div>
     </div>
+    <div class="bannerGrid" v-else-if="isLoginPage">
+      <div id="login">
+        <router-link v-bind:to="{ name: 'home' }">Back to Home</router-link>
+      </div>
+    </div>
     <div class="bannerGrid bannerImg" v-else>
       <div id="logo">
         <router-link v-bind:to="{ name: 'home' }"><h1>Salt & Pepperoni Pizzeria</h1></router-link>
@@ -24,6 +29,13 @@ export default {
   computed: {
     isHomePage() {
       if (this.$route.path == "/") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isLoginPage() {
+      if (this.$route.path == "/login") {
         return true;
       } else {
         return false;
@@ -77,6 +89,5 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 60%;
-  margin-bottom: 16px;
 }
 </style>

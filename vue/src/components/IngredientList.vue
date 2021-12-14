@@ -34,68 +34,62 @@
     <div class="ingredientList">
       <div>
         <h3 id="meatId">Meats</h3>
-        <div
-          class="meats ingredientCategory"
-          v-for="ingredient in meats"
-          v-bind:key="ingredient.ingredientId"
-        >
-        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
-          <label :for="ingredient"></label>
-          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
-          <p id="ingredientPrice">
-            Price: ${{ Number(ingredient.price).toFixed(2) }}
-          </p>
-          
+        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:click="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">
+              Price: ${{ Number(ingredient.price).toFixed(2) }}
+            </p>
+          </div>
         </div>
       </div>
       <div>
         <h3 id="veggieId">Veggies</h3>
-        <div
-          class="veggies ingredientCategory"
-          v-for="ingredient in veggies"
-          v-bind:key="ingredient.ingredientId"
-        >
-        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
-          <label :for="ingredient"></label>
-          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
-          <p id="ingredientPrice">
-            Price: ${{ Number(ingredient.price).toFixed(2) }}
-          </p>
-          
-      
+        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:click="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">
+              Price: ${{ Number(ingredient.price).toFixed(2) }}
+            </p>
+          </div>
         </div>
       </div>
       <div>
         <h3 id="sauceId">Sauces</h3>
-        <div
-          class="sauces ingredientCategory"
-          v-for="ingredient in sauces"
-          v-bind:key="ingredient.ingredientId"
-        >
-          <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
-          <label :for="ingredient"></label>
-          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
-          <p id="ingredientPrice">
-            Price: ${{ Number(ingredient.price).toFixed(2) }}
-          </p>
-        
-      
+        <div class="sauces ingredientCategory" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:click="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">
+              Price: ${{ Number(ingredient.price).toFixed(2) }}
+            </p>
+          </div>
         </div>
       </div>
       <div>
         <h3 id="cheeseId">Cheeses</h3>
-        <div
-          class="cheeses ingredientCategory"
-          v-for="ingredient in cheeses"
-          v-bind:key="ingredient.ingredientId"
-        >
-        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
-          <label :for="ingredient"></label>
-          <p id="ingredientName">{{ ingredient.ingredientName }}</p>
-          <p id="ingredientPrice">
-            Price: ${{ Number(ingredient.price).toFixed(2) }}
-          </p>
-          
+        <div class="cheeses ingredientCategory" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:click="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">
+              Price: ${{ Number(ingredient.price).toFixed(2) }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -184,18 +178,9 @@ export default {
       this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);
       this.$store.state.currentCartItemId++;
     },
-    // addToIngredients(ingredient) {
-    //   this.ingredientsToAdd.push(ingredient);
-  
-    //   console.log("add to ingredients worked!");
-    // },
-    // addDoubleIngredients(ingredient) {
-    //   this.ingredientsToAdd.push(ingredient, ingredient);
-    //   console.log("add to double ingredients worked!");
-    // },
-    // testMethod(event) {
-    //   console.log(event);
-    // }
+    checkedIngredients(ingredient) {
+      ingredient.checked = !ingredient.checked;
+    },
   },
   created() {
     this.getIngredients();
@@ -289,20 +274,27 @@ export default {
 
 .ingredientCategory {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   background-color: #fff;
   margin-top: 16px;
   border-radius: 8px;
   padding: 16px;
 }
 
+.ingredientChecked {
+  background-color: rgb(225, 225, 225);
+}
+
+.ingredientCategory > .ingredientCheckbox {
+  padding-right: 16px;
+}
+
 #ingredientName,
-#ingredientPrice,
-#ingredientQuantity {
+#ingredientPrice {
   margin: 8px 0;
 }
 
-#ingredientQuantity {
-  width: 80px;
+#ingredientName > .bold {
+  font-weight: bold;
 }
 </style>

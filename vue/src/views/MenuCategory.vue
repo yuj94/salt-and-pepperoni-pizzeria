@@ -35,6 +35,7 @@ export default {
     "banner banner banner"
     "navigation menu-list cart"
     "footer footer footer";
+  gap: 24px;
 }
 
 .banner {

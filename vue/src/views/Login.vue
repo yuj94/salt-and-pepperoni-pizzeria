@@ -1,24 +1,33 @@
 <template>
-  <div id="loginDiv" class="text-center">
-    <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Employee Login</h1>
-      <div class="alert alert-danger" role="alert" v-if="invalidCredentials">Invalid username and password!</div>
-      <div class="alert alert-success" role="alert" v-if="this.$route.query.registration">Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
-      <input type="text" id="username" class="form-control" placeholder="Username" v-model="user.username" required autofocus/>
-      <label for="password" class="sr-only">Password</label>
-      <input type="password" id="password" class="form-control" placeholder="Password" v-model="user.password" required/>
-      <button type="submit">Login</button>
-    </form>
+  <div id="loginDiv">
+    <banner></banner>
+    <div class="text-center">
+      <form class="form-signin" @submit.prevent="login">
+        <h1 class="h3 mb-3 font-weight-normal">Employee Login</h1>
+        <div class="alert alert-danger" role="alert" v-if="invalidCredentials">Invalid username and password!</div>
+        <div class="alert alert-success" role="alert" v-if="this.$route.query.registration">Thank you for registering, please sign in.</div>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Username" v-model="user.username" required autofocus/>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Password" v-model="user.password" required/>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    <foot></foot>
   </div>
 </template>
 
 <script>
+import Banner from "@/components/Banner.vue";
+import Foot from "@/components/Foot.vue";
 import authService from "../services/AuthService";
 
 export default {
   name: "login",
-  components: {},
+  components: {
+    Banner,
+    Foot,
+  },
   data() {
     return {
       user: {
@@ -54,8 +63,8 @@ export default {
 <style scoped>
 #loginDiv {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   background: url(https://images.unsplash.com/photo-1634629377376-6c6bae2d8bcf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1931&q=80);
   background-repeat: no-repeat;
   background-size: cover;
@@ -66,19 +75,23 @@ export default {
 .form-signin {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.75);
   color: #fff;
   padding: 32px;
-  border-radius: 8px;
 }
 
 .form-signin > h1 {
   font-size: 40px;
 }
 
+.form-signin > .alert-danger {
+  padding-top: 16px;
+}
+
 .form-signin > label {
-  padding: 8px;
+  padding: 16px;
 }
 
 .form-signin > input {

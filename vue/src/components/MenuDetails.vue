@@ -86,7 +86,7 @@ export default {
   grid-template-areas:
     "img name price"
     "img description cart";
-  column-gap: 16px;
+  gap: 16px;
   background-color: #fff;
   padding: 16px;
   border-radius: 8px;

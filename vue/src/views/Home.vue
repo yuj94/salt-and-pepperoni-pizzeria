@@ -40,11 +40,11 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
   padding: 32px;
 }
 
 .homeText > h1 {
-  color: #fff;
   font-size: 80px;
 }
 

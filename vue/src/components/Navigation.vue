@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .navigationDiv {
   text-align: center;
-  padding: 0 24px;
+  padding-left: 24px;
 }
 
 .navigationDiv > h2 {
