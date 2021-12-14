@@ -11,7 +11,22 @@ export default {
   },
 
   getAllHistoricalOrders() {
-    return http.get('/order/history')
-  }
+    return http.get('/order/history');
+  },
 
+  getMenuItemDetails(orderId){
+    return http.get('/order/pending/menuItem/' + orderId);
+  },
+
+  getCustomPizzaDetails(orderId){
+    return http.get('order/pending/customPizza/' + orderId );
+  },
+
+  setOrderToComplete(orderId){
+    return http.put('/order/pending/markComplete/' + orderId);
+  },
+  
+  setOrderToNotComplete(orderId){
+    return http.put('/order/pending/markNotComplete/' + orderId)
+  }
 }

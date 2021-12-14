@@ -93,7 +93,7 @@ public class JdbcOrderDao implements OrderDao {
                      "ON order_items.menu_item_id = menu.item_id\n" +
                      "WHERE order_items.order_id = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, orderId);
 
         while (results.next()) {
             orderMenuItemList.add(mapRowToMenuItem(results));
@@ -112,7 +112,7 @@ public class JdbcOrderDao implements OrderDao {
                      "ON order_items.custom_pizza_id = custom_pizza.pizza_id\n" +
                      "WHERE order_items.order_id = ?;";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, orderId);
 
         while (results.next()) {
             customPizzasList.add(mapRowToCustomPizza(results));
@@ -129,6 +129,19 @@ public class JdbcOrderDao implements OrderDao {
         return orderId;
     }
 
+    @Override
+    public void setOrderToComplete(int orderId){
+        String sql ="UPDATE orders SET completed = ? WHERE order_id = ?;";
+
+        jdbcTemplate.update(sql, true, orderId);
+    }
+
+    @Override
+    public void setOrderToNotComplete(int orderId){
+        String sql = "UPDATE orders SET completed = ? WHERE order_id = ?;";
+
+        jdbcTemplate.update(sql, false, orderId);
+    }
 
     //everything below is an import from JdbcMenuDao
 
