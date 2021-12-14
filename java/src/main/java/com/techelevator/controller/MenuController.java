@@ -31,4 +31,10 @@ public class MenuController {
 
     @RequestMapping(path = "/custom-pizza", method = RequestMethod.POST)
     public int createCustomPizza(@RequestBody CustomPizza customPizza) { return menuDao.createCustomPizza(customPizza);}
+
+    @RequestMapping(path = "/add-ingredient", method = RequestMethod.POST)
+    public int addIngredient(@RequestBody Ingredient ingredient) { return menuDao.addIngredient(ingredient);}
+
+    @RequestMapping(path = "/create-menu-item", method = RequestMethod.POST)
+    public int createMenuItem(@RequestBody MenuItem menuItem) { return menuDao.createMenuItem(menuItem);}
 }

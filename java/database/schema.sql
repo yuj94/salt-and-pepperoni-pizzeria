@@ -35,7 +35,7 @@ CREATE TABLE menu (
         item_id serial,
         item_name varchar(64) NOT NULL,
         item_description varchar(512),
-        item_category varchar(32) NOT NULL CHECK(item_category = 'Pizza' OR item_category = 'Appetizer' OR item_category = 'Salad' OR item_category = 'Drink' OR item_category = 'Dessert'),
+        item_category varchar(32) NOT NULL, 
         price decimal (4,2),
         total_quantity decimal (6,2),
         image_url varchar(512),
@@ -135,10 +135,10 @@ VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on r
        ('Meatball Pepperoni Pizza', 'Savory meatballs and pepperoni make for a tasty combination, especially when we add onions, black olives, sun-dried tomatoes, a three-cheese blend, and real cheese made from mozzarella on our original crust, then sprinkle it all with classic Italian seasoning for an extra dash of flavor', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/meatball-pepp-slate-compressed.png'),
        ('BBQ Chicken Bacon Ranch Pizza', 'We had you at bacon, right? It gets even better. Ranch dresssing base with a smoky Southern-style BBQ sauce add a tangy twist to this irresistible pizza topped with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella. Round one up today', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/bbq-chicken-bacon-slate-compressed.png'),
        ('Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/fiery-buffalo-chicken-slate-compressed.png');
-             
+          
 INSERT INTO menu (item_name, item_description, item_category, price, image_url)
 VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa salami, kalamata olives, green sicilian olives, drizzle of extra virgin olive oil, basil leaf garnish & bread', 'Appetizer', 13, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240dc2b7eContent_ContentFile_mobile_Antipasto_1170.png_companyCode_GRPI001_designId_1'),
-       ('Bruschetta', 'Our bruschetta is served trio styler', 'Appetizer', 12, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240df2c18Content_ContentFile_mobile_BruschettaTrio_1170.png_companyCode_GRPI001_designId_1'), 
+       ('Bruschetta', 'Our bruschetta is served trio style', 'Appetizer', 12, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240df2c18Content_ContentFile_mobile_BruschettaTrio_1170.png_companyCode_GRPI001_designId_1'), 
        ('Caprese', 'Slices of fresh mozzarella, tomatoes, fresh basil, drizzled with extra virgin olive oil & fresh cracked black pepper', 'Appetizer', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240eb4492Content_ContentFile_mobile_Caprese_1170.png_companyCode_GRPI001_designId_1'),
        ('Mediterranean Salad', 'Romaine lettuce, cucumbers, tomatoes, Kalamata olives, feta cheese, red onion served with house vinaigrette dressing on the side', 'Salad', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e1d690Content_ContentFile_MediterraneanSalad_1170.png_companyCode_GRPI001_designId_1'),
        ('Spinach Salad', 'Baby spinach, red onion, cherry tomatoes, bacon, crumbled Gorgonzola cheese served with balsamic vinaigrette dressing on the side', 'Salad', 11, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e4a544Content_ContentFile_mobile_SpinachSalad_1170.png_companyCode_GRPI001_designId_1'),

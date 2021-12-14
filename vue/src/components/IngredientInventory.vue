@@ -15,19 +15,19 @@
 
       <div>
       <button id ="addIngredientButton" v-if="showForm === false" v-on:click.prevent="showForm = true">Add Ingredient</button>
-        <form v-on:submit.prevent="addNewIngredient" v-if="showForm === true">
+        <form v-on:submit.prevent="addIngredient" v-if="showForm === true">
           <div class="form-element">
-            <label for="name">Name: </label>
-            <input id="name" type="text" v-model="newIngredient.ingredientName" />
+            <label for="ingredientName">Name: </label>
+            <input id="ingredientName" type="text" v-model="newIngredient.ingredientName" />
           </div>
 
           <div class="form-element">
             <label for="type">Type: </label>
-            <select name="type" id="type" v-model="newIngredient.type">
-              <option value="meat">Meat</option>
-              <option value="veggie">Veggie</option>
-              <option value="sauce">Sauce</option>
-              <option value="cheese">Cheese</option>
+            <select name="type" id="type" v-model="newIngredient.ingredientType">
+              <option value="Meat">Meat</option>
+              <option value="Veggies">Veggie</option>
+              <option value="Sauce">Sauce</option>
+              <option value="Cheese">Cheese</option>
             </select>
           </div>  
 
@@ -37,11 +37,11 @@
           </div>
 
           <div class="form-element">
-            <label for="quantity">Quantity: </label>
-            <input id="quantity" type="number" min="0" v-model.number="newIngredient.totalQuantity">
+            <label for="totalQuantity">Quantity: </label>
+            <input id="totalQuantity" type="number" min="0" v-model.number="newIngredient.totalQuantity">
           </div>
 
-          <input type="submit" value="Save" />
+          <input type="submit" value="Submit" />
           <input type="button" value="Cancel" v-on:click.prevent="resetForm" /> 
         </form>
       </div>
@@ -56,17 +56,12 @@
             v-for="ingredient in meats"
             v-bind:key="ingredient.ingredientId">
             <div>
-              <input
-                type="text"
-                id="ingredientId"
-                name="ingredientName"
-                value ="Change Meat Name"/>
               <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             </div>
 
             <div>
               <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
-              <label for="price">Update Price: ${{ ingredient.quantity }}</label>
+              <label for="price">Update Price: ${{ ingredient.price }}</label>
               <input id="price" name="price" type="number" min="0" max="9.99"/>
             </div>
 
@@ -86,11 +81,6 @@
             v-for="ingredient in veggies"
             v-bind:key="ingredient.ingredientId">
             <div>
-              <input
-                type="text"
-                id="ingredientId"
-                name="ingredientName"
-                value="Change Veggie Name"/>
               <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             </div>
             <div>
@@ -114,11 +104,6 @@
             v-for="ingredient in sauces"
             v-bind:key="ingredient.ingredientId">
             <div>
-              <input
-                type="text"
-                id="ingredientId"
-                name="ingredientName"
-                value="Change Sauce Name"/>
               <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             </div>
             <div>
@@ -142,11 +127,6 @@
             v-for="ingredient in cheeses"
             v-bind:key="ingredient.ingredientId">
             <div>
-            <input
-              type="text"
-              id="ingredientId"
-              name="ingredientName"
-              value="Change Cheese Name"/>
             <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
           </div>
           <div>
@@ -211,13 +191,14 @@ export default {
         this.isLoading = false;
       });
     },
-    addNewIngredient() {
+    addIngredient() {
+      menuService.addIngredient(this.newIngredient).then(() => {
       this.$store.commit("ADD_INGREDIENT",this.newIngredient);
       this.resetForm();
+      });
     },
     resetForm() {
       this.showForm = false;
-      this.newReview = {};
     },
   },
   created() {
