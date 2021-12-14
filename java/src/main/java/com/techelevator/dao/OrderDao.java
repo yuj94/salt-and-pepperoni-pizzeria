@@ -20,6 +20,10 @@ public interface OrderDao {
 
         List<CustomPizza> getCustomPizzasByOrderId(int orderId);
 
+        void setOrderToComplete(int orderId);
+
+        void setOrderToNotComplete(int orderId);
+
         int createOrder(Order order);
 
 }
