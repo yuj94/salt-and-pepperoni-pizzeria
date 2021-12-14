@@ -39,30 +39,13 @@
           v-for="ingredient in meats"
           v-bind:key="ingredient.ingredientId"
         >
+        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
+          <label :for="ingredient"></label>
           <p id="ingredientName">{{ ingredient.ingredientName }}</p>
           <p id="ingredientPrice">
             Price: ${{ Number(ingredient.price).toFixed(2) }}
           </p>
-          <label for="ingredient"></label>
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-model="ingredients"
-          >
-            <option value="0"></option>
-            <option
-              :value="ingredient"
-              v-on:click="addToIngredients(ingredient)"
-            >
-              Regular
-            </option>
-            <option
-              :value="ingredient"
-              v-on:click="addDoubleIngredients(ingredient)"
-            >
-              Double
-            </option>
-          </select>
+          
         </div>
       </div>
       <div>
@@ -72,30 +55,14 @@
           v-for="ingredient in veggies"
           v-bind:key="ingredient.ingredientId"
         >
+        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
+          <label :for="ingredient"></label>
           <p id="ingredientName">{{ ingredient.ingredientName }}</p>
           <p id="ingredientPrice">
             Price: ${{ Number(ingredient.price).toFixed(2) }}
           </p>
-          <label for="ingredient"></label>
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-model="ingredients"
-          >
-            <option value="0"></option>
-            <option
-              :value="ingredient"
-              v-on:click="addToIngredients(ingredient)"
-            >
-              Regular
-            </option>
-            <option
-              :value="ingredient"
-              v-on:click="addDoubleIngredients(ingredient)"
-            >
-              Double
-            </option>
-          </select>
+          
+      
         </div>
       </div>
       <div>
@@ -105,30 +72,14 @@
           v-for="ingredient in sauces"
           v-bind:key="ingredient.ingredientId"
         >
+          <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
+          <label :for="ingredient"></label>
           <p id="ingredientName">{{ ingredient.ingredientName }}</p>
           <p id="ingredientPrice">
             Price: ${{ Number(ingredient.price).toFixed(2) }}
           </p>
-          <label for="ingredient"></label>
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-model="ingredients"
-          >
-            <option value="0"></option>
-            <option
-              :value="ingredient"
-              v-on:click="addToIngredients(ingredient)"
-            >
-              Regular
-            </option>
-            <option
-              :value="ingredient"
-              v-on:click="addDoubleIngredients(ingredient)"
-            >
-              Double
-            </option>
-          </select>
+        
+      
         </div>
       </div>
       <div>
@@ -138,30 +89,13 @@
           v-for="ingredient in cheeses"
           v-bind:key="ingredient.ingredientId"
         >
+        <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd">
+          <label :for="ingredient"></label>
           <p id="ingredientName">{{ ingredient.ingredientName }}</p>
           <p id="ingredientPrice">
             Price: ${{ Number(ingredient.price).toFixed(2) }}
           </p>
-          <label for="ingredient"></label>
-          <select
-            name="ingredientQuantity"
-            id="ingredientQuantity"
-            v-model="ingredients"
-          >
-            <option value="0"></option>
-            <option
-              :value="ingredient"
-              v-on:click="addToIngredients(ingredient)"
-            >
-              Regular
-            </option>
-            <option
-              :value="ingredient"
-              v-on:click="addDoubleIngredients(ingredient)"
-            >
-              Double
-            </option>
-          </select>
+          
         </div>
       </div>
     </div>
@@ -177,19 +111,19 @@ export default {
     return {
       pizzaSize: 12,
       customPizza: {},
-      ingredients: [],
+      ingredientsToAdd: [],
     };
   },
   computed: {
     computedPrice() {
       let totalPrice = this.basePrice;
-      this.ingredients.forEach(
+      this.ingredientsToAdd.forEach(
         (ingredient) => (totalPrice += ingredient.price)
       );
       return Number(totalPrice).toFixed(2);
     },
     toppingsRemaining() {
-      return 9 - this.ingredients.length;
+      return 9 - this.ingredientsToAdd.length;
     },
     sauces() {
       return this.$store.state.ingredients.filter((ingredient) => {
@@ -241,7 +175,7 @@ export default {
     },
     addToCart() {
       this.customPizza.price = this.computedPrice;
-      this.customPizza.ingredients = this.ingredients;
+      this.customPizza.ingredients = this.ingredientsToAdd;
       this.getCustomPizzaId(this.customPizza);
       this.customPizza.itemSize = this.pizzaSize;
       this.customPizza.itemCategory = "Custom";
@@ -250,12 +184,18 @@ export default {
       this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);
       this.$store.state.currentCartItemId++;
     },
-    addToIngredients(ingredient) {
-      this.ingredients.push(ingredient);
-    },
-    addDoubleIngredients(ingredient) {
-      this.ingredients.push(ingredient, ingredient);
-    },
+    // addToIngredients(ingredient) {
+    //   this.ingredientsToAdd.push(ingredient);
+  
+    //   console.log("add to ingredients worked!");
+    // },
+    // addDoubleIngredients(ingredient) {
+    //   this.ingredientsToAdd.push(ingredient, ingredient);
+    //   console.log("add to double ingredients worked!");
+    // },
+    // testMethod(event) {
+    //   console.log(event);
+    // }
   },
   created() {
     this.getIngredients();
