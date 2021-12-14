@@ -16,7 +16,7 @@ public interface MenuDao {
 
     List<Ingredient> getIngredientList();
 
-    boolean createCustomPizza(CustomPizza customPizza);
+    int createCustomPizza(CustomPizza customPizza);
 
     int updateIngredientQuantity(int ingredientId, double quantity);
 

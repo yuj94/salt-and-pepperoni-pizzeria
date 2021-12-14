@@ -1,16 +1,14 @@
 <template>
   <div class="cartDiv">
     <h2>Cart</h2>
-    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
-      <li class="cartItem">{{ item }} {{ item }} - $ {{ item }}</li>
-      <button>Delete Item</button>
-    </ul>
-    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.itemId">
-      <li class="cartItem">Custom {{ item }} Pizza - $ {{ item }}</li>
-      <button>Delete Item</button>
+    <ul class="customerCart" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
+      <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+      <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+      <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }} each</li>
+      <button v-on:click="removeItem(item)">Delete Item</button>
     </ul>
     <h3>Total Price: ${{ this.totalPrice }}</h3>
-    <button type="button" v-on:click="goToRoute">
+    <button type="button" id="buttonCart" v-on:click="goToRoute">
       {{ !isAtCheckout ? "Proceed to Checkout" : "Back to Menu" }}
     </button>
   </div>
@@ -26,9 +24,9 @@ export default {
     totalPrice() {
       let totalPrice = 0;
       this.$store.state.cart.forEach((item) => {
-        totalPrice += item.price;
+        totalPrice += (item.price * item.quantity);
       });
-      return totalPrice;
+      return Number(totalPrice).toFixed(2);
     }
   },
   methods: {
@@ -41,6 +39,23 @@ export default {
         this.isAtCheckout = false;
       }
     },
+    removeItem(item) {
+      this.$store.commit("REMOVE_ITEM_FROM_CART", item);
+    },
+    isMenuItem(item) {
+      if (item.itemCategory == 'Menu') {
+        return true; 
+        } else {
+          return false;
+        }
+    },
+    isPizza(item) {
+      if (item.menuItemCategory == "pizza") {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
 };
 </script>
@@ -60,5 +75,21 @@ export default {
 
 .customerCart {
   list-style-type: none;
+}
+
+#buttonCart {
+  border: none;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin: auto;
+  background-color: #d20201;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+#buttonCart:hover {
+  background-color: rgba(210, 2, 1, 0.5);
 }
 </style>

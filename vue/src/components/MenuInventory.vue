@@ -1,98 +1,190 @@
 <template>
   <div class="menuInventoryDiv">
-       <div class="manageItemBanner">
-        <h2>Manage Menu Items</h2>
-      <button type="submit">Add Menu Item</button>
+    <div class="manageItemBanner">
+      <h2>Manage Menu Items</h2>
+
+      <div>
+        <button id ="addMenuItemButton" v-if="showForm === false" v-on:click.prevent="showForm = true">Add Menu Item</button>
+          <form v-on:submit.prevent="addNewIngredient" v-if="showForm === true">
+            <div class="form-element">
+              <label for="name">Name: </label>
+              <input id="name" type="text" v-model="newMenuItem.itemName" />
+            </div>
+
+            <div class="form-element">
+              <label for="description">Description: </label>
+              <input id="description" type="text" v-model="newMenuItem.itemDescription" />
+            </div>  
+
+            <div class="form-element">
+              <label for="category">Type: </label>
+              <select name="category" id="category" v-model="newMenuItem.itemCategory">
+                <option value="pizza">Pizza</option>
+                <option value="appetizer">Appetizer</option>
+                <option value="salad">Salad</option>
+                <option value="dessert">Dessert</option>
+                <option value="drink">Drink</option>
+              </select>
+            </div>
+            
+            <div class="form-element">
+              <label for="price">Price: </label>
+              <input id="price" type="number" min="0" max="25.00" v-model="newMenuItem.price" />
+            </div>
+
+            <div class="form-element">
+              <label for="quantity">Quantity: </label>
+              <input id="quantity" type="number" min="0" v-model.number="newMenuItem.totalQuantity">
+            </div>
+
+            <input type="submit" value="Save" />
+            <input type="button" value="Cancel" v-on:click.prevent="resetForm" /> 
+          </form>
       </div>
-      <div class="menuItemList">
-        <div>
-          <h2 id="pizzaId">Pizzas</h2>
-          <div
-            class="menuItem"
-            id="pizzas"
-            v-for="item in pizzas"
-            v-bind:key="item.itemId"
-          >
+    </div>
+
+    <div class="menuItemList">
+      <div>
+        <h2 id="pizzaId">Pizzas</h2>
+        <div
+          class="menuItem"
+          id="pizzas"
+          v-for="item in pizzas"
+          v-bind:key="item.itemId">
           <div>
             <input
               type="text"
               id="itemId"
               name="itemName"
-              value="Change Item Name"
-            />
+              value="Change Pizza Name"/>
             <label for="itemId"> {{ item.itemName }} </label>
           </div>
           <div>
+            <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
+            <label for="price">Update Price: ${{ item.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
+            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
+          </div>
+        </div>
+      </div>
 
-              <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
-             <label for="quantity">Update Price: ${{ item.quantity }}</label>
-                <input id="quantity" name="quantity" type="number" min="0" max="9.99"/>
-            
-            </div>
-            <div>
-                <h3 id="itemQuantity">Current quantity: {{item.totalQuantity}}</h3>
-                 <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
-                <input id="quantity" name="quantity" type="number"/>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h2 id="appetizerId">Appetizers</h2>
-          <div
-            class="menuItem"
-            id="appetizers"
-            v-for="item in appetizers"
-            v-bind:key="item.itemId"
-          >
+      <div>
+        <h2 id="appetizerId">Appetizers</h2>
+        <div
+          class="menuItem"
+          id="appetizers"
+          v-for="item in appetizers"
+          v-bind:key="item.itemId">
+          <div>
+            <input 
+              type="text"
+              id="itemId"
+              name="itemName"
+              value="Change Appetizer Name"/>
             <label for="itemId"> {{ item.itemName }} </label>
-            <h3 id="itemPrice">${{ item.price }} </h3>
-            <h3 id="itemQuantity">{{ item.totalQuantity }}</h3>
+          </div>
+          <div>
+            <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
+            <label for="price">Update Price: ${{ item.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
+            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
           </div>
         </div>
-        <div>
-          <h2 id="saladId">Salads</h2>
-          <div
-            class="menuItem"
-            id="salads"
-            v-for="item in salads"
-            v-bind:key="item.itemId"
-          >
-            <label for="itemId"> {{ item.itemName }} </label>
-            <h3 id="itemPrice">${{ item.price }} </h3>
-            <h3 id="itemQuantity">{{ item.totalQuantity }}</h3>
-          </div>
-        </div>
+      </div>
 
-        <div>
-          <h2 id="dessertId">Desserts</h2>
-          <div
-            class="menuItem"
-            id="dessert"
-            v-for="item in desserts"
-            v-bind:key="item.itemId"
-          >
+      <div>
+        <h2 id="saladId">Salads</h2>
+        <div
+          class="menuItem"
+          id="salads"
+          v-for="item in salads"
+          v-bind:key="item.itemId">
+          <div>
+            <input 
+              type="text"
+              id="itemId"
+              name="itemName"
+              value="Change Salad Name"/>
             <label for="itemId"> {{ item.itemName }} </label>
-            <h3 id="itemPrice">${{ item.price }} </h3>
-            <h3 id="itemQuantity">{{ item.totalQuantity }}</h3>
+          </div>
+          <div>
+            <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
+            <label for="price">Update Price: ${{ item.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
+            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
           </div>
         </div>
+      </div>
+
+      <div>
+        <h2 id="dessertId">Desserts</h2>
+        <div
+          class="menuItem"
+          id="dessert"
+          v-for="item in desserts"
+          v-bind:key="item.itemId">
+          <div>
+            <input 
+              type="text"
+              id="itemId"
+              name="itemName"
+              value="Change Dessert Name"/>
+            <label for="itemId"> {{ item.itemName }} </label>
+          </div>
+          <div>
+            <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
+            <label for="price">Update Price: ${{ item.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
+            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
+          </div>
+        </div>
+      </div>
         
-        <div>
-          <h2 id="drinkId">Drinks</h2>
-          <div
-            class="menuItem"
-            id="drinks"
-            v-for="item in drinks"
-            v-bind:key="item.itemId"
-          >
+      <div>
+        <h2 id="drinkId">Drinks</h2>
+        <div
+          class="menuItem"
+          id="drinks"
+          v-for="item in drinks"
+          v-bind:key="item.itemId">
+          <div>
+            <input 
+              type="text"
+              id="itemId"
+              name="itemName"
+              value="Change Drink Name"/>
             <label for="itemId"> {{ item.itemName }} </label>
-            <h3 id="itemPrice">${{ item.price }} </h3>
-            <h3 id="itemQuantity">{{ item.totalQuantity }}</h3>
+          </div>
+          <div>
+            <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
+            <label for="price">Update Price: ${{ item.price }}</label>
+            <input id="price" name="price" type="number" min="0" max="9.99"/>
+          </div>
+          <div>
+            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
+            <input id="quantity" name="quantity" type="number" min="0"/>
           </div>
         </div>
-
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -103,6 +195,8 @@ export default {
   data() {
     return {
       isLoading: true,
+      showForm: false,
+      newMenuItem: {}
     };
   },
   computed: {
@@ -139,6 +233,14 @@ export default {
         this.$store.commit("SET_MENU_ITEMS", response.data);
         this.isLoading = false;
       });
+    },
+    addNewMenuItem() {
+      this.$store.commit("ADD_MENU_ITEM",this.newMenuItem);
+      this.resetForm();
+    },
+    resetForm() {
+      this.showForm = false;
+      this.newReview = {};
     },
   },
   created() {

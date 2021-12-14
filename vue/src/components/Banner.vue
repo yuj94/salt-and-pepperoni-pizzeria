@@ -1,16 +1,16 @@
 <template>
   <div class="bannerDiv">
     <div class="bannerGrid" v-if="isHomePage">
-      <div id="login" class="homePageLogin">
+      <div id="login">
         <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Employee Login</router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-else>Logout</router-link>
       </div>
     </div>
-    <div class="bannerGrid" v-else>
+    <div class="bannerGrid bannerImg" v-else>
       <div id="logo">
         <router-link v-bind:to="{ name: 'home' }"><h1>Salt & Pepperoni Pizzeria</h1></router-link>
       </div>
-      <div id="login" class="nonHomePageLogin">
+      <div id="login">
         <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Employee Login</router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-else>Logout</router-link>
       </div>
@@ -62,25 +62,21 @@ export default {
   font-weight: bold;
 }
 
-#logo > a {
-  color: #d20201;
-}
-
-.homePageLogin > a {
+#logo > a,
+#login > a {
   color: #fff;
 }
 
-.nonHomePageLogin > a {
-  color: #000;
-}
-
-.homePageLogin > a:hover {
+#login > a:hover {
   color: rgba(255, 255, 255, 0.5);
   transition: color 0.5s;
 }
 
-.nonHomePageLogin > a:hover {
-  color: rgba(0, 0, 0, 0.5);
-  transition: color 0.5s;
+.bannerImg {
+  background: url(https://images.unsplash.com/photo-1630443876697-e0d2faac7b51?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 60%;
+  margin-bottom: 16px;
 }
 </style>

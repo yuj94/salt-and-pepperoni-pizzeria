@@ -1,5 +1,5 @@
 <template>
-  <div class="employeePortalNav">
+  <div class="employeePortalNavDiv">
     <router-link v-bind:to="{name: 'pending-orders'}"><h2>Pending Orders</h2></router-link>
     <router-link v-bind:to="{name: 'historical-orders'}"><h2>Historical Orders</h2></router-link>
     <router-link v-bind:to="{name: 'manage-inventory'}"><h2>Inventory</h2></router-link>

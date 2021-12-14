@@ -20,6 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+    currentCartItemId: 1,
     menuItems: [],
     customPizzas: [],
     cart: [],
@@ -52,13 +53,32 @@ export default new Vuex.Store({
       state.ingredients = data;
     },
     ADD_MENU_ITEM_TO_CART(state, data) {
-      state.cart = data;
+      state.cart.push(data);
     },
     SET_PENDING_ORDERS(state, data) {
       state.pendingOrders = data;
     },
     SET_HISTORICAL_ORDERS(state, data) {
       state.historicalOrders = data;
-    }
+    },
+    REMOVE_ITEM_FROM_CART(state, data) {
+      let indexOfItem = state.cart.indexOf(data);
+      state.cart.splice(indexOfItem, 1);
+    },
+    UPDATE_MENU_ITEM_QUANTITY(state, id) {
+      let indexOfItem = state.cart.findIndex( e => e.itemId === id);
+      state.cart[indexOfItem].quantity ++;
+    },
+    UPDATE_PIZZA_QUANTITY(state, id, size) {
+      let indexOfItem = state.cart.findIndex( (e) => {return e.itemId === id && e.itemSize === size});
+      state.cart[indexOfItem].quantity ++;
+    },
+    UPDATE_CUSTOM_PIZZA_QUANTITY(state, id) {
+      let indexOfItem = state.cart.findIndex( (e) => {return e.cartItemId === id});
+      state.cart[indexOfItem].quantity ++;
+    },
+    ADD_CUSTOM_PIZZA_TO_CART(state, data) {
+      state.cart.push(data);
+    },
   }
 })

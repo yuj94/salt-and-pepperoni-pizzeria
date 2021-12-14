@@ -1,5 +1,5 @@
 <template>
-  <div class="menuDiv">
+  <div class="menuCategoryDiv">
     <banner class="banner"></banner>
     <navigation class="navigation"></navigation>
     <menu-list class="menuList"></menu-list>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.menuDiv {
+.menuCategoryDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas:
