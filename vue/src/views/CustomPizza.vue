@@ -28,7 +28,6 @@ export default {
 .customPizzaDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  gap: 10px;
   grid-template-areas: 
     "banner banner banner"
     "navigation menu-list cart"

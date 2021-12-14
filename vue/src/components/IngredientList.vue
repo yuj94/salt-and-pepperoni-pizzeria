@@ -313,18 +313,22 @@ export default {
 
 #meatId {
   grid-area: meatId;
+  text-align: center;
 }
 
 #veggieId {
   grid-area: veggieId;
+  text-align: center;
 }
 
 #sauceId {
   grid-area: sauceId;
+  text-align: center;
 }
 
 #cheeseId {
   grid-area: cheeseId;
+  text-align: center;
 }
 
 .meats {
@@ -352,7 +356,6 @@ export default {
   padding: 16px;
 }
 
-.ingredientCategory > label,
 #ingredientName,
 #ingredientPrice,
 #ingredientQuantity {
