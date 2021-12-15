@@ -78,22 +78,16 @@ export default new Vuex.Store({
     ADD_CUSTOM_PIZZA_TO_CART(state, data) {
       state.cart.push(data);
     },
-    SET_MENU_ITEM_DETAILS_PENDING(state, data) {
+    SET_MENU_ITEM_DETAILS(state, data) {
       state.pendingOrders = data;
     },
-    SET_CUSTOM_PIZZA_DETAILS_PENDING(state, data){
+    SET_CUSTOM_PIZZA_DETAILS(state, data){
       state.pendingOrders = data;
     },
     SET_ORDER_TO_COMPLETE(state, data){
       state.pendingOrders = data;
     },
     SET_ORDER_TO_NOT_COMPLETE(state, data){
-      state.historicalOrders = data;
-    },
-    SET_MENU_ITEM_DETAILS_HISTORICAL(state, data) {
-      state.historicalOrders = data;
-    },
-    SET_CUSTOM_PIZZA_DETAILS_HISTORICAL(state, data){
       state.historicalOrders = data;
     },
   }

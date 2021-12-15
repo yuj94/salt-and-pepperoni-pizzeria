@@ -1,5 +1,6 @@
 <template>
   <div>
+    <global-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></global-modal>
     <table id="tblOrders">
       <thead>
         <tr>
@@ -7,10 +8,6 @@
           <th>Order Id</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Address</th>
-          <th>State</th>
-          <th>City</th>
-          <th>Zip Code</th>
           <th>Email Address</th>
           <th>Phone Number</th>
           <th>Order Total</th>
@@ -20,27 +17,19 @@
       <tbody>
         <tr>
           <td></td>
-          <td><input type="text" id="orderIdfilter" v-model="filter.orderId" placeholder="Order Id"/></td>
+          <td><input type="text" id="orderIdFilter" v-model="filter.orderId" placeholder="Order Id"/></td>
           <td><input type="text" id="firstNameFilter" v-model="filter.firstName" placeholder="First Name"/></td>
           <td><input type="text" id="lastNameFilter" v-model="filter.lastName" placeholder="Last Name"/></td>
-          <td><input type="text" id="addressFilter" v-model="filter.addressLine" placeholder="Address"/></td>
-          <td><input type="text" id="stateFilter" v-model="filter.addressState" placeholder="State"/></td>
-          <td><input type="text" id="cityFilter" v-model="filter.addressCity" placeholder="City"/></td>
-          <td><input type="text" id="zipCodeFilter" v-model="filter.addressZipCode" placeholder="Zip Code"/></td>
           <td><input type="text" id="emailFilter" v-model="filter.email" placeholder="E-Mail"/></td>
           <td><input type="text" id="phoneNumberFilter" v-model="filter.phoneNumber" placeholder="Phone Number"/></td>
           <td><input type="text" id="orderTotalFilter" v-model="filter.orderTotal" placeholder="Order Total"/></td>
           <td></td>
         </tr>
-        <tr v-for="order in filteredList" v-bind:key="order.orderId">
-          <button type="button" class="orderDetailsButton" v-on:click="viewOrderDetails(order.orderId)">View Order Details</button>
+        <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
+          <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)'>View Order Details</button>
           <td>{{ order.orderId }}</td>
           <td>{{ order.firstName }}</td>
           <td>{{ order.lastName }}</td>
-          <td>{{ order.addressLine }}</td>
-          <td>{{ order.addressState }}</td>
-          <td>{{ order.addressCity }}</td>
-          <td>{{ order.addressZipCode }}</td>
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.orderTotal }}</td>
@@ -53,38 +42,37 @@
 
 <script>
 import orderService from '@/services/OrderService.js';
+import GlobalModal from '@/components/GlobalModal.vue';
 
 export default {
   name: "historical-orders-list",
+  components: {
+      GlobalModal
+  },
   data() {
     return {
+      orderId: Object,
       filter: {
         orderId: "",
         firstName: "",
         lastName: "",
-        addressLine: "",
-        addressState: "",
-        addressCity: "",
-        addressZipCode: "",
         email: "",
         phoneNumber: "",
         orderTotal: "",
       },
+      showModal: false
     };
   },
   computed: {
     filteredList() {
       return this.$store.state.historicalOrders.filter((order) => {
-        return order.orderId.toString().includes(this.filter.orderId) &&
+        return  order.orderId.toString().includes(this.filter.orderId.toString()) &&
           order.firstName.toLowerCase().includes(this.filter.firstName.toLowerCase()) &&
           order.lastName.toLowerCase().includes(this.filter.lastName.toLowerCase()) &&
-          order.addressLine.toLowerCase().includes(this.filter.addressLine.toLowerCase()) &&
-          order.addressState.toLowerCase().includes(this.filter.addressState.toLowerCase()) &&
-          order.addressCity.toLowerCase().includes(this.filter.addressCity.toLowerCase()) &&
           order.email.toLowerCase().includes(this.filter.email.toLowerCase()) &&
-          order.addressZipCode.toString().includes(this.filter.addressZipCode) &&
           order.phoneNumber.toLowerCase().includes(this.filter.phoneNumber.toLowerCase()) &&
           order.orderTotal.toString().includes(this.filter.orderTotal)
+          // order.orderId === this.filter.orderId
       });
     },
   },
@@ -97,25 +85,39 @@ export default {
     markAsNotCompleted(orderId){
       orderService.setOrderToNotComplete(orderId).then((response)=>{
         this.$store.commit("SET_ORDER_TO_NOT_COMPLETE", response.data);
+        window.location.reload();
       })
     },
-    viewOrderDetails(orderId){ 
-      orderService.getMenuItemDetails(orderId).then((response)=> {
-        this.$store.commit("SET_MENU_ITEM_DETAILS_HISTORICAL", response.data)
-      })
-      orderService.getCustomPizzaDetails(orderId).then((response)=>{
-        this.$store.commit("SET_CUSTOM_PIZZA_DETAILS_HISTORICAL", response.data)
-      })
-    },
+    toggleModal(orderId){
+      this.orderId = orderId;
+      this.showModal = !this.showModal;
+    }
   },
   created() {
     this.getHistoricalOrders();
-    this.markAsNotCompleted();
-    this.viewOrderDetails();
   },
 };
 </script>
 
 <style>
+.toggle-modal-button{
+  width: 100px;
+  height: 50px;
+}
 
+#orderIdFilter{
+  width: 60px;
+}
+
+#stateFilter{
+  width: 60px;
+}
+
+#phoneNumberFilter{
+  width: 105px;
+}
+
+#orderTotalFilter{
+  width: 75px;
+}
 </style>
