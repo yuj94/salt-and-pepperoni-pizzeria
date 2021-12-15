@@ -79,7 +79,7 @@ public class JdbcOrderDao implements OrderDao {
     public List<MenuItem> getMenuItemsByOrderId(int orderId) {
         List<MenuItem> orderMenuItemList = new ArrayList<>();
 
-        String sql = "SELECT menu.item_name, menu.price\n" +
+        String sql = "SELECT menu.item_name AS item_name, menu.item_id AS item_id, menu.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity, menu.item_category AS item_category\n" +
                      "FROM order_items\n" +
                      "FULL OUTER JOIN menu\n" +
                      "ON order_items.menu_item_id = menu.item_id\n" +
@@ -98,7 +98,7 @@ public class JdbcOrderDao implements OrderDao {
     public List<CustomPizza> getCustomPizzasByOrderId(int orderId) {
         List<CustomPizza> customPizzasList = new ArrayList<>();
 
-        String sql = "SELECT *\n" +
+        String sql = "SELECT custom_pizza.pizza_id AS item_id, custom_pizza.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity\n" +
                      "FROM custom_pizza\n" +
                      "FULL OUTER JOIN order_items\n" +
                      "ON order_items.custom_pizza_id = custom_pizza.pizza_id\n" +
@@ -219,6 +219,8 @@ public class JdbcOrderDao implements OrderDao {
         order.setAddressState(rowSet.getString("address_state"));
         order.setAddressCity(rowSet.getString("address_city"));
         order.setAddressZipCode(rowSet.getInt("address_zip_code"));
+        order.setCustomPizza(getCustomPizzasByOrderId(order.getOrderId()));
+        order.setMenuItems(getMenuItemsByOrderId(order.getOrderId()));
 
         return order;
     }
@@ -234,8 +236,11 @@ public class JdbcOrderDao implements OrderDao {
     private CustomPizza mapRowToCustomPizza(SqlRowSet rowSet) {
         CustomPizza customPizza = new CustomPizza();
 
-        customPizza.setPizzaId(rowSet.getInt("pizza_id"));
+        customPizza.setPizzaId(rowSet.getInt("item_id"));
         customPizza.setPrice(rowSet.getBigDecimal("price"));
+        customPizza.setItemType(rowSet.getString("item_type"));
+        customPizza.setItemSize(rowSet.getInt("item_size"));
+        customPizza.setOrderQuantity(rowSet.getInt("quantity"));
 
         return customPizza;
     }
@@ -258,15 +263,11 @@ public class JdbcOrderDao implements OrderDao {
 
         menuItem.setItemId(rowSet.getInt("item_id"));
         menuItem.setPrice(rowSet.getBigDecimal("price"));
+        menuItem.setItemType(rowSet.getString("item_type"));
         menuItem.setItemCategory(rowSet.getString("item_category"));
         menuItem.setItemName(rowSet.getString("item_name"));
-        menuItem.setItemDescription(rowSet.getString("item_description"));
-        menuItem.setTotalQuantity(rowSet.getDouble("total_quantity"));
-
-        if (rowSet.getString("item_category").equals(PIZZA_CATEGORY)) {
-            menuItem.setPrice(getMenuItemPrice(menuItem));
-            menuItem.setIngredientList(getMenuPizzaIngredients(menuItem.getItemId()));
-        }
+        menuItem.setOrderQuantity(rowSet.getDouble("quantity"));
+        menuItem.setItemSize(rowSet.getInt("item_size"));
 
         return menuItem;
     }
