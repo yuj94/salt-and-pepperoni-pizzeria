@@ -1,7 +1,7 @@
 <template>
   <div class="checkoutCompDiv">
     <h2>Checkout</h2>
-    <form v-on:submit.prevent="submitOrder" class="checkoutForm">
+    <form v-on:submit.prevent="submitOrder" class="checkoutForm" v-if="!isCompleted">
       <h3>Contact Information</h3>
       <div id="contactInfoDiv">
         <div id="firstNameDiv">
@@ -66,6 +66,9 @@
       </div>
       <input type="submit" value="Submit Order" class="checkoutSubmit"/>
     </form>
+    <div class="orderSubmitted" v-else>
+      <p>Thanks for your order! Your order number is: {{this.orderId}}</p>
+    </div>
   </div>
 </template>
 
@@ -80,6 +83,7 @@ export default {
       isTakeout: true,
       order: {
       },
+      isCompleted: false,
     };
   },
   methods: {
@@ -90,12 +94,23 @@ export default {
       this.generateOrderInformation();
       orderService.submitOrder(this.order).then((response) => {
         this.orderId = response.data;
+        this.order = {};
+        this.$store.state.cart = [];
+        this.isCompleted = true;
       });
     },
     generateOrderInformation() {
       this.order.isDelivery = !this.isTakeout;
+      this.order.orderTotal = this.getOrderTotal();
       this.order.menuItems = this.$store.state.cart.filter(e => e.itemCategory == "Menu");
       this.order.customPizza = this.$store.state.cart.filter(e => e.itemCategory == "Custom");
+    },
+    getOrderTotal() {
+      let totalPrice = 0;
+      this.$store.state.cart.forEach((item) => {
+        totalPrice += (item.price * item.orderQuantity);
+      });
+      return Number(totalPrice).toFixed(2);
     }
   },
 };
@@ -249,5 +264,13 @@ export default {
 
 .checkoutSubmit:hover {
   background-color: rgba(210, 2, 1, 0.5);
+}
+
+.orderSubmitted {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  text-align: center;
 }
 </style>

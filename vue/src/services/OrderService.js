@@ -15,15 +15,15 @@ export default {
   },
 
   getMenuItemDetails(orderId){
-    return http.get('/order/pending/menuItem/' + orderId);
+    return http.get('/order/pending/menuItem/' + orderId, orderId);
   },
 
   getCustomPizzaDetails(orderId){
-    return http.get('order/pending/customPizza/' + orderId );
+    return http.get('order/pending/customPizza/' + orderId, orderId);
   },
 
   setOrderToComplete(orderId){
-    return http.put('/order/pending/markComplete/' + orderId);
+    return http.put('/order/pending/markComplete/' + orderId, orderId);
   },
   
   setOrderToNotComplete(orderId){

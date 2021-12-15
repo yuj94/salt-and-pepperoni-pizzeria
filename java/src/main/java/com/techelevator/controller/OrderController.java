@@ -63,7 +63,7 @@ public class OrderController {
     }
 
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)
-    public void createOrder(@RequestBody Order order) {
-        orderDao.createOrder(order);
+    public int createOrder(@RequestBody Order order) {
+        return orderDao.createOrder(order);
     }
 }

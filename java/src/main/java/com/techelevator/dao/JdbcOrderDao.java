@@ -29,13 +29,8 @@ public class JdbcOrderDao implements OrderDao {
     public List<Order> getAllPendingOrders() {
         List<Order> pendingOrderList = new ArrayList<>();
 
-        String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
-                     "FROM order_items\n" +
-                     "FULL OUTER JOIN orders\n" +
-                     "ON order_items.order_id = orders.order_id\n" +
-                     "FULL OUTER JOIN menu\n" +
-                     "ON order_items.menu_item_id = menu.item_id\n" +
-                     "WHERE orders.completed = FALSE;";
+        String sql = "SELECT order_id, first_name, last_name, phone_number, email, order_total, delivery, completed, order_date, address_line_1, address_state, address_city, address_zip_code\n" +
+                     "FROM orders WHERE orders.completed = FALSE;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -50,13 +45,8 @@ public class JdbcOrderDao implements OrderDao {
     public List<Order> getAllHistoricalOrders() {
         List<Order> orderSearchList = new ArrayList<>();
 
-        String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
-                     "FROM order_items\n" +
-                     "FULL OUTER JOIN orders\n" +
-                     "ON order_items.order_id = orders.order_id\n" +
-                     "FULL OUTER JOIN menu\n" +
-                     "ON order_items.menu_item_id = menu.item_id\n" +
-                     "WHERE orders.completed = TRUE;";
+        String sql = "SELECT order_id, first_name, last_name, phone_number, email, order_total, delivery, completed, order_date, address_line_1, address_state, address_city, address_zip_code\n" +
+                "FROM orders WHERE orders.completed = TRUE;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -89,9 +79,9 @@ public class JdbcOrderDao implements OrderDao {
     public List<MenuItem> getMenuItemsByOrderId(int orderId) {
         List<MenuItem> orderMenuItemList = new ArrayList<>();
 
-        String sql = "SELECT menu.item_name, menu.price\n" +
+        String sql = "SELECT menu.item_name AS item_name, menu.item_id AS item_id, menu.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity, menu.item_category AS item_category\n" +
                      "FROM order_items\n" +
-                     "FULL OUTER JOIN menu\n" +
+                     "INNER JOIN menu\n" +
                      "ON order_items.menu_item_id = menu.item_id\n" +
                      "WHERE order_items.order_id = ?;";
 
@@ -108,9 +98,9 @@ public class JdbcOrderDao implements OrderDao {
     public List<CustomPizza> getCustomPizzasByOrderId(int orderId) {
         List<CustomPizza> customPizzasList = new ArrayList<>();
 
-        String sql = "SELECT *\n" +
+        String sql = "SELECT custom_pizza.pizza_id AS item_id, custom_pizza.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity\n" +
                      "FROM custom_pizza\n" +
-                     "FULL OUTER JOIN order_items\n" +
+                     "INNER JOIN order_items\n" +
                      "ON order_items.custom_pizza_id = custom_pizza.pizza_id\n" +
                      "WHERE order_items.order_id = ?;";
 
@@ -136,6 +126,8 @@ public class JdbcOrderDao implements OrderDao {
                     "VALUES (?,?,?,?,?,?) RETURNING order_id;";
             order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getOrderTotal()));
         }
+
+        orderId = order.getOrderId();
 
         setOrderItems(order);
 
@@ -227,6 +219,8 @@ public class JdbcOrderDao implements OrderDao {
         order.setAddressState(rowSet.getString("address_state"));
         order.setAddressCity(rowSet.getString("address_city"));
         order.setAddressZipCode(rowSet.getInt("address_zip_code"));
+        order.setCustomPizza(getCustomPizzasByOrderId(order.getOrderId()));
+        order.setMenuItems(getMenuItemsByOrderId(order.getOrderId()));
 
         return order;
     }
@@ -242,8 +236,11 @@ public class JdbcOrderDao implements OrderDao {
     private CustomPizza mapRowToCustomPizza(SqlRowSet rowSet) {
         CustomPizza customPizza = new CustomPizza();
 
-        customPizza.setPizzaId(rowSet.getInt("pizza_id"));
+        customPizza.setPizzaId(rowSet.getInt("item_id"));
         customPizza.setPrice(rowSet.getBigDecimal("price"));
+        customPizza.setItemType(rowSet.getString("item_type"));
+        customPizza.setItemSize(rowSet.getInt("item_size"));
+        customPizza.setOrderQuantity(rowSet.getInt("quantity"));
 
         return customPizza;
     }
@@ -266,15 +263,11 @@ public class JdbcOrderDao implements OrderDao {
 
         menuItem.setItemId(rowSet.getInt("item_id"));
         menuItem.setPrice(rowSet.getBigDecimal("price"));
+        menuItem.setItemType(rowSet.getString("item_type"));
         menuItem.setItemCategory(rowSet.getString("item_category"));
         menuItem.setItemName(rowSet.getString("item_name"));
-        menuItem.setItemDescription(rowSet.getString("item_description"));
-        menuItem.setTotalQuantity(rowSet.getDouble("total_quantity"));
-
-        if (rowSet.getString("item_category").equals(PIZZA_CATEGORY)) {
-            menuItem.setPrice(getMenuItemPrice(menuItem));
-            menuItem.setIngredientList(getMenuPizzaIngredients(menuItem.getItemId()));
-        }
+        menuItem.setOrderQuantity(rowSet.getDouble("quantity"));
+        menuItem.setItemSize(rowSet.getInt("item_size"));
 
         return menuItem;
     }

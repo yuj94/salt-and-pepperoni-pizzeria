@@ -10,6 +10,14 @@ public class CustomPizza extends MenuItem {
     private BigDecimal price;
     private List<Ingredient> ingredients = new ArrayList<>();
     private int itemSize;
+    private String itemType;
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
 
     public int getItemSize() {
         return itemSize;
