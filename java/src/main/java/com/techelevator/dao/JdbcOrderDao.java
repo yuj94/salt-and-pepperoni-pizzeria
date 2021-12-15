@@ -81,7 +81,7 @@ public class JdbcOrderDao implements OrderDao {
 
         String sql = "SELECT menu.item_name AS item_name, menu.item_id AS item_id, menu.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity, menu.item_category AS item_category\n" +
                      "FROM order_items\n" +
-                     "FULL OUTER JOIN menu\n" +
+                     "INNER JOIN menu\n" +
                      "ON order_items.menu_item_id = menu.item_id\n" +
                      "WHERE order_items.order_id = ?;";
 
@@ -100,7 +100,7 @@ public class JdbcOrderDao implements OrderDao {
 
         String sql = "SELECT custom_pizza.pizza_id AS item_id, custom_pizza.price AS price, order_items.item_type AS item_type, order_items.item_size AS item_size, order_items.quantity AS quantity\n" +
                      "FROM custom_pizza\n" +
-                     "FULL OUTER JOIN order_items\n" +
+                     "INNER JOIN order_items\n" +
                      "ON order_items.custom_pizza_id = custom_pizza.pizza_id\n" +
                      "WHERE order_items.order_id = ?;";
 
