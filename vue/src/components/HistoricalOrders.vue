@@ -1,6 +1,6 @@
 <template>
   <div>
-    <global-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></global-modal>
+    <historical-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></historical-modal>
   <div class="historicalOrdersDiv">
     <table id="tblOrders">
       <thead>
@@ -27,7 +27,7 @@
           <td></td>
         </tr>
         <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
-          <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)' v-bind:orderId="order.orderId">View Order Details</button>
+          <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)'>View Order Details</button>
           <td>{{ order.orderId }}</td>
           <td>{{ order.firstName }}</td>
           <td>{{ order.lastName }}</td>
@@ -44,16 +44,15 @@
 
 <script>
 import orderService from '@/services/OrderService.js';
-import GlobalModal from '@/components/GlobalModal.vue';
+import HistoricalModal from '@/components/HistoricalModal.vue';
 
 export default {
   name: "historical-orders-list",
   components: {
-      GlobalModal
+      HistoricalModal
   },
   data() {
     return {
-      orderId: Object,
       filter: {
         orderId: "",
         firstName: "",
@@ -62,6 +61,7 @@ export default {
         phoneNumber: "",
         orderTotal: "",
       },
+      historicalOrders: [],
       showModal: false
     };
   },
@@ -74,7 +74,6 @@ export default {
           order.email.toLowerCase().includes(this.filter.email.toLowerCase()) &&
           order.phoneNumber.toLowerCase().includes(this.filter.phoneNumber.toLowerCase()) &&
           order.orderTotal.toString().includes(this.filter.orderTotal)
-          // order.orderId === this.filter.orderId
       });
     },
   },

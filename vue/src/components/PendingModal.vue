@@ -5,7 +5,6 @@
       <thead>
         <tr >
           <th></th>
-          <th>Order Id</th>
           <th>Item Id</th>
           <th>Item Name</th>
           <th>Quantity</th>
@@ -16,35 +15,20 @@
       <tbody>
         <tr v-for="item in this.$store.state.pendingOrders[indexOfOrderId].menuItems" v-bind:key="item.itemId" >
           <td></td>
-          <td></td>
-          <!-- <td>{{this.orderId}}</td> -->
           <td>{{ item.itemId }}</td>
-          <td v-if="item.itemCategory='Pizza'">{{item.itemSize}}" {{ item.itemName }}</td>
-          <td v-else>{{item.itemName}}</td>
+          <td v-if="item.itemSize!=0">{{item.itemSize}}" {{ item.itemName }} </td>
+          <td v-else>{{ item.itemName }}</td>
           <td>{{ item.orderQuantity }}</td>
-          <td>{{ item.price }}</td>
+          <td v-if="item.price != null">{{item.price}}</td>
         </tr>
-        <!-- <tr v-for="order in this.$store.state.pendingOrders.customPizza" v-bind:key="order.orderId" >
+        <tr v-for="item in this.$store.state.pendingOrders[indexOfOrderId].customPizza" v-bind:key="item.itemId" >
           <td></td>
-          <td>{{this.orderId}}</td>
-          <td >{{ order.pizzaId}}</td>
-          <td>{{order.itemSize}}" Custom Pizza</td>
-          <td>{{ order.orderQuantity }}</td>
-          <td>{{ order.price }}</td>
-        </tr> -->
-        <!-- <tr v-for="order in this.$store.state.historicalOrders" v-bind:key="order.orderId">
+          <td v-if="item.price !=null"> {{item.pizzaId}}</td>
+          <td v-if="item.price != null">{{item.itemSize}}" Custom Pizza</td>
+          <td v-if="item.price != null">{{ item.orderQuantity }}</td>
+          <td v-if="item.price != null">{{ item.price }}</td>
           <td></td>
-          <td>{{ order.orderId}}</td>
-          <td v-if="order.menuItems.menuItemId!=null">{{ order.menuItems.menuItemId }}</td>
-          <td v-else>{{ order.customPizza.pizzaId}}</td>
-          <td v-if="order.menuItems.itemCategory='Pizza'">{{order.menuItems.itemSize}}" {{ order.menuItems.itemName }}</td>
-          <td v-else-if="order.menuItems.menuItemId=null">{{order.customPizza.itemSize}}" Custom Pizza</td>
-          <td v-else>{{order.menuItems.itemName}}</td>
-          <td>{{ order.menutItems.orderQuantity }}</td>
-          <td v-if="order.menuItems.menuItemId!=null">{{ order.menuItems.size}}</td>
-          <td v-else>{{ order.customPizza.itemSize }}</td>
-          <td>{{ order.price }}</td>
-        </tr> -->
+        </tr>
       </tbody>
     </table>
     </div>
@@ -57,11 +41,6 @@ import orderService from '@/services/OrderService.js';
 export default {
   data(){
     return {
-        // menuItemId: '',
-        // menuItemName: '',
-        // customPizzaId: '',
-        // quantity: '',
-        // price: '',
     }
   },
   computed: {
@@ -72,7 +51,6 @@ export default {
   name: 'global-modal',
   props: { 
     orderId: Number,
-    // filter: Object,
     },
   // props: ["orderId"],
   methods:{
@@ -113,6 +91,7 @@ height: 100%;
 background-color: rgb(0,0,0,0.5);
 padding: 100px;
 top:0px;
+z-index: 20;
 }
 
 .modal-inner{

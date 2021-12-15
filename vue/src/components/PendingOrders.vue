@@ -1,6 +1,6 @@
 <template>
   <div>
-    <global-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></global-modal>
+    <pending-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></pending-modal>
   <div class="pendingOrdersDiv">
     <table id="tblOrders">
       <thead>
@@ -24,7 +24,7 @@
           <td><input type="text" id="emailFilter" v-model="filter.email" placeholder="E-Mail"/></td>
           <td><input type="text" id="phoneNumberFilter" v-model="filter.phoneNumber" placeholder="Phone Number"/></td>
           <td><input type="text" id="orderTotalFilter" v-model="filter.orderTotal" placeholder="Order Total"/></td>
-          <td> </td>
+          <td></td>
         </tr>
         <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
           <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)'>View Order Details</button>
@@ -34,26 +34,25 @@
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.orderTotal }}</td>
-          <button type="button" class="completedButton" v-on:click="markAsCompleted(order.orderId)" v-bind:orderId="order.orderId">Mark As Completed</button>
+          <button type="button" class="completedButton" v-on:click="markAsCompleted(order.orderId)">Mark As Completed</button>
         </tr>
       </tbody>
     </table>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
 import orderService from "@/services/OrderService.js";
-import GlobalModal from '@/components/GlobalModal.vue';
+import PendingModal from '@/components/PendingModal.vue';
 
 export default {
   name: "pending-orders-list",
     components: {
-      GlobalModal
+      PendingModal
   },
   data() {
     return {
-      // orderId: Number,
       filter: {
         orderId: "",
         firstName: "",
@@ -77,9 +76,6 @@ export default {
           order.orderTotal.toString().includes(this.filter.orderTotal)
       });
     },
-    getOrderId(orderId){
-      return orderId;
-    }
   },
   methods: {
     getPendingOrders() {
@@ -88,7 +84,6 @@ export default {
       });
     },
     markAsCompleted(orderId){
-
       orderService.setOrderToComplete(orderId).then((response)=>{
         this.$store.commit("SET_ORDER_TO_COMPLETE", response.data)
         window.location.reload();
