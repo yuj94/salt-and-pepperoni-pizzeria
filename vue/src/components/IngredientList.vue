@@ -1,7 +1,7 @@
 <template>
   <div class="ingredientListDiv">
-    <div class="customPizzaHeader">
-      <h2>Create Your Own</h2>
+    <h2>Create Your Own</h2>
+    <div class="ingredientListDesc">
       <div class="sizeATC">
         <div>
           <label for="pizzaSize">Choose a pizza size:</label>&nbsp;
@@ -13,23 +13,23 @@
         </div>
         <button id="customCart" v-on:click="addToCart">Add to Cart</button>
       </div>
-    </div>
-    <div class="pizzaDescription">
-      <p>
-        For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas,
-        our prices start at <span class="bold">${{ this.basePrice }}</span> for
-        the dough plus the cost of the ingredients selected.
-      </p>
-      <p>
-        Your current custom pizza costs:
-        <span class="bold">${{ this.computedPrice }}</span
-        >.
-      </p>
-      <p>
-        You can select up to
-        <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients
-        for your custom pizza.
-      </p>
+      <div class="pizzaDescription">
+        <p>
+          For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas,
+          our prices start at <span class="bold">${{ this.basePrice }}</span> for
+          the dough plus the cost of the ingredients selected.
+        </p>
+        <p>
+          Your current custom pizza costs:
+          <span class="bold">${{ this.computedPrice }}</span
+          >.
+        </p>
+        <p>
+          You can select up to
+          <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients
+          for your custom pizza.
+        </p>
+      </div>
     </div>
     <div class="ingredientList">
       <div>
@@ -189,12 +189,19 @@ export default {
 </script>
 
 <style scoped>
-.customPizzaHeader > h2 {
+.ingredientListDiv > h2 {
   background-color: #d20201;
   color: #fff;
   border-radius: 8px;
   text-align: center;
   padding: 16px;
+}
+
+.ingredientListDesc {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
 }
 
 .sizeATC {
@@ -207,7 +214,6 @@ export default {
   border: none;
   padding: 16px 24px;
   border-radius: 8px;
-  margin: 16px 0;
   background-color: #d20201;
   color: #fff;
   font-weight: bold;
@@ -220,7 +226,7 @@ export default {
 }
 
 .pizzaDescription > p {
-  margin: 16px 0;
+  margin-top: 16px;
 }
 
 .pizzaDescription > p > .bold {
@@ -238,21 +244,25 @@ export default {
 
 #meatId {
   grid-area: meatId;
+  color: #d20201;
   text-align: center;
 }
 
 #veggieId {
   grid-area: veggieId;
+  color: #d20201;
   text-align: center;
 }
 
 #sauceId {
   grid-area: sauceId;
+  color: #d20201;
   text-align: center;
 }
 
 #cheeseId {
   grid-area: cheeseId;
+  color: #d20201;
   text-align: center;
 }
 
@@ -289,9 +299,8 @@ export default {
   padding-right: 16px;
 }
 
-#ingredientName,
-#ingredientPrice {
-  margin: 8px 0;
+#ingredientName {
+  margin-bottom: 8px;
 }
 
 #ingredientName > .bold {

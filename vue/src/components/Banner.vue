@@ -74,14 +74,17 @@ export default {
   font-weight: bold;
 }
 
-#logo > a,
+#logo > a {
+  color: #fff;
+}
+
 #login > a {
   color: #fff;
+  transition: color 0.5s;
 }
 
 #login > a:hover {
   color: rgba(255, 255, 255, 0.5);
-  transition: color 0.5s;
 }
 
 .bannerImg {

@@ -6,12 +6,12 @@
         <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
         <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
         <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }} each</li>
-        <button v-on:click="removeItem(item)">Delete Item</button>
+        <button v-on:click="removeItem(item)">Remove</button>
       </ul>
     </div>
     <h3 class="cartPrice">Total Price: ${{ this.totalPrice }}</h3>
-    <button type="button" id="buttonCart" v-on:click="goToRoute">
-      {{ !isAtCheckout ? "Proceed to Checkout" : "Back to Menu" }}
+    <button type="button" id="buttonCart" v-on:click="goToRoute" v-if="!isAtCheckout">
+      Proceed to Checkout
     </button>
   </div>
 </template>
@@ -37,7 +37,6 @@ export default {
         this.$router.push({ path: "checkout" });
         this.isAtCheckout = true;
       } else {
-        this.$router.push({ path: "pizzas" });
         this.isAtCheckout = false;
       }
     },

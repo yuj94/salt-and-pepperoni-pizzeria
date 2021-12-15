@@ -1,6 +1,6 @@
 <template>
   <div class="menuListDiv">
-    <h2 class="categoryHeader">{{ capitalizeFirstLetter(this.$route.params.category) }}</h2>
+    <h2>{{ capitalizeFirstLetter(this.$route.params.category) }}</h2>
     <div v-for="item in currentCategoryItems" v-bind:key="item.itemId">
       <div class="allMenuItems">
         <menu-details v-bind:menuObj="item"></menu-details>
