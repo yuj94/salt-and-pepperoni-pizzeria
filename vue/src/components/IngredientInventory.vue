@@ -63,7 +63,7 @@
               <h3 id="ingredientPrice">Current Price: ${{ ingredient.price }} </h3>&nbsp;
               <label for="price">Update Price: ${{ ingredient.price }}</label>
               <form v-on:submit.prevent="updateIngredientPrice(ingredient)">
-                <input id="price" name="price" type="number" min="0" max="9.99" v-model="updatedIngredient.price"/>
+                <input id="price" name="price" type="number" min="0" max="9.99" v-model="getCurrentIngredient(ingredient).price"/>
                 <input type="submit" value="Update"/>
               </form>
             </div>
@@ -71,7 +71,7 @@
             <div>
               <h3 id="ingredientOrderQuantity">Current Quantity: {{ ingredient.totalQuantity }}</h3>
               <label for="totalQuantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
-              <input id="quantity" name="totalQuantity" type="number" min="0" v-model="updatedIngredient.totalQuantity"/>
+              <input id="quantity" name="totalQuantity" type="number" min="0" v-model="getCurrentIngredient(ingredient).totalQuantity"/>
               <button id ="totalQuantity" v-on:click="updateIngredientQuantity(ingredient)">Update</button>
             </div>
           </div>
@@ -166,6 +166,7 @@ export default {
       isLoading: true,
       showForm: false,
       newIngredient: {},
+      currentIngredient: {},
       updatedIngredient: []
     };
   },
@@ -205,7 +206,7 @@ export default {
     },
     addIngredient() {
       menuService.addIngredient(this.newIngredient).then(() => {
-      this.$store.commit("ADD_INGREDIENT",this.newIngredient);
+      this.$store.commit(this.newIngredient);
       this.resetForm();
       });
     },
@@ -220,6 +221,9 @@ export default {
       menuService.updateIngredientQuantity(this.updatedIngredient.ingredientId, this.updatedIngredient.totalQuantity).then(() => {
       this.getIngredients();
       });
+    },
+    getCurrentIngredient(ingredient) {
+      return ingredient;
     },
     resetForm() {
       this.showForm = false;
