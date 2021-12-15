@@ -37,7 +37,7 @@ export default {
       }
     },
     isLoginPage() {
-      if (this.$route.path == "/login") {
+      if (this.$route.path == "/login" || this.$route.path == "/register") {
         return true;
       } else {
         return false;

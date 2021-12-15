@@ -11,6 +11,11 @@
         <router-link v-bind:to="{ name: 'home' }">Back to Home</router-link>
       </div>
     </div>
+    <div class="bannerGrid" v-else-if="isRegisterPage">
+      <div id="register">
+        <router-link v-bind:to="{ name: 'pending-orders' }">Back to Employee Portal</router-link>
+      </div>
+    </div>
     <div class="bannerGrid bannerImg" v-else>
       <div id="logo">
         <router-link v-bind:to="{ name: 'home' }"><h1>Salt & Pepperoni Pizzeria</h1></router-link>
@@ -41,6 +46,13 @@ export default {
         return false;
       }
     },
+    isRegisterPage() {
+      if (this.$route.path == "/register") {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
 };
 </script>
@@ -60,7 +72,7 @@ export default {
   align-items: center;
 }
 
-#login {
+#login, #register {
   grid-area: login;
   display: flex;
   align-items: center;
@@ -68,7 +80,8 @@ export default {
 }
 
 #logo > a,
-#login > a {
+#login > a, 
+#register > a {
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
@@ -78,12 +91,14 @@ export default {
   color: #fff;
 }
 
-#login > a {
+#login > a,
+#register > a {
   color: #fff;
   transition: color 0.5s;
 }
 
-#login > a:hover {
+#login > a:hover,
+#register > a:hover {
   color: rgba(255, 255, 255, 0.5);
 }
 
