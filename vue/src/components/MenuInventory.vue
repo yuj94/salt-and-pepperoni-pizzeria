@@ -19,10 +19,10 @@
             <div class="form-element">
               <label for="category">Type: </label>
               <select name="category" id="category" v-model="newMenuItem.itemCategory">
-                <option value="appetizer">Appetizer</option>
-                <option value="salad">Salad</option>
-                <option value="dessert">Dessert</option>
-                <option value="drink">Drink</option>
+                <option value="Appetizer">Appetizer</option>
+                <option value="Salad">Salad</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Drink">Drink</option>
               </select>
             </div>
             
@@ -57,11 +57,13 @@
             <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
             <label for="price">Update Price: ${{ item.price }}</label>
             <input id="price" name="price" type="number" min="0" max="9.99"/>
+            <button id ="updatePriceButton">Update</button>
           </div>
           <div>
-            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <h3 id="itemQuantity">Current Quantity: {{ item.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
         </div>
       </div>
@@ -80,11 +82,13 @@
             <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
             <label for="price">Update Price: ${{ item.price }}</label>
             <input id="price" name="price" type="number" min="0" max="9.99"/>
+            <button id ="updatePriceButton">Update</button>
           </div>
           <div>
-            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <h3 id="itemQuantity">Current Quantity: {{ item.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
         </div>
       </div>
@@ -103,11 +107,13 @@
             <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
             <label for="price">Update Price: ${{ item.price }}</label>
             <input id="price" name="price" type="number" min="0" max="9.99"/>
+            <button id ="updatePriceButton">Update</button>
           </div>
           <div>
-            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <h3 id="itemQuantity">Current Quantity: {{ item.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
         </div>
       </div>
@@ -126,11 +132,13 @@
             <h3 id="itemPrice">Current Price: ${{ item.price }} </h3>
             <label for="price">Update Price: ${{ item.price }}</label>
             <input id="price" name="price" type="number" min="0" max="9.99"/>
+            <button id ="updatePriceButton">Update</button>
           </div>
           <div>
-            <h3 id="itemQuantity">Current quantity: {{ item.totalQuantity }}</h3>
+            <h3 id="itemQuantity">Current Quantity: {{ item.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ item.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
         </div>
       </div>
@@ -151,11 +159,6 @@ export default {
     };
   },
   computed: {
-    pizzas() {
-      return this.$store.state.menuItems.filter((item) => {
-        return item.itemCategory == "Pizza";
-      });
-    },
     appetizers() {
       return this.$store.state.menuItems.filter((item) => {
         return item.itemCategory == "Appetizer";

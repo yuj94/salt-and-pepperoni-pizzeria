@@ -4,6 +4,7 @@ import com.techelevator.model.Ingredient;
 import com.techelevator.model.MenuItem;
 import com.techelevator.model.CustomPizza;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface MenuDao {
@@ -20,11 +21,11 @@ public interface MenuDao {
 
     int updateIngredientQuantity(int ingredientId, double quantity);
 
-    int updateIngredientPrice(int ingredientId, double price);
+    int updateIngredientPrice(int ingredientId, BigDecimal price);
 
     int updateMenuItemQuantity(int itemId, double quantity);
 
-    int updateMenuItemPrice(int itemId, double price);
+    int updateMenuItemPrice(int itemId, BigDecimal price);
 
     int addIngredient (Ingredient ingredient);
 

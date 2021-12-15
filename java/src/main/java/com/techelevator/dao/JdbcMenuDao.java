@@ -162,7 +162,7 @@ public class JdbcMenuDao implements MenuDao {
     }
 
     @Override
-    public int updateIngredientPrice (int ingredientId, double price){
+    public int updateIngredientPrice (int ingredientId, BigDecimal price){
         String sql = "UPDATE price\n" +
                      "FROM ingredient\n" +
                      "SET price = ?\n" +
@@ -180,7 +180,7 @@ public class JdbcMenuDao implements MenuDao {
     }
 
     @Override
-    public int updateMenuItemPrice (int itemId, double price){
+    public int updateMenuItemPrice (int itemId, BigDecimal price){
         String sql = "UPDATE price\n" +
                      "FROM menu\n" +
                      "SET price = ?\n" +

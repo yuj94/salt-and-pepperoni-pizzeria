@@ -24,5 +24,13 @@ export default {
 
   addNewMenuItem(newMenuItem) {
     return http.post('/create-menu-item', newMenuItem);
+  },
+
+  updateIngredientPrice(ingredientId, price) {
+    return http.put('/update/ingredient-price/'+ ingredientId, ingredientId, price);
+  },
+
+  updateIngredientQuantity(ingredientId, totalQuantity) {
+    return http.put('/update/ingredient-quantity/'+ ingredientId, ingredientId, totalQuantity);
   }
 }
