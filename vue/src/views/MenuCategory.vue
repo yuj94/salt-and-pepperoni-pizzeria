@@ -44,8 +44,6 @@ export default {
 
 .navigation {
   grid-area: navigation;
-  display: flexbox;
-  flex-direction: column;
 }
 
 .menuList {

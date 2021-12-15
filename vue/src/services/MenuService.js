@@ -16,6 +16,13 @@ export default {
 
   createCustomPizza(pizza) {
     return http.post('/custom-pizza', pizza)
-  }
+  },
 
+  addIngredient(newIngredient) {
+    return http.post('/add-ingredient', newIngredient);
+  },
+
+  addNewMenuItem(newMenuItem) {
+    return http.post('/create-menu-item', newMenuItem);
+  }
 }

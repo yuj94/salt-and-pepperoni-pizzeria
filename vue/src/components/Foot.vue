@@ -64,11 +64,11 @@ export default {
 
 .homepageFooter > p > a {
   color: #fff;
+  transition: color 0.5s;
 }
 
 .homepageFooter > p > a:hover {
   color: rgba(255, 255, 255, 0.5);
-  transition: color 0.5s;
 }
 
 .nonHomepageFooter {
@@ -77,10 +77,10 @@ export default {
 
 .nonHomepageFooter > p > a {
     color: #000;
+    transition: color 0.5s;
 }
 
 .nonHomepageFooter > p > a:hover {
   color: rgba(0, 0, 0, 0.5);
-  transition: color 0.5s;
 }
 </style>
