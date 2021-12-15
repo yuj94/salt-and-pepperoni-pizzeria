@@ -137,6 +137,8 @@ public class JdbcOrderDao implements OrderDao {
             order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getOrderTotal()));
         }
 
+        orderId = order.getOrderId();
+
         setOrderItems(order);
 
         return orderId;

@@ -1,24 +1,24 @@
 <template>
   <div class="checkoutCompDiv">
     <h2>Checkout</h2>
-    <form v-on:submit.prevent="submitOrder" class="checkoutForm">
+    <form v-on:submit.prevent="submitOrder" class="checkoutForm" v-if="!isCompleted">
       <h3>Contact Information</h3>
       <div id="contactInfoDiv">
         <div id="firstNameDiv">
           <label for="firstName"></label>
-          <input type="text" id="firstName" placeholder="First name" v-model="order.firstName"/>
+          <input type="text" id="firstName" placeholder="First name" v-model="order.firstName" required/>
         </div>
         <div id="lastNameDiv">
           <label for="lastName"></label>
-          <input type="text" id="lastName" placeholder="Last name" v-model="order.lastName"/>
+          <input type="text" id="lastName" placeholder="Last name" v-model="order.lastName" required/>
         </div>
         <div id="emailDiv">
           <label for="email"></label>
-          <input type="text" id="email" placeholder="Email" v-model="order.email"/>
+          <input type="text" id="email" placeholder="Email" v-model="order.email" required/>
         </div>
         <div id="phoneDiv">
           <label for="phone"></label>
-          <input type="text" id="phoneNumber" placeholder="Phone" v-model="order.phoneNumber"/>
+          <input type="text" id="phoneNumber" placeholder="Phone" v-model="order.phoneNumber" required/>
         </div>
       </div>
       <div id="deliveryOptionDiv">
@@ -29,43 +29,46 @@
         <div id="deliveryAddressDiv">
           <div id="addressLineDiv">
             <label for="addressLine"></label>
-            <input type="text" id="addressLine" placeholder="Address"  v-model="order.addressLine"/>
+            <input type="text" id="addressLine" placeholder="Address"  v-model="order.addressLine" required/>
           </div>
           <div id="addressCityDiv">
             <label for="addressCity"></label>
-            <input type="text" id="addressCity" placeholder="City" v-model="order.addressCity"/>
+            <input type="text" id="addressCity" placeholder="City" v-model="order.addressCity" required/>
           </div>
           <div id="addressStateDiv">
             <label for="addressState"></label>
-            <input type="text" id="addressState" placeholder="State"  v-model="order.addressState"/>
+            <input type="text" id="addressState" placeholder="State"  v-model="order.addressState" required/>
           </div>
           <div id="addressZipCodeDiv">
             <label for="addressZipCode"></label>
-            <input type="number" id="addressZipCode" min=00001 max=99999 placeholder="Zip code" v-model="order.addressZipCode"/>
+            <input type="number" id="addressZipCode" min=00001 max=99999 placeholder="Zip code" v-model="order.addressZipCode" required/>
           </div>
         </div>
         <h3>Payment Infomation</h3>
         <div id="paymentInfoDiv">
           <div id="creditCardNumberDiv">
             <label for="creditCardNumber"></label>
-            <input type="number" id="creditCardNumber" min="1000000000000000" max="9999999999999999" placeholder="Card number" v-model="order.creditCardNumber"/>
+            <input type="number" id="creditCardNumber" min="1000000000000000" max="9999999999999999" placeholder="Card number" v-model="order.creditCardNumber" required/>
           </div>
           <div id="creditCardCCVDiv">
             <label for="creditCardCCV"></label>
-            <input type="number" id="creditCardCCV" min="100" max="999" placeholder="Security code" v-model="order.creditCardCCV"/>
+            <input type="number" id="creditCardCCV" min="100" max="999" placeholder="Security code" v-model="order.creditCardCCV" required/>
           </div>
           <div id="creditCardExpMonthDiv">
             <label for="creditCardExpMonth"></label>
-            <input type="number" id="creditCardExpMonth" min="1" max="12" placeholder="Expiration month" v-model="order.creditCardExpMonth"/>
+            <input type="number" id="creditCardExpMonth" min="1" max="12" placeholder="Expiration month" v-model="order.creditCardExpMonth" required/>
           </div>
           <div id="creditCardExpYearDiv">
             <label for="creditCardExpYear"></label>
-            <input type="number" id="creditCardExpYear" min="2021" max="2040" placeholder="Expiration year" v-model="order.creditCardExpYear"/>
+            <input type="number" id="creditCardExpYear" min="2021" max="2040" placeholder="Expiration year" v-model="order.creditCardExpYear" required/>
           </div>
         </div>
       </div>
       <input type="submit" value="Submit Order" class="checkoutSubmit"/>
     </form>
+    <div v-else>
+      <p>Thanks for your order! Your order number is: {{this.orderId}}</p>
+    </div>
   </div>
 </template>
 
@@ -80,6 +83,7 @@ export default {
       isTakeout: true,
       order: {
       },
+      isCompleted: false,
     };
   },
   methods: {
@@ -90,12 +94,23 @@ export default {
       this.generateOrderInformation();
       orderService.submitOrder(this.order).then((response) => {
         this.orderId = response.data;
+        this.order = {};
+        this.$store.state.cart = [];
+        this.isCompleted = true;
       });
     },
     generateOrderInformation() {
       this.order.isDelivery = !this.isTakeout;
+      this.order.orderTotal = this.getOrderTotal();
       this.order.menuItems = this.$store.state.cart.filter(e => e.itemCategory == "Menu");
       this.order.customPizza = this.$store.state.cart.filter(e => e.itemCategory == "Custom");
+    },
+    getOrderTotal() {
+      let totalPrice = 0;
+      this.$store.state.cart.forEach((item) => {
+        totalPrice += (item.price * item.orderQuantity);
+      });
+      return Number(totalPrice).toFixed(2);
     }
   },
 };
