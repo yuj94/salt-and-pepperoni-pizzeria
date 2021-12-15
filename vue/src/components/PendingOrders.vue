@@ -39,6 +39,7 @@
       </tbody>
     </table>
   </div>
+  </div>
 </template>
 
 <script>

@@ -29,13 +29,8 @@ public class JdbcOrderDao implements OrderDao {
     public List<Order> getAllPendingOrders() {
         List<Order> pendingOrderList = new ArrayList<>();
 
-        String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
-                     "FROM order_items\n" +
-                     "FULL OUTER JOIN orders\n" +
-                     "ON order_items.order_id = orders.order_id\n" +
-                     "FULL OUTER JOIN menu\n" +
-                     "ON order_items.menu_item_id = menu.item_id\n" +
-                     "WHERE orders.completed = FALSE;";
+        String sql = "SELECT order_id, first_name, last_name, phone_number, email, order_total, delivery, completed, order_date, address_line_1, address_state, address_city, address_zip_code\n" +
+                     "FROM orders WHERE orders.completed = FALSE;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -50,13 +45,8 @@ public class JdbcOrderDao implements OrderDao {
     public List<Order> getAllHistoricalOrders() {
         List<Order> orderSearchList = new ArrayList<>();
 
-        String sql = "SELECT orders.order_id, orders.first_name, orders.last_name, orders.phone_number, orders.email, orders.order_total, orders.delivery, orders.completed, orders.order_date, orders.address_line_1, orders.address_state, orders.address_city, orders.address_zip_code\n" +
-                     "FROM order_items\n" +
-                     "FULL OUTER JOIN orders\n" +
-                     "ON order_items.order_id = orders.order_id\n" +
-                     "FULL OUTER JOIN menu\n" +
-                     "ON order_items.menu_item_id = menu.item_id\n" +
-                     "WHERE orders.completed = TRUE;";
+        String sql = "SELECT order_id, first_name, last_name, phone_number, email, order_total, delivery, completed, order_date, address_line_1, address_state, address_city, address_zip_code\n" +
+                "FROM orders WHERE orders.completed = TRUE;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
