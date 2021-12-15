@@ -8,6 +8,7 @@ import com.techelevator.model.Ingredient;
 import com.techelevator.model.MenuItem;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -37,4 +38,10 @@ public class MenuController {
 
     @RequestMapping(path = "/create-menu-item", method = RequestMethod.POST)
     public int createMenuItem(@RequestBody MenuItem menuItem) { return menuDao.createMenuItem(menuItem);}
+
+    @RequestMapping(path = "/update/ingredient-price/{ingredientId}", method = RequestMethod.PUT)
+    public int updateIngredientPrice(@PathVariable int ingredientId, BigDecimal price ) { return menuDao.updateIngredientPrice(ingredientId, price);}
+
+    @RequestMapping(path = "/update/ingredient-quantity/{ingredientId}", method = RequestMethod.PUT)
+    public int updateIngredientQuantity(@PathVariable int ingredientId, double quantity ) { return menuDao.updateIngredientQuantity(ingredientId, quantity);}
 }

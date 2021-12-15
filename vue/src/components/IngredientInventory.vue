@@ -60,15 +60,19 @@
             </div>
 
             <div>
-              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <h3 id="ingredientPrice">Current Price: ${{ ingredient.price }} </h3>&nbsp;
               <label for="price">Update Price: ${{ ingredient.price }}</label>
-              <input id="price" name="price" type="number" min="0" max="9.99"/>
+              <form v-on:submit.prevent="updateIngredientPrice(ingredient)">
+                <input id="price" name="price" type="number" min="0" max="9.99" v-model="updatedIngredient.price"/>
+                <input type="submit" value="Update"/>
+              </form>
             </div>
 
             <div>
-            <h3 id="ingredientOrderQuantity">{{ ingredient.totalQuantity }}</h3>
-            <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
-            <input id="quantity" name="quantity" type="number" min="0"/>
+              <h3 id="ingredientOrderQuantity">Current Quantity: {{ ingredient.totalQuantity }}</h3>
+              <label for="totalQuantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
+              <input id="quantity" name="totalQuantity" type="number" min="0" v-model="updatedIngredient.totalQuantity"/>
+              <button id ="totalQuantity" v-on:click="updateIngredientQuantity(ingredient)">Update</button>
             </div>
           </div>
         </div>
@@ -84,14 +88,16 @@
               <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             </div>
             <div>
-              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <h3 id="ingredientPrice">Current Price: ${{ ingredient.price }} </h3>&nbsp;
               <label for="price">Update Price: ${{ ingredient.price }}</label>
               <input id="price" name="price" type="number" min="0" max="9.99"/>
+              <button id ="updatePriceButton">Update</button>
             </div>
           <div>
-            <h3 id="ingredientOrderQuantity">{{ ingredient.totalQuantity }}</h3>
+            <h3 id="ingredientOrderQuantity">Current Quantity: {{ ingredient.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
           </div>
         </div>
@@ -107,14 +113,16 @@
               <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
             </div>
             <div>
-              <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+              <h3 id="ingredientPrice">Current Price: ${{ ingredient.price }} </h3>&nbsp;
               <label for="price">Update Price: ${{ ingredient.price }}</label>
               <input id="price" name="price" type="number" min="0" max="9.99"/>
+              <button id ="updatePriceButton">Update</button>
             </div>
             <div>
-              <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+              <h3 id="ingredientOrderQuantity">Current Quantity: {{ ingredient.totalQuantity }}</h3>
               <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
               <input id="quantity" name="quantity" type="number" min="0"/>
+              <button id ="updateQuantityButton">Update</button>
             </div>
           </div>
         </div>
@@ -130,17 +138,20 @@
             <label for="ingredientId"> {{ ingredient.ingredientName }} </label>
           </div>
           <div>
-            <h3 id="ingredientPrice">$ {{ ingredient.price }} </h3>&nbsp;
+            <h3 id="ingredientPrice">Current Price: ${{ ingredient.price }} </h3>&nbsp;
             <label for="price">Update Price: ${{ ingredient.price }}</label>
             <input id="price" name="price" type="number" min="0" max="9.99"/>
+            <button id ="updatePriceButton">Update</button>
           </div>
           <div>
-            <h3 id="ingredientOrderQuantity">{{ ingredient.orderQuantity }}</h3>
+            <h3 id="ingredientOrderQuantity">Current Quantity: {{ ingredient.totalQuantity }}</h3>
             <label for="quantity">Update Quantity: {{ ingredient.totalQuantity }} </label>
             <input id="quantity" name="quantity" type="number" min="0"/>
+            <button id ="updateQuantityButton">Update</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -154,7 +165,8 @@ export default {
     return {
       isLoading: true,
       showForm: false,
-      newIngredient: {}
+      newIngredient: {},
+      updatedIngredient: []
     };
   },
   computed: {
@@ -195,6 +207,18 @@ export default {
       menuService.addIngredient(this.newIngredient).then(() => {
       this.$store.commit("ADD_INGREDIENT",this.newIngredient);
       this.resetForm();
+      });
+    },
+    updateIngredientPrice(ingredient) {
+      this.updatedIngredient.ingredientId = ingredient.ingredientId;
+      menuService.updateIngredientPrice(this.updatedIngredient.ingredientId, this.updatedIngredient.price).then(() => {
+      this.getIngredients();
+      });
+    },
+    updateIngredientQuantity(ingredient) {
+      this.updatedIngredient.ingredientId = ingredient.ingredientId;
+      menuService.updateIngredientQuantity(this.updatedIngredient.ingredientId, this.updatedIngredient.totalQuantity).then(() => {
+      this.getIngredients();
       });
     },
     resetForm() {
