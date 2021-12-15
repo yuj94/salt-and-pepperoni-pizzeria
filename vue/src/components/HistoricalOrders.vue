@@ -27,7 +27,7 @@
           <td></td>
         </tr>
         <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
-          <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)'>View Order Details</button>
+          <button class="toggle-modal-button" v-on:click='toggleModal(order.orderId)' v-bind:orderId="order.orderId">View Order Details</button>
           <td>{{ order.orderId }}</td>
           <td>{{ order.firstName }}</td>
           <td>{{ order.lastName }}</td>

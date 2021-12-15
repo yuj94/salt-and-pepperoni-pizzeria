@@ -34,7 +34,7 @@
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
           <td>{{ order.orderTotal }}</td>
-          <button type="button" class="completedButton" v-on:click="markAsCompleted(order.orderId)">Mark As Completed</button>
+          <button type="button" class="completedButton" v-on:click="markAsCompleted(order.orderId)" v-bind:orderId="order.orderId">Mark As Completed</button>
         </tr>
       </tbody>
     </table>
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      orderId: Number,
+      // orderId: Number,
       filter: {
         orderId: "",
         firstName: "",
