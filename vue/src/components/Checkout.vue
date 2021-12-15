@@ -66,7 +66,7 @@
       </div>
       <input type="submit" value="Submit Order" class="checkoutSubmit"/>
     </form>
-    <div v-else>
+    <div class="orderSubmitted" v-else>
       <p>Thanks for your order! Your order number is: {{this.orderId}}</p>
     </div>
   </div>
@@ -264,5 +264,13 @@ export default {
 
 .checkoutSubmit:hover {
   background-color: rgba(210, 2, 1, 0.5);
+}
+
+.orderSubmitted {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 16px;
+  text-align: center;
 }
 </style>

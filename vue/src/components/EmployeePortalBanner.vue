@@ -1,6 +1,10 @@
 <template>
   <div class="employeePortalBannerDiv bannerImg">
     <h1>Salt & Pepperoni Pizzeria's Employee Portal</h1>
+    <div class="employeePortalLinks">
+      <router-link v-bind:to="{ name: 'register' }">Register</router-link>
+      <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
+    </div>
   </div>
 </template>
 
@@ -10,16 +14,45 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .employeePortalBannerDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas: "logo logo links";
   height: 96px;
-  width: 100vw;
-  position: fixed;
+  padding: 0 24px;
   z-index: 10;
+}
+
+.employeePortalBannerDiv > h1 {
+  grid-area: logo;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.employeePortalLinks {
+  grid-area: links;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.employeePortalLinks > a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.5s;
+}
+
+.employeePortalLinks > a:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.employeePortalLinks > a:nth-child(1) {
+  margin-right: 24px;
 }
 
 .bannerImg {

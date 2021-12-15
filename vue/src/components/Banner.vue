@@ -87,7 +87,13 @@ export default {
   align-items: center;
 }
 
-#logo > a,
+#logo > a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.5s;
+}
+
 #login > a,
 #login > div > a,
 #register > a {
