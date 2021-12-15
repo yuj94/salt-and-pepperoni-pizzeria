@@ -7,6 +7,7 @@ import java.util.List;
 public class MenuItem {
     private int itemId;
     private String itemName;
+    private String itemType;
     private String itemDescription;
     private String itemCategory;
     private BigDecimal price;
@@ -14,6 +15,14 @@ public class MenuItem {
     private double totalQuantity;
     private String imageUrl;
     private int itemSize;
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
 
     public int getItemSize() {
         return itemSize;

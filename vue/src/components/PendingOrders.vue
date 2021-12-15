@@ -88,6 +88,7 @@ export default {
       });
     },
     markAsCompleted(orderId){
+
       orderService.setOrderToComplete(orderId).then((response)=>{
         this.$store.commit("SET_ORDER_TO_COMPLETE", response.data)
         window.location.reload();
