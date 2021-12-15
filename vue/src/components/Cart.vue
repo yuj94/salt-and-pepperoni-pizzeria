@@ -3,9 +3,9 @@
     <h2>Cart</h2>
     <div class="customerCart">
       <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
-        <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-        <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-        <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
+        <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+        <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+        <li class="cartItem" v-else>Qty: {{item.orderQuantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
         <button v-on:click="removeItem(item)">Remove</button>
       </ul>
     </div>
@@ -26,7 +26,7 @@ export default {
     totalPrice() {
       let totalPrice = 0;
       this.$store.state.cart.forEach((item) => {
-        totalPrice += (item.price * item.quantity);
+        totalPrice += (item.price * item.orderQuantity);
       });
       return Number(totalPrice).toFixed(2);
     }

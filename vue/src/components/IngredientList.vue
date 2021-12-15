@@ -165,7 +165,7 @@ export default {
     },
     getCustomPizzaId(pizza) {
       menuService.createCustomPizza(pizza).then((response) => {
-        this.$store.state.cart[this.indexOfCustomPizza].pizzaId = response.data;
+        this.$store.state.cart[this.indexOfCustomPizza].itemId = response.data;
       });
     },
     addToCart() {
@@ -178,7 +178,7 @@ export default {
       this.getCustomPizzaId(this.customPizza);
       this.customPizza.itemSize = this.pizzaSize;
       this.customPizza.itemCategory = "Custom";
-      this.customPizza.quantity = 1;
+      this.customPizza.orderQuantity = 1;
       this.customPizza.cartItemId = this.$store.state.currentCartItemId;
       this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);
       this.indexOfCustomPizza = this.$store.state.cart.findIndex(e => e.cartItemId === this.$store.state.currentCartItemId);

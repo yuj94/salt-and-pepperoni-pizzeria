@@ -61,4 +61,9 @@ public class OrderController {
     public void setOrderToNotComplete(Principal principal, @PathVariable int orderId){
         orderDao.setOrderToNotComplete(orderId);
     }
+
+    @RequestMapping(path = "/checkout", method = RequestMethod.POST)
+    public void createOrder(@RequestBody Order order) {
+        orderDao.createOrder(order);
+    }
 }

@@ -18,6 +18,8 @@ public class JdbcOrderDao implements OrderDao {
 
     private JdbcTemplate jdbcTemplate;
     private static final String PIZZA_CATEGORY = "Pizza";
+    private static final String MENU_ITEM = "Menu";
+    private static final String CUSTOM_PIZZA = "Custom";
 
     public JdbcOrderDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -123,10 +125,38 @@ public class JdbcOrderDao implements OrderDao {
 
     @Override
     public int createOrder(Order order) {
-        String sql = "INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, delivery, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv, order_total)\n"+
-                     "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING order_id;";
-        int orderId = jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getAddressLine(), order.getAddressState(), order.getAddressCity(), order.getAddressZipCode(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getCreditCardNumber(), order.getCreditCardExpMonth(), order.getCreditCardExpYear(), order.getCreditCardCcv(), order.getOrderTotal());
+        int orderId = 0;
+
+        if (order.isDelivery()) {
+            String sql = "INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, delivery, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv, order_total)\n" +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING order_id;";
+            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getAddressLine(), order.getAddressState(), order.getAddressCity(), order.getAddressZipCode(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getCreditCardNumber(), order.getCreditCardExpMonth(), order.getCreditCardExpYear(), order.getCreditCardCcv(), order.getOrderTotal()));
+        } else {
+            String sql = "INSERT INTO orders (first_name, last_name, email, phone_number, delivery, order_total)\n" +
+                    "VALUES (?,?,?,?,?,?) RETURNING order_id;";
+            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getOrderTotal()));
+        }
+
+        setOrderItems(order);
+
         return orderId;
+    }
+
+    private void setOrderItems(Order order) {
+
+        String menuItemSql = "INSERT INTO order_items (order_id, item_type, menu_item_id, item_size, quantity) " +
+                "VALUES (?, ?, ?, ?, ?);";
+
+        for (int i = 0; i < order.getMenuItems().size(); i++) {
+            jdbcTemplate.update(menuItemSql, order.getOrderId(), MENU_ITEM, order.getMenuItems().get(i).getItemId(), order.getMenuItems().get(i).getItemSize(), order.getMenuItems().get(i).getOrderQuantity());
+        }
+
+        String customPizzaSql = "INSERT INTO order_items (order_id, item_type, custom_pizza_id, item_size, quantity) " +
+                "VALUES (?, ?, ?, ?, ?);";
+
+        for (int i = 0; i < order.getCustomPizza().size(); i++) {
+            jdbcTemplate.update(customPizzaSql, order.getOrderId(), CUSTOM_PIZZA, order.getCustomPizza().get(i).getItemId(), order.getCustomPizza().get(i).getItemSize(), order.getCustomPizza().get(i).getOrderQuantity());
+        }
     }
 
     @Override

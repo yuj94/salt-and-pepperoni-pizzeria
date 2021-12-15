@@ -10,8 +10,18 @@ public class MenuItem {
     private String itemDescription;
     private String itemCategory;
     private BigDecimal price;
+    private double orderQuantity;
     private double totalQuantity;
     private String imageUrl;
+    private int itemSize;
+
+    public int getItemSize() {
+        return itemSize;
+    }
+
+    public void setItemSize(int itemSize) {
+        this.itemSize = itemSize;
+    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -19,6 +29,14 @@ public class MenuItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public double getOrderQuantity() {
+        return orderQuantity;
+    }
+
+    public void setOrderQuantity(double orderQuantity) {
+        this.orderQuantity = orderQuantity;
     }
 
     private List<Ingredient> ingredientList = new ArrayList<>();

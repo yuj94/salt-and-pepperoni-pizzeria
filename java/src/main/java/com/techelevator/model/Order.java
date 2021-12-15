@@ -18,7 +18,7 @@ public class Order {
     private List<CustomPizza> customPizza;
     private boolean isDelivery;
     private boolean isCompleted;
-    private int creditCardNumber;
+    private String creditCardNumber;
     private int creditCardExpMonth;
     private int creditCardExpYear;
     private int creditCardCcv;
@@ -132,11 +132,11 @@ public class Order {
         isCompleted = completed;
     }
 
-    public int getCreditCardNumber() {
+    public String getCreditCardNumber() {
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(int creditCardNumber) {
+    public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
 

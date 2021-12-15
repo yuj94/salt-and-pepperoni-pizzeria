@@ -77,10 +77,6 @@ public class JdbcMenuDao implements MenuDao {
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, customPizzaId);
 
-//        if(results.next()) {
-//            pizza = mapRowToCustomPizza(CUSTOM_PIZZA, results);
-//        }
-
         pizza.setIngredientList(getMenuPizzaIngredients(pizza.getItemId()));
 
         return pizza;

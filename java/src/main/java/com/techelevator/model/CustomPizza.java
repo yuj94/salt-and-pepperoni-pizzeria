@@ -9,20 +9,14 @@ public class CustomPizza extends MenuItem {
     private int pizzaId;
     private BigDecimal price;
     private List<Ingredient> ingredients = new ArrayList<>();
+    private int itemSize;
 
-    public CustomPizza() {
-
+    public int getItemSize() {
+        return itemSize;
     }
 
-    public CustomPizza(int pizzaId, BigDecimal price) {
-        this.pizzaId = pizzaId;
-        this.price = price;
-    }
-
-
-    public CustomPizza(int pizzaId, String pizzaName, String pizzaDescription, BigDecimal price) {
-        this.pizzaId = pizzaId;
-        this.price = price;
+    public void setItemSize(int itemSize) {
+        this.itemSize = itemSize;
     }
 
     public int getPizzaId() {

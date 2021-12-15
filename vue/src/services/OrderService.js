@@ -27,6 +27,11 @@ export default {
   },
   
   setOrderToNotComplete(orderId){
-    return http.put('/order/pending/markNotComplete/' + orderId)
+    return http.put('/order/pending/markNotComplete/' + orderId);
+  },
+
+  submitOrder(order) {
+    return http.post('/checkout', order);
   }
+
 }

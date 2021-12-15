@@ -82,10 +82,10 @@ export default {
         e.itemSize === this.itemToAddToCart.itemSize && 
         e.price === this.itemToAddToCart.price && 
         e.itemName === this.itemToAddToCart.itemName); 
-        this.itemToAddToCart.quantity = this.$store.state.cart[indexOfItem].quantity + 1;
+        this.itemToAddToCart.orderQuantity = this.$store.state.cart[indexOfItem].orderQuantity + 1;
         this.$store.commit("UPDATE_MENU_ITEM", this.itemToAddToCart);
       } else {
-        this.itemToAddToCart.quantity = 1;
+        this.itemToAddToCart.orderQuantity = 1;
         this.itemToAddToCart.cartItemId = this.$store.state.currentCartItemId;
         this.$store.commit("ADD_MENU_ITEM_TO_CART", this.itemToAddToCart);
         this.$store.state.currentCartItemId ++;
