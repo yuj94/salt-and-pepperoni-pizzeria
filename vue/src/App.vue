@@ -23,7 +23,7 @@ html {
 body {
   height: 100%;
   font-family: "Nunito", sans-serif;
-  background: #f6f2ed;
+  background-color: #f6f2ed;
 }
 
 #app {

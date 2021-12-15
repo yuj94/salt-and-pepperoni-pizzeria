@@ -1,11 +1,11 @@
 <template>
   <div class="employeePortalNavDiv">
-    <router-link v-bind:to="{name: 'pending-orders'}"><h2>Pending Orders</h2></router-link>
-    <router-link v-bind:to="{name: 'historical-orders'}"><h2>Historical Orders</h2></router-link>
-    <router-link v-bind:to="{name: 'manage-inventory'}"><h2>Inventory</h2></router-link>
-    <router-link v-bind:to="{name: 'manage-menu-items'}"><h2>Menu Items</h2></router-link>
-    <router-link v-bind:to="{name: 'register'}"><h2>Register Employee</h2></router-link>
-    <router-link v-bind:to="{name: 'logout'}"><h2>Logout</h2></router-link>
+    <router-link v-bind:to="{ name: 'pending-orders' }"><h3>Pending Orders</h3></router-link>
+    <router-link v-bind:to="{ name: 'historical-orders' }"><h3>Historical Orders</h3></router-link>
+    <router-link v-bind:to="{ name: 'manage-inventory' }"><h3>Inventory</h3></router-link>
+    <router-link v-bind:to="{ name: 'manage-menu-items' }"><h3>Menu Items</h3></router-link>
+    <router-link v-bind:to="{ name: 'register' }"><h3>Register Employee</h3></router-link>
+    <router-link v-bind:to="{ name: 'logout' }"><h3>Logout</h3></router-link>
   </div>
 </template>
 
@@ -17,11 +17,15 @@ export default {
 
 <style scoped>
 .employeePortalNavDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
-    padding-left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 192px;
+  width: 100vw;
+  position: fixed;
+  padding-top: 96px;
+  background-color: #f6f2ed;
+  z-index: 5;
 }
 
 .employeePortalNavDiv > a {
@@ -34,22 +38,7 @@ export default {
   color: #d20201;
 }
 
-.employeePortalNavDiv > a > h2 {
-  padding: 16px;
-  margin: 16px 0;
-}
-
-.employeePortalNavDiv > a {
-  text-decoration: none;
-  color: #000;
-  transition: color 0.5s;
-}
-
-.employeePortalNavDiv > a:hover {
-  color: #d20201;
-}
-
-.employeePortalNavDiv > a > h2 {
+.employeePortalNavDiv > a > h3 {
   padding: 16px;
 }
 
@@ -57,7 +46,7 @@ export default {
   color: #d20201 !important;
 }
 
-.router-link-exact-active > h2 {
+.router-link-exact-active > h3 {
   background-color: #fff;
   border-radius: 8px;
 }

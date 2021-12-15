@@ -3,7 +3,10 @@
     <div class="bannerGrid" v-if="isHomePage">
       <div id="login">
         <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Employee Login</router-link>
-        <router-link v-bind:to="{ name: 'logout' }" v-else>Logout</router-link>
+        <div v-else>
+          <router-link v-bind:to="{ name: 'pending-orders' }">Employee Portal</router-link>
+          <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
+        </div>
       </div>
     </div>
     <div class="bannerGrid" v-else-if="isLoginPage">
@@ -22,7 +25,10 @@
       </div>
       <div id="login">
         <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Employee Login</router-link>
-        <router-link v-bind:to="{ name: 'logout' }" v-else>Logout</router-link>
+        <div v-else>
+          <router-link v-bind:to="{ name: 'pending-orders' }">Employee Portal</router-link>
+          <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -62,8 +68,17 @@ export default {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "logo logo login";
-  height: 100px;
+  height: 96px;
   padding: 0 24px;
+}
+
+#login,
+#register {
+  grid-area: login;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 #logo {
@@ -72,34 +87,25 @@ export default {
   align-items: center;
 }
 
-#login, #register {
-  grid-area: login;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 #logo > a,
-#login > a, 
+#login > a,
+#login > div > a,
 #register > a {
+  color: #fff;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-}
-
-#logo > a {
-  color: #fff;
-}
-
-#login > a,
-#register > a {
-  color: #fff;
   transition: color 0.5s;
 }
 
 #login > a:hover,
+#login > div > a:hover,
 #register > a:hover {
   color: rgba(255, 255, 255, 0.5);
+}
+
+#login > div > a:nth-child(1) {
+  margin-right: 24px;
 }
 
 .bannerImg {

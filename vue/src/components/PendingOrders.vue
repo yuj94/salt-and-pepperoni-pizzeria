@@ -1,6 +1,7 @@
 <template>
   <div>
     <global-modal v-show="showModal" v-bind:orderId="orderId" @toggle='toggleModal(orderId)'></global-modal>
+  <div class="pendingOrdersDiv">
     <table id="tblOrders">
       <thead>
         <tr>
@@ -102,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .toggle-modal-button{
   width: 100px;
   height: 50px;
@@ -122,5 +123,9 @@ export default {
 
 #orderTotalFilter{
   width: 75px;
+}
+
+.pendingOrdersDiv {
+  padding-top: 192px;
 }
 </style>

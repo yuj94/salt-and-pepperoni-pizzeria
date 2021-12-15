@@ -1,5 +1,5 @@
 <template>
-  <div class="ingredientListDiv">
+  <div class="ingredientInventoryDiv">
     <div class="manageIngredientBanner">
       <h2>Manage Inventory Ingredients</h2>
 
@@ -208,6 +208,18 @@ export default {
 </script>
 
 <style scoped>
+.ingredientInventoryDiv{
+  padding-top: 192px;
+}
+
+
+
+
+
+
+
+
+
 .manageIngredientBanner {
     display: flex;
     flex-direction: row;
