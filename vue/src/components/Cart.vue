@@ -5,7 +5,7 @@
       <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
         <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.quantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
         <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.quantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-        <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }} each</li>
+        <li class="cartItem" v-else>Qty: {{item.quantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
         <button v-on:click="removeItem(item)">Delete Item</button>
       </ul>
     </div>
@@ -52,7 +52,7 @@ export default {
         }
     },
     isPizza(item) {
-      if (item.menuItemCategory == "pizza") {
+      if (item.menuItemCategory == "Pizza") {
         return true;
       } else {
         return false;

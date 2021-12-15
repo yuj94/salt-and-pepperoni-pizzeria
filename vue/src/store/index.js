@@ -66,17 +66,14 @@ export default new Vuex.Store({
       let indexOfItem = state.cart.indexOf(data);
       state.cart.splice(indexOfItem, 1);
     },
-    UPDATE_MENU_ITEM_QUANTITY(state, id) {
-      let indexOfItem = state.cart.findIndex( e => e.itemId === id);
-      state.cart[indexOfItem].quantity ++;
-    },
-    UPDATE_PIZZA_QUANTITY(state, id, size) {
-      let indexOfItem = state.cart.findIndex( (e) => {return e.itemId === id && e.itemSize === size});
-      state.cart[indexOfItem].quantity ++;
-    },
-    UPDATE_CUSTOM_PIZZA_QUANTITY(state, id) {
-      let indexOfItem = state.cart.findIndex( (e) => {return e.cartItemId === id});
-      state.cart[indexOfItem].quantity ++;
+    UPDATE_MENU_ITEM(state, item) {
+      let indexOfItem = state.cart.findIndex( e => 
+        e.itemId === item.itemId && 
+        e.itemSize === item.itemSize && 
+        e.price === item.price && 
+        e.itemName === item.itemName);
+      state.cart.splice(indexOfItem, 1);
+      state.cart.push(item);
     },
     ADD_CUSTOM_PIZZA_TO_CART(state, data) {
       state.cart.push(data);

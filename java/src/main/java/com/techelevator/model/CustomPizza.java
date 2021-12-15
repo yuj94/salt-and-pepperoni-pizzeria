@@ -8,7 +8,7 @@ public class CustomPizza extends MenuItem {
 
     private int pizzaId;
     private BigDecimal price;
-    private List<Ingredient> pizzaIngredients = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     public CustomPizza() {
 
@@ -41,11 +41,11 @@ public class CustomPizza extends MenuItem {
         this.price = price;
     }
 
-    public void setPizzaIngredients(List<Ingredient> pizzaIngredients) {
-        this.pizzaIngredients = pizzaIngredients;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public List<Ingredient> getPizzaIngredients() {
-        return pizzaIngredients;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }

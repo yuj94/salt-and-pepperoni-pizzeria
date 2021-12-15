@@ -91,7 +91,7 @@ public class JdbcMenuDao implements MenuDao {
 
         int customPizzaId = 0;
 
-        if (customPizza.getPizzaIngredients().size() <= MAX_INGREDIENTS_ALLOWED) {
+        if (customPizza.getIngredients().size() <= MAX_INGREDIENTS_ALLOWED) {
             String sql = "INSERT INTO custom_pizza (price) " +
                          "VALUES (?) RETURNING pizza_id;";
 
@@ -107,11 +107,11 @@ public class JdbcMenuDao implements MenuDao {
     }
 
     private void addIngredientsToPizzaIngredientTable(CustomPizza customPizza) {
-        String sql = "INSERT INTO pizza_ingredient (pizza_id, ingredient_id, quantity) " +
+        String sql = "INSERT INTO pizza_ingredient (custom_pizza_id, ingredient_id, quantity) " +
                      "VALUES (?, ?, ?);";
 
-        for (int i = 0; i < customPizza.getPizzaIngredients().size(); i++) {
-            jdbcTemplate.update(sql, customPizza.getPizzaId(), customPizza.getPizzaIngredients().get(i).getIngredientId(), customPizza.getPizzaIngredients().get(i).getOrderQuantity());
+        for (int i = 0; i < customPizza.getIngredients().size(); i++) {
+            jdbcTemplate.update(sql, customPizza.getPizzaId(), customPizza.getIngredients().get(i).getIngredientId(), customPizza.getIngredients().get(i).getOrderQuantity());
         }
 
     }
