@@ -1,7 +1,7 @@
 <template>
   <div class='global-modal'>
     <div class="modal-inner">
-      <table id="tblOrders">
+      <table class="styled-table">
       <thead class="tableHeader">
         <tr >
           <th>Item Id</th>
@@ -98,6 +98,44 @@ export default {
 
 .table-header{
     align-self: left;
+}
+
+.styled-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #d20201;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: thin solid #f6f2ed;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #fff;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: thin solid #d20201;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #d20201;
 }
 
 </style>
