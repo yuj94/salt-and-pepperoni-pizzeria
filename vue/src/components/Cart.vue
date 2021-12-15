@@ -1,7 +1,7 @@
 <template>
   <div class="cartDiv">
     <h2>Cart</h2>
-    <div v-if="this.$store.state.cart.length == 0"><p>Your cart is empty.</p></div>
+    <div class="emptyCart" v-if="this.$store.state.cart.length == 0"><p>Your cart is empty.</p></div>
     <div v-else>
       <div class="customerCart">
         <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
@@ -80,9 +80,15 @@ export default {
   padding: 16px;
 }
 
+.emptyCart {
+  background-color: #fff;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+}
+
 .customerCart {
   background-color: #fff;
-  min-height: 72px;
   margin: 16px 0;
   padding: 16px;
   border-radius: 8px;
