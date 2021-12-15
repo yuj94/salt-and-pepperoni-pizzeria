@@ -1,6 +1,6 @@
 <template>
-  <div class="employeePortalBannerDiv">
-      <h1 id="heading">Salt & Pepperoni Pizzeria's Employee Portal</h1>
+  <div class="employeePortalBannerDiv bannerImg">
+    <h1>Salt & Pepperoni Pizzeria's Employee Portal</h1>
   </div>
 </template>
 
@@ -12,11 +12,20 @@ export default {
 
 <style>
 .employeePortalBannerDiv {
-  color: #d20201;
-  text-align: center;
+  display: flex;
   justify-content: center;
-  align-content: center;
-  margin: auto;
-  padding-top: 1em;
+  align-items: center;
+  color: #fff;
+  height: 96px;
+  width: 100vw;
+  position: fixed;
+  z-index: 10;
+}
+
+.bannerImg {
+  background: url(https://images.unsplash.com/photo-1630443876697-e0d2faac7b51?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 60%;
 }
 </style>

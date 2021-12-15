@@ -202,6 +202,23 @@ export default {
 </script>
 
 <style scoped>
+.menuInventoryDiv{
+  padding-top: 192px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .manageItemBanner {
     display: flex;
     flex-direction: row;

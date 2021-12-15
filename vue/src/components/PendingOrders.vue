@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pendingOrdersDiv">
     <table id="tblOrders">
       <thead>
         <tr>
@@ -116,6 +116,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.pendingOrdersDiv {
+  padding-top: 192px;
+}
 </style>
