@@ -106,7 +106,6 @@ export default {
   background-color: #d20201;
   color: #fff;
   font-weight: bold;
-  margin-bottom: 16px;
   cursor: pointer;
   transition: background-color 0.5s;
 }

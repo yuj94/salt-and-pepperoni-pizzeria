@@ -239,7 +239,7 @@ export default {
   grid-template-areas:
     "meatId veggieId sauceId cheeseId"
     "meat veggies sauce cheese";
-  grid-gap: 16px;
+  gap: 16px;
 }
 
 #meatId {
