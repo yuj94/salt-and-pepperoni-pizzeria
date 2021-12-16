@@ -26,21 +26,23 @@
           </tr>
         </tbody>
       </table>
-      <div>
-        <h2>Customer Information:</h2>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].firstName }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].lastName }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].email }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].phoneNumber }}</p>
-        <div v-if="this.$store.state.pendingOrders[indexOfOrderId].isDelivery">
-          <h2>Customer Address:</h2>
-          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressLine }}</p>
-          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressState }}</p>
-          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressCity }}</p>
-          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressZipCode }}</p>
+      <div class="customerDetails">
+        <div class="customerInformation">
+          <h2>Customer Information</h2>
+          <p>First name: {{ this.$store.state.pendingOrders[indexOfOrderId].firstName }}</p>
+          <p>Last name: {{ this.$store.state.pendingOrders[indexOfOrderId].lastName }}</p>
+          <p>Email: {{ this.$store.state.pendingOrders[indexOfOrderId].email }}</p>
+          <p>Phone: {{ this.$store.state.pendingOrders[indexOfOrderId].phoneNumber }}</p>
+        </div>
+        <div class="customerAddress" v-if="this.$store.state.pendingOrders[indexOfOrderId].isDelivery">
+          <h2>Customer Address</h2>
+          <p>Address: {{ this.$store.state.pendingOrders[indexOfOrderId].addressLine }}</p>
+          <p>City: {{ this.$store.state.pendingOrders[indexOfOrderId].addressCity }}</p>
+          <p>State: {{ this.$store.state.pendingOrders[indexOfOrderId].addressState }}</p>
+          <p>Zip code: {{ this.$store.state.pendingOrders[indexOfOrderId].addressZipCode }}</p>
         </div>
       </div>
-      <button class="toggle-modal-button" v-on:click="toggleModal()">Return</button>
+      <button class="toggle-modal-button" v-on:click="toggleModal()">Close</button>
     </div>
   </div>
 </template>
@@ -91,15 +93,17 @@ export default {
   top: 0;
   left: 0;
   background-color: rgb(0, 0, 0, 0.75);
-  padding: 192px;
+  padding: 80px;
   z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-inner {
-  width: 100%;
-  height: 100%;
   background-color: #f6f2ed;
   border-radius: 8px;
+  padding-bottom: 24px;
 }
 
 .styled-table {
@@ -131,10 +135,9 @@ export default {
   text-align: center;
 }
 
-.toggle-modal-button,
-.completedButton {
+.toggle-modal-button {
   border: none;
-  padding: 8px 24px;
+  padding: 16px 24px;
   border-radius: 8px;
   background-color: #d20201;
   color: #fff;
@@ -143,73 +146,36 @@ export default {
   transition: background-color 0.5s;
 }
 
-.toggle-modal-button:hover,
-.completedButton:hover {
+.toggle-modal-button:hover {
   background-color: rgba(210, 2, 1, 0.5);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* #tblOrders {
-  width: 100%;
+.customerDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "information address";
+  gap: 16px;
+  padding: 16px;
 }
 
-.toggle-modal-button {
-  width: 200px;
-  height: 200px;
-  background-color: white;
-} */
-
-
-
-
-
-/* .styled-table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  width: 100%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+.customerInformation {
+  grid-area: information;
+  min-width: 320px;
 }
 
-.styled-table thead tr {
-  background-color: #d20201;
-  color: #ffffff;
-  text-align: left;
+.customerAddress {
+  grid-area: address;
+  min-width: 320px;
 }
 
-.styled-table th,
-.styled-table td {
-  padding: 12px 15px;
+.customerInformation > p,
+.customerAddress > p {
+  padding-top: 16px;
 }
 
-.styled-table tbody tr {
-  border-bottom: thin solid #f6f2ed;
+.modal-inner > .toggle-modal-button {
+  display: flex;
+  margin: 8px auto 0 auto;
 }
-
-.styled-table tbody tr:nth-of-type(even) {
-  background-color: #fff;
-}
-
-.styled-table tbody tr:last-of-type {
-  border-bottom: thin solid #d20201;
-}
-
-.styled-table tbody tr.active-row {
-  font-weight: bold;
-  color: #d20201;
-} */
 </style>

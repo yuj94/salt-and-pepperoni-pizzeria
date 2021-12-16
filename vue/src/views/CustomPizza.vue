@@ -31,7 +31,7 @@ export default {
 .customPizzaDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas: 
+  grid-template-areas:
     "banner banner banner"
     "navigation menu-list cart"
     "footer footer footer";

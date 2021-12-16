@@ -1,14 +1,14 @@
 <template>
   <div class="menuDetailsDiv">
-    <img id="itemImg" v-bind:src="menuObj.imageUrl" alt="Picture of menu item." />
+    <img id="itemImg" v-bind:src="menuObj.imageUrl" alt="Picture of menu item."/>
     <div id="itemName" v-if="isPizza">
       <h3>{{ menuObj.itemName }}</h3>
       <div id="pizzaSize">
         <label for="pizzaSize">Choose a size: </label>
         <select name="pizzaSize" id="pizzaSize" v-model="pizzaSize">
-            <option value='12'>12"</option>
-            <option value='16'>16"</option>
-            <option value='18'>18"</option>
+          <option value="12">12"</option>
+          <option value="16">16"</option>
+          <option value="18">18"</option>
         </select>
       </div>
     </div>
@@ -24,27 +24,36 @@ export default {
   name: "menu-details",
   data() {
     return {
-      itemToAddToCart: {
-      },
-      pizzaSize: '12',
+      itemToAddToCart: {},
+      pizzaSize: "12",
     };
   },
   props: ["menuObj"],
   computed: {
     isPizza() {
-      if (this.$route.params.category.substring(0, this.$route.params.category.length - 1) == "pizza") {
+      if (
+        this.$route.params.category.substring(
+          0,
+          this.$route.params.category.length - 1
+        ) == "pizza"
+      ) {
         return true;
       } else {
         return false;
       }
     },
     thisItemSize() {
-      if (this.$route.params.category.substring(0, this.$route.params.category.length - 1) == "pizza") {
-        return this.pizzaSize; 
+      if (
+        this.$route.params.category.substring(
+          0,
+          this.$route.params.category.length - 1
+        ) == "pizza"
+      ) {
+        return this.pizzaSize;
       } else {
-        return '0';
+        return "0";
       }
-    }
+    },
   },
   methods: {
     pizzaPrice(originalPrice) {
@@ -58,38 +67,48 @@ export default {
     },
     addItemToCart(item) {
       this.itemToAddToCart.itemType = "Menu";
-      this.itemToAddToCart.itemCategory = this.$route.params.category.substring(0, 1).toUpperCase() + this.$route.params.category.substring(1, this.$route.params.category.length - 1);
+      this.itemToAddToCart.itemCategory =
+        this.$route.params.category.substring(0, 1).toUpperCase() +
+        this.$route.params.category.substring(
+          1,
+          this.$route.params.category.length - 1
+        );
       this.itemToAddToCart.itemId = item.itemId;
       this.itemToAddToCart.itemName = item.itemName;
       this.itemToAddToCart.itemSize = Number(this.thisItemSize);
 
       if (this.isPizza) {
-          this.itemToAddToCart.price = this.pizzaPrice(item.price);
-          this.itemToAddToCart.ingredientList = item.ingredientList;
-        } else {
-          this.itemToAddToCart.price = item.price;
-        }
+        this.itemToAddToCart.price = this.pizzaPrice(item.price);
+        this.itemToAddToCart.ingredientList = item.ingredientList;
+      } else {
+        this.itemToAddToCart.price = item.price;
+      }
 
-      let filteredCartArray = this.$store.state.cart.filter((e) => { 
-        return e.itemId === this.itemToAddToCart.itemId && 
-              e.itemSize === this.itemToAddToCart.itemSize && 
-              e.price === this.itemToAddToCart.price && 
-              e.itemName === this.itemToAddToCart.itemName
-              });
-      
+      let filteredCartArray = this.$store.state.cart.filter((e) => {
+        return (
+          e.itemId === this.itemToAddToCart.itemId &&
+          e.itemSize === this.itemToAddToCart.itemSize &&
+          e.price === this.itemToAddToCart.price &&
+          e.itemName === this.itemToAddToCart.itemName
+        );
+      });
+
       if (filteredCartArray.length >= 1) {
-        let indexOfItem = this.$store.state.cart.findIndex( e => 
-        e.itemId === this.itemToAddToCart.itemId && 
-        e.itemSize === this.itemToAddToCart.itemSize && 
-        e.price === this.itemToAddToCart.price && 
-        e.itemName === this.itemToAddToCart.itemName); 
-        this.itemToAddToCart.orderQuantity = this.$store.state.cart[indexOfItem].orderQuantity + 1;
+        let indexOfItem = this.$store.state.cart.findIndex(
+          (e) =>
+            e.itemId === this.itemToAddToCart.itemId &&
+            e.itemSize === this.itemToAddToCart.itemSize &&
+            e.price === this.itemToAddToCart.price &&
+            e.itemName === this.itemToAddToCart.itemName
+        );
+        this.itemToAddToCart.orderQuantity =
+          this.$store.state.cart[indexOfItem].orderQuantity + 1;
         this.$store.commit("UPDATE_MENU_ITEM", this.itemToAddToCart);
       } else {
         this.itemToAddToCart.orderQuantity = 1;
         this.itemToAddToCart.cartItemId = this.$store.state.currentCartItemId;
         this.$store.commit("ADD_MENU_ITEM_TO_CART", this.itemToAddToCart);
-        this.$store.state.currentCartItemId ++;
+        this.$store.state.currentCartItemId++;
       }
       this.itemToAddToCart = {};
     },

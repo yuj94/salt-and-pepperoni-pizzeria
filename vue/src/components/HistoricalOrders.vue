@@ -10,8 +10,8 @@
             <th>Time to Fulfill</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Email Address</th>
-            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Phone</th>
             <th>Order Total</th>
             <th></th>
           </tr>
@@ -22,7 +22,7 @@
             <td>
               <input type="text" id="orderIdFilter" v-model="filter.orderId" placeholder="Order Id" />
             </td>
-            <td>Hrs:Mins:Secs</td>
+            <td class="center">Hrs:Mins:Secs</td>
             <td>
               <input type="text" id="firstNameFilter" v-model="filter.firstName" placeholder="First Name" />
             </td>
@@ -43,7 +43,7 @@
           <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
             <button class="toggle-modal-button" v-on:click="toggleModal(order.orderId)">Order Details</button>
             <td class="center">{{ order.orderId }}</td>
-            <td  class="center">{{order.timeElapsed.substring(1, 8)}}</td>
+            <td class="center">{{ order.timeElapsed.substring(1, 8) }}</td>
             <td>{{ order.firstName }}</td>
             <td>{{ order.lastName }}</td>
             <td>{{ order.email }}</td>
@@ -124,16 +124,17 @@ export default {
 </script>
 
 <style scoped>
-
 .historicalOrdersDiv {
+  /* padding: 192px 24px 0 24px; */
   padding: 0 24px;
 }
 
 .styled-table {
   border-collapse: collapse;
-  width: 100%;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .styled-table > thead > tr {
@@ -162,6 +163,7 @@ export default {
   border: 1px solid;
   padding: 16px;
   border-radius: 8px;
+  width: 100%;
 }
 
 .center {
@@ -183,5 +185,5 @@ export default {
 .toggle-modal-button:hover,
 .notCompletedButton:hover {
   background-color: rgba(210, 2, 1, 0.5);
-  }
+}
 </style>

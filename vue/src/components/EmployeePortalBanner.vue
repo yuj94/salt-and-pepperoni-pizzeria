@@ -20,6 +20,8 @@ export default {
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "logo logo links";
   height: 96px;
+  /* width: 100%;
+  position: fixed; */
   padding: 0 24px;
   z-index: 10;
 }
