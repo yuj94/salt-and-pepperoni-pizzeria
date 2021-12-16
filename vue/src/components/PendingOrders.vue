@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div onLoad=" LoadOnce()">
     <pending-modal v-show="showModal" v-bind:orderId="orderId" @toggle="toggleModal(orderId)"></pending-modal>
     <div class="pendingOrdersDiv">
       <table class="styled-table">
@@ -115,9 +115,7 @@ export default {
         this.$store.commit("SET_PENDING_ORDERS", response.data);
       });
     },
-    isDeliveryFilter() {
-      this.filter.isDelivery = !this.filter.isDelivery;
-    },
+
     markAsCompleted(orderId) {
       orderService.setOrderToComplete(orderId).then((response) => {
         this.$store.commit("SET_ORDER_TO_COMPLETE", response.data);
