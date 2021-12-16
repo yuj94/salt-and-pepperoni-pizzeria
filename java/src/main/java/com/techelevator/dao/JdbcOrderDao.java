@@ -160,7 +160,7 @@ public class JdbcOrderDao implements OrderDao {
 
     private void updateQuantities(Order order) {
         for (int i = 0; i < order.getMenuItems().size(); i++) {
-            if (order.getMenuItems().get(i).getItemCategory() == "Pizza") {
+            if (order.getMenuItems().get(i).getItemCategory().equals(PIZZA_CATEGORY)) {
                 for (int n = 0; n < order.getMenuItems().get(i).getIngredientList().size(); n++) {
                     String sql = "UPDATE ingredient SET total_quantity = total_quantity - ? WHERE ingredient_id = ?";
 
