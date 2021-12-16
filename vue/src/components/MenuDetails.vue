@@ -65,6 +65,7 @@ export default {
 
       if (this.isPizza) {
           this.itemToAddToCart.price = this.pizzaPrice(item.price);
+          this.itemToAddToCart.ingredientList = item.ingredientList;
         } else {
           this.itemToAddToCart.price = item.price;
         }
