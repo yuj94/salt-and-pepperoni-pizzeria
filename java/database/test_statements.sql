@@ -53,3 +53,11 @@ INSERT INTO menu (item_name, item_description, item_category, price, total_quant
 Values(1,1,'Salad',1,1) RETURNING item_id;
 
 --everything from ingredient where pizza-ingredient.pizza_id = pizza.pizza_id
+
+UPDATE ingredient
+SET price = 1.5
+WHERE ingredient_id = 2;
+
+UPDATE ingredient
+SET total_quantity = NULL
+WHERE ingredient_id = 2;

@@ -154,35 +154,31 @@ public class JdbcMenuDao implements MenuDao {
 
     @Override
     public int updateIngredientQuantity (int ingredientId, double quantity){
-        String sql = "UPDATE total_quantity\n" +
-                     "FROM ingredient\n" +
-                     "SET quantity = ?\n" +
+        String sql = "UPDATE ingredient\n" +
+                     "SET total_quantity = ?\n" +
                      "WHERE ingredient_id = ?;";
         return jdbcTemplate.update(sql, quantity, ingredientId);
     }
 
     @Override
     public int updateIngredientPrice (int ingredientId, BigDecimal price){
-        String sql = "UPDATE price\n" +
-                     "FROM ingredient\n" +
+        String sql = "UPDATE ingredient\n" +
                      "SET price = ?\n" +
-                     "WHERE ingredient_id = ?;";
+                     "WHERE ingredient_id = ?";
         return jdbcTemplate.update(sql, price, ingredientId);
     }
 
     @Override
     public int updateMenuItemQuantity (int itemId, double quantity){
-        String sql = "UPDATE total_quantity\n" +
-                     "FROM menu\n" +
-                     "SET quantity = ?\n" +
+        String sql = "UPDATE menu\n" +
+                     "SET total_quantity = ?\n" +
                      "WHERE item_id = ?;";
         return jdbcTemplate.update(sql, quantity, itemId);
     }
 
     @Override
     public int updateMenuItemPrice (int itemId, BigDecimal price){
-        String sql = "UPDATE price\n" +
-                     "FROM menu\n" +
+        String sql = "UPDATE menu\n" +
                      "SET price = ?\n" +
                      "WHERE item_id = ?;";
         return jdbcTemplate.update(sql, price, itemId);
