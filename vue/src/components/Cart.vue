@@ -5,8 +5,8 @@
     <div v-else>
       <div class="customerCart">
         <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
-          <li class="cartItem" v-if="isMenuItem(item) && !isPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-          <li class="cartItem" v-else-if="isPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+          <li class="cartItem" v-if="isMenuItem(item) && !isMenuPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+          <li class="cartItem" v-else-if="isMenuPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
           <li class="cartItem" v-else>Qty: {{item.orderQuantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
           <button v-on:click="removeItem(item)">Remove</button>
         </ul>
@@ -51,8 +51,8 @@ export default {
           return false;
         }
     },
-    isPizza(item) {
-      if (item.menuItemCategory == "Pizza") {
+    isMenuPizza(item) {
+      if (item.itemCategory == "Pizza" && item.itemType == "Menu") {
         return true;
       } else {
         return false;
