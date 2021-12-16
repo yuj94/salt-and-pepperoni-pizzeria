@@ -22,7 +22,7 @@
         </div>
       </div>
       <div id="deliveryOptionDiv">
-        <a id="delivery-button" href="#" v-on:click.prevent="changeDelivery">{{ isTakeout ? "Click Here For Delivery" : "Click Here For Takeout" }}</a>
+        <a id="delivery-button" href="#" v-on:click.prevent="changeDelivery()">{{ isTakeout ? "Click Here For Delivery" : "Click Here For Takeout" }}</a>
       </div>
       <div id="takeOutDiv" v-if="!isTakeout">
         <h3>Delivery Address</h3>
@@ -51,8 +51,8 @@
             <input type="number" id="creditCardNumber" min="1000000000000000" max="9999999999999999" placeholder="Card number" v-model="order.creditCardNumber" required/>
           </div>
           <div id="creditCardCCVDiv">
-            <label for="creditCardCCV"></label>
-            <input type="number" id="creditCardCCV" min="100" max="999" placeholder="Security code" v-model="order.creditCardCCV" required/>
+            <label for="creditCardCcv"></label>
+            <input type="number" id="creditCardCcv" min="100" max="999" placeholder="Security code" v-model="order.creditCardCcv" required/>
           </div>
           <div id="creditCardExpMonthDiv">
             <label for="creditCardExpMonth"></label>
@@ -82,12 +82,14 @@ export default {
       orderId: '',
       isTakeout: true,
       order: {
+        isDelivery: false,
       },
       isCompleted: false,
     };
   },
   methods: {
     changeDelivery() {
+      this.order.isDelivery = this.isTakeout;
       this.isTakeout = !this.isTakeout;
     },
     submitOrder() {
@@ -100,7 +102,6 @@ export default {
       });
     },
     generateOrderInformation() {
-      this.order.isDelivery = !this.isTakeout;
       this.order.orderTotal = this.getOrderTotal();
       this.order.menuItems = this.$store.state.cart.filter(e => e.itemType == "Menu");
       this.order.customPizza = this.$store.state.cart.filter(e => e.itemType == "Custom");
