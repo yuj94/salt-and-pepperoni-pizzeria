@@ -7,6 +7,8 @@
           <tr>
             <th></th>
             <th>Order Id</th>
+            <th>Time Since Placed</th>
+            <th>Delivery</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email Address</th>
@@ -21,9 +23,15 @@
             <td>
               <input type="text" id="orderIdFilter" v-model="filter.orderId" placeholder="Order Id" />
             </td>
+            <td>Hrs:Mins:Secs</td>
+            <td class="center">
+              
+              <input type="checkbox" id="deliveryFilter" v-model="filter.isDelivery" v-on:click="isDeliveryFilter()"/>
+            </td>
             <td>
               <input type="text" id="firstNameFilter" v-model="filter.firstName" placeholder="First name" />
             </td>
+          
             <td>
               <input type="text" id="lastNameFilter" v-model="filter.lastName" placeholder="Last name" />
             </td>
@@ -41,6 +49,8 @@
           <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
             <button class="toggle-modal-button" v-on:click="toggleModal(order.orderId)">Order Details</button>
             <td class="center">{{ order.orderId }}</td>
+            <td class="center">{{order.timeElapsed.substring(1, 8)}}</td>
+            <td class="center">{{(order.isDelivery) ? 'Delivery' : 'Takeout'}}</td>
             <td>{{ order.firstName }}</td>
             <td>{{ order.lastName }}</td>
             <td>{{ order.email }}</td>
@@ -67,6 +77,7 @@ export default {
     return {
       filter: {
         orderId: "",
+        isDelivery: false,
         firstName: "",
         lastName: "",
         email: "",
@@ -82,6 +93,7 @@ export default {
       return this.$store.state.pendingOrders.filter((order) => {
         return (
           order.orderId.toString().includes(this.filter.orderId.toString()) &&
+          ((this.filter.isDelivery && order.isDelivery) || (!this.filter.isDelivery && !order.isDelivery || order.isDelivery)) &&
           order.firstName
             .toLowerCase()
             .includes(this.filter.firstName.toLowerCase()) &&
@@ -102,6 +114,9 @@ export default {
       orderService.getAllPendingOrders().then((response) => {
         this.$store.commit("SET_PENDING_ORDERS", response.data);
       });
+    },
+    isDeliveryFilter() {
+      this.filter.isDelivery = !this.filter.isDelivery;
     },
     markAsCompleted(orderId) {
       orderService.setOrderToComplete(orderId).then((response) => {

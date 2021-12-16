@@ -194,18 +194,32 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    private String getTimeElapsed(Order order) {
+        String timeElapsed = "";
+        if (!order.getIsCompleted()) {
+            String sql = "SELECT (now() - order_date) AS time_elapsed FROM orders WHERE order_id = ?;";
+
+            timeElapsed = jdbcTemplate.queryForObject(sql, String.class, order.getOrderId());
+        } else {
+            String sql = "SELECT (completed_date - order_date) AS time_elapsed FROM orders WHERE order_id = ?;";
+
+            timeElapsed = jdbcTemplate.queryForObject(sql, String.class, order.getOrderId());
+        }
+        return timeElapsed;
+    }
+
     @Override
     public void setOrderToComplete(int orderId){
-        String sql ="UPDATE orders SET completed = ? WHERE order_id = ?;";
+        String sql ="UPDATE orders SET completed = TRUE, completed_date = now() WHERE order_id = ?;";
 
-        jdbcTemplate.update(sql, true, orderId);
+        jdbcTemplate.update(sql, orderId);
     }
 
     @Override
     public void setOrderToNotComplete(int orderId){
-        String sql = "UPDATE orders SET completed = ? WHERE order_id = ?;";
+        String sql = "UPDATE orders SET completed = FALSE WHERE order_id = ?;";
 
-        jdbcTemplate.update(sql, false, orderId);
+        jdbcTemplate.update(sql, orderId);
     }
 
     //everything below is an import from JdbcMenuDao
@@ -257,11 +271,12 @@ public class JdbcOrderDao implements OrderDao {
         order.setEmail(rowSet.getString("email"));
         order.setOrderTotal(rowSet.getBigDecimal("order_total"));
         order.setIsDelivery(rowSet.getBoolean("delivery"));
-        order.setCompleted(rowSet.getBoolean("completed"));
+        order.setIsCompleted(rowSet.getBoolean("completed"));
         order.setAddressLine(rowSet.getString("address_line_1"));
         order.setAddressState(rowSet.getString("address_state"));
         order.setAddressCity(rowSet.getString("address_city"));
         order.setAddressZipCode(rowSet.getInt("address_zip_code"));
+        order.setTimeElapsed(getTimeElapsed(order));
         order.setCustomPizza(getCustomPizzasByOrderId(order.getOrderId()));
         order.setMenuItems(getMenuItemsByOrderId(order.getOrderId()));
 
