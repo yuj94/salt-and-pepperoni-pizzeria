@@ -16,7 +16,7 @@
             <td v-if="item.itemSize != 0">{{ item.itemSize }}" {{ item.itemName }}</td>
             <td v-else>{{ item.itemName }}</td>
             <td class="center">{{ item.orderQuantity }}</td>
-            <td class="center">{{ item.price }}</td>
+            <td class="center">${{ Number(item.price).toFixed(2) }} each</td>
           </tr>
           <tr v-for="item in this.$store.state.historicalOrders[indexOfOrderId].customPizza" v-bind:key="item.itemId">
             <td class="center">{{ item.pizzaId }}</td>
