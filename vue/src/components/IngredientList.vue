@@ -177,7 +177,8 @@ export default {
       this.customPizza.ingredients = this.ingredientsToAdd;
       this.getCustomPizzaId(this.customPizza);
       this.customPizza.itemSize = this.pizzaSize;
-      this.customPizza.itemCategory = "Custom";
+      this.customPizza.itemType = "Custom";
+      this.customPizza.itemCategory = "Pizza"
       this.customPizza.orderQuantity = 1;
       this.customPizza.cartItemId = this.$store.state.currentCartItemId;
       this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);

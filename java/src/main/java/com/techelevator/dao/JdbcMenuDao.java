@@ -153,7 +153,7 @@ public class JdbcMenuDao implements MenuDao {
 
 
     @Override
-    public int updateIngredientQuantity (int ingredientId, double quantity){
+    public int updateIngredientQuantity (int ingredientId, Double quantity){
         String sql = "UPDATE ingredient\n" +
                      "SET total_quantity = ?\n" +
                      "WHERE ingredient_id = ?;";

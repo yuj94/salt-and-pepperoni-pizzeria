@@ -20,6 +20,10 @@ public class JdbcOrderDao implements OrderDao {
     private static final String PIZZA_CATEGORY = "Pizza";
     private static final String MENU_ITEM = "Menu";
     private static final String CUSTOM_PIZZA = "Custom";
+    private static final int SMALL_PIZZA = 12;
+    private static final int MEDIUM_PIZZA = 16;
+    private static final int LARGE_PIZZA = 18;
+
 
     public JdbcOrderDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -148,6 +152,45 @@ public class JdbcOrderDao implements OrderDao {
 
         for (int i = 0; i < order.getCustomPizza().size(); i++) {
             jdbcTemplate.update(customPizzaSql, order.getOrderId(), CUSTOM_PIZZA, order.getCustomPizza().get(i).getItemId(), order.getCustomPizza().get(i).getItemSize(), order.getCustomPizza().get(i).getOrderQuantity());
+        }
+
+        updateQuantities(order);
+
+    }
+
+    private void updateQuantities(Order order) {
+        for (int i = 0; i < order.getMenuItems().size(); i++) {
+            if (order.getMenuItems().get(i).getItemCategory() == "Pizza") {
+                for (int n = 0; n < order.getMenuItems().get(i).getIngredientList().size(); n++) {
+                    String sql = "UPDATE ingredient SET total_quantity = total_quantity - ? WHERE ingredient_id = ?";
+
+                    if (order.getMenuItems().get(i).getItemSize() == SMALL_PIZZA){
+                        jdbcTemplate.update(sql, order.getMenuItems().get(i).getOrderQuantity(), order.getMenuItems().get(i).getIngredientList().get(n).getIngredientId());
+                    } else if (order.getMenuItems().get(i).getItemSize() == MEDIUM_PIZZA) {
+                        jdbcTemplate.update(sql, order.getMenuItems().get(i).getOrderQuantity() * 1.3, order.getMenuItems().get(i).getIngredientList().get(n).getIngredientId());
+                    } else if (order.getMenuItems().get(i).getItemSize() == LARGE_PIZZA) {
+                        jdbcTemplate.update(sql, order.getMenuItems().get(i).getOrderQuantity() * 1.5, order.getMenuItems().get(i).getIngredientList().get(n).getIngredientId());
+                    }
+                }
+            } else {
+                String sql = "UPDATE menu SET total_quantity = total_quantity - ? WHERE item_id = ?";
+
+                jdbcTemplate.update(sql, order.getMenuItems().get(i).getOrderQuantity(), order.getMenuItems().get(i).getItemId());
+            }
+        }
+
+        for (int i = 0; i < order.getCustomPizza().size(); i++) {
+            for (int n = 0; n < order.getCustomPizza().get(i).getIngredients().size(); n++) {
+                String sql = "UPDATE ingredient SET total_quantity = total_quantity - ? WHERE ingredient_id = ?";
+
+                if (order.getCustomPizza().get(i).getItemSize() == SMALL_PIZZA){
+                    jdbcTemplate.update(sql, order.getCustomPizza().get(i).getOrderQuantity(), order.getCustomPizza().get(i).getIngredients().get(n).getIngredientId());
+                } else if (order.getCustomPizza().get(i).getItemSize() == MEDIUM_PIZZA) {
+                    jdbcTemplate.update(sql, order.getCustomPizza().get(i).getOrderQuantity() * 1.3, order.getCustomPizza().get(i).getIngredients().get(n).getIngredientId());
+                } else if (order.getCustomPizza().get(i).getItemSize() == LARGE_PIZZA) {
+                    jdbcTemplate.update(sql, order.getCustomPizza().get(i).getOrderQuantity() * 1.5, order.getCustomPizza().get(i).getIngredients().get(n).getIngredientId());
+                }
+            }
         }
     }
 

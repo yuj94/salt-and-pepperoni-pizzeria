@@ -102,8 +102,8 @@ export default {
     generateOrderInformation() {
       this.order.isDelivery = !this.isTakeout;
       this.order.orderTotal = this.getOrderTotal();
-      this.order.menuItems = this.$store.state.cart.filter(e => e.itemCategory == "Menu");
-      this.order.customPizza = this.$store.state.cart.filter(e => e.itemCategory == "Custom");
+      this.order.menuItems = this.$store.state.cart.filter(e => e.itemType == "Menu");
+      this.order.customPizza = this.$store.state.cart.filter(e => e.itemType == "Custom");
     },
     getOrderTotal() {
       let totalPrice = 0;

@@ -43,5 +43,5 @@ public class MenuController {
     public int updateIngredientPrice(@PathVariable int ingredientId, BigDecimal price ) { return menuDao.updateIngredientPrice(ingredientId, price);}
 
     @RequestMapping(path = "/update/ingredient-quantity/{ingredientId}", method = RequestMethod.PUT)
-    public int updateIngredientQuantity(@PathVariable int ingredientId, double quantity ) { return menuDao.updateIngredientQuantity(ingredientId, quantity);}
+    public int updateIngredientQuantity(@PathVariable int ingredientId, Double quantity ) { return menuDao.updateIngredientQuantity(ingredientId, quantity);}
 }

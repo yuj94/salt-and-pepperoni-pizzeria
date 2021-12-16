@@ -7,13 +7,13 @@ public class Ingredient {
     private String ingredientName;
     private String ingredientType;
     private BigDecimal price;
-    private double orderQuantity;
-    private double totalQuantity;
+    private Double orderQuantity;
+    private Double totalQuantity;
 
     public Ingredient() {
 
     }
-    public Ingredient(int ingredientId, String ingredientName, String ingredientType, BigDecimal price, double orderQuantity, double totalQuantity) {
+    public Ingredient(int ingredientId, String ingredientName, String ingredientType, BigDecimal price, Double orderQuantity, Double totalQuantity) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
         this.ingredientType = ingredientType;
@@ -54,19 +54,19 @@ public class Ingredient {
         this.price = price;
     }
 
-    public double getOrderQuantity() {
+    public Double getOrderQuantity() {
         return orderQuantity;
     }
 
-    public void setOrderQuantity(double orderQuantity) {
+    public void setOrderQuantity(Double orderQuantity) {
         this.orderQuantity = orderQuantity;
     }
 
-    public double getTotalQuantity() {
+    public Double getTotalQuantity() {
         return totalQuantity;
     }
 
-    public void setTotalQuantity(double totalQuantity) {
+    public void setTotalQuantity(Double totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 }

@@ -114,6 +114,8 @@ WHERE ingredient_type = 'Veggies';
 
 UPDATE ingredient SET price = 1.50
 WHERE ingredient_type = 'Meat';
+
+UPDATE ingredient SET total_quantity = 50;
            
 CREATE TABLE custom_pizza (
 	pizza_id serial,
@@ -159,6 +161,8 @@ VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa sa
        ('Dasani', '20 FL OZ', 'Drink', 2, 'https://m.media-amazon.com/images/I/31Fo4PL7BVL.jpg'),
        ('Root Beer', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/81pRfPL1WxL._SL1500_.jpg'),
        ('Dr. Pepper', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/719IvqhnvTL._SL1500_.jpg');
+       
+UPDATE menu SET total_quantity = 50;
 
 CREATE TABLE pizza_ingredient (
         pizza_ingredient_id serial,
@@ -285,18 +289,6 @@ CREATE TABLE orders (
         
         CONSTRAINT PK_orders PRIMARY KEY (order_id)
 );
-
-INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
-VALUES ('Han', 'Solo', 'Corellia Street', 'CO','Corellia Central', 12345, 'SanHolo@hmail.com', '9231234323', 45.54, 1234567890123456, 12, 25, 4356),
-       ('Leia', 'Skywalker', 'Alderaan Drive', 'AL', 'Alderaan Square', 54321, 'I<3SanHolo@gmail.com', '8324256178', 98.21, 1234567890123456, 12, 25, 4356),
-       ('Chewnacca', 'Wookie', 'Kashyyyk Court', 'KA', 'Kashyyyk Central', 31234, 'Chewie@gmail.com', '1111111111', 1.23, 1234567890123456, 12, 25, 4356);
-       
-INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, order_total, completed, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv)
-VALUES ('Anakin','Skywalker', 'Tatooine', 'TA', 'Tatooine Circle', 31253, 'ILoveMySister@gmail.com', '2223334444', 65.43, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Yoda', 'Shrek', 'Dagobah', 'DA', 'Dagobah Bog', 41265, 'JediMasterIAm@gmail.com', '2325462364', 54.32, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Mace', 'Windu', 'Haruun Kal', 'HK', 'Haruun Kal Circle', 12353, 'HaveYouSeenMyPurpleLightSabre@gmail.com', '1255436433', 878.43, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Obi-Wan', 'Kenobi', 'Stewjon', 'SJ', 'Stew And Beans', 55932, 'YouWereMyBrotherAnakin@gmail.com', '5215427653', 97.23, TRUE, 1234567890123456, 12, 25, 4356),
-       ('Qui-Gon', 'Jinn', 'Coruscant', 'CO', 'Crossant', 12353, 'BeatBySomeHornedDude@gmail.com', '2342517647', 75.43, TRUE, 1234567890123456, 12, 25, 4356);
        
 CREATE TABLE order_items (
         order_id int NOT NULL,

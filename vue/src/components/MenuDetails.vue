@@ -57,11 +57,11 @@ export default {
       }
     },
     addItemToCart(item) {
-      this.itemToAddToCart.itemCategory = "Menu";
-      this.itemToAddToCart.menuItemCategory = this.$route.params.category.substring(0, 1).toUpperCase() + this.$route.params.category.substring(1, this.$route.params.category.length - 1);
+      this.itemToAddToCart.itemType = "Menu";
+      this.itemToAddToCart.itemCategory = this.$route.params.category.substring(0, 1).toUpperCase() + this.$route.params.category.substring(1, this.$route.params.category.length - 1);
       this.itemToAddToCart.itemId = item.itemId;
       this.itemToAddToCart.itemName = item.itemName;
-      this.itemToAddToCart.itemSize = this.thisItemSize;
+      this.itemToAddToCart.itemSize = Number(this.thisItemSize);
 
       if (this.isPizza) {
           this.itemToAddToCart.price = this.pizzaPrice(item.price);

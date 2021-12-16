@@ -19,7 +19,7 @@ public interface MenuDao {
 
     int createCustomPizza(CustomPizza customPizza);
 
-    int updateIngredientQuantity(int ingredientId, double quantity);
+    int updateIngredientQuantity(int ingredientId, Double quantity);
 
     int updateIngredientPrice(int ingredientId, BigDecimal price);
 
