@@ -45,7 +45,7 @@ export default {
       this.$store.commit("REMOVE_ITEM_FROM_CART", item);
     },
     isMenuItem(item) {
-      if (item.itemCategory == 'Menu') {
+      if (item.itemType == 'Menu') {
         return true; 
         } else {
           return false;

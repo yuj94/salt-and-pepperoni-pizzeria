@@ -121,14 +121,14 @@ public class JdbcOrderDao implements OrderDao {
     public int createOrder(Order order) {
         int orderId = 0;
 
-        if (order.isDelivery()) {
+        if (order.getIsDelivery()) {
             String sql = "INSERT INTO orders (first_name, last_name, address_line_1, address_state, address_city, address_zip_code, email, phone_number, delivery, credit_card_number, credit_card_exp_month, credit_card_exp_year, credit_card_ccv, order_total)\n" +
                     "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) RETURNING order_id;";
-            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getAddressLine(), order.getAddressState(), order.getAddressCity(), order.getAddressZipCode(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getCreditCardNumber(), order.getCreditCardExpMonth(), order.getCreditCardExpYear(), order.getCreditCardCcv(), order.getOrderTotal()));
+            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getAddressLine(), order.getAddressState(), order.getAddressCity(), order.getAddressZipCode(), order.getEmail(), order.getPhoneNumber(), order.getIsDelivery(), order.getCreditCardNumber(), order.getCreditCardExpMonth(), order.getCreditCardExpYear(), order.getCreditCardCcv(), order.getOrderTotal()));
         } else {
             String sql = "INSERT INTO orders (first_name, last_name, email, phone_number, delivery, order_total)\n" +
                     "VALUES (?,?,?,?,?,?) RETURNING order_id;";
-            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getEmail(), order.getPhoneNumber(), order.isDelivery(), order.getOrderTotal()));
+            order.setOrderId(jdbcTemplate.queryForObject(sql, Integer.class, order.getFirstName(), order.getLastName(), order.getEmail(), order.getPhoneNumber(), order.getIsDelivery(), order.getOrderTotal()));
         }
 
         orderId = order.getOrderId();
@@ -256,7 +256,7 @@ public class JdbcOrderDao implements OrderDao {
         order.setPhoneNumber(rowSet.getString("phone_number"));
         order.setEmail(rowSet.getString("email"));
         order.setOrderTotal(rowSet.getBigDecimal("order_total"));
-        order.setDelivery(rowSet.getBoolean("delivery"));
+        order.setIsDelivery(rowSet.getBoolean("delivery"));
         order.setCompleted(rowSet.getBoolean("completed"));
         order.setAddressLine(rowSet.getString("address_line_1"));
         order.setAddressState(rowSet.getString("address_state"));
