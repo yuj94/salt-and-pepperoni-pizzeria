@@ -29,7 +29,7 @@
         <div id="deliveryAddressDiv">
           <div id="addressLineDiv">
             <label for="addressLine"></label>
-            <input type="text" id="addressLine" placeholder="Address"  v-model="order.addressLine" required/>
+            <input type="text" id="addressLine" placeholder="Address" v-model="order.addressLine" required/>
           </div>
           <div id="addressCityDiv">
             <label for="addressCity"></label>
@@ -37,11 +37,11 @@
           </div>
           <div id="addressStateDiv">
             <label for="addressState"></label>
-            <input type="text" id="addressState" placeholder="State"  v-model="order.addressState" maxlength="2" required/>
+            <input type="text" id="addressState" placeholder="State" v-model="order.addressState" maxlength="2" required/>
           </div>
           <div id="addressZipCodeDiv">
             <label for="addressZipCode"></label>
-            <input type="number" id="addressZipCode" min=00001 max=99999 placeholder="Zip code" v-model="order.addressZipCode" required/>
+            <input type="number" id="addressZipCode" min="00001" max="99999" placeholder="Zip code" v-model="order.addressZipCode" required/>
           </div>
         </div>
         <h3>Payment Infomation</h3>
@@ -79,7 +79,7 @@ export default {
   name: "checkout-component",
   data() {
     return {
-      orderId: '',
+      orderId: "",
       isTakeout: true,
       order: {
         isDelivery: false,
@@ -103,16 +103,20 @@ export default {
     },
     generateOrderInformation() {
       this.order.orderTotal = this.getOrderTotal();
-      this.order.menuItems = this.$store.state.cart.filter(e => e.itemType == "Menu");
-      this.order.customPizza = this.$store.state.cart.filter(e => e.itemType == "Custom");
+      this.order.menuItems = this.$store.state.cart.filter(
+        (e) => e.itemType == "Menu"
+      );
+      this.order.customPizza = this.$store.state.cart.filter(
+        (e) => e.itemType == "Custom"
+      );
     },
     getOrderTotal() {
       let totalPrice = 0;
       this.$store.state.cart.forEach((item) => {
-        totalPrice += (item.price * item.orderQuantity);
+        totalPrice += item.price * item.orderQuantity;
       });
       return Number(totalPrice).toFixed(2);
-    }
+    },
   },
 };
 </script>
@@ -163,12 +167,12 @@ export default {
 }
 
 #deliveryOptionDiv {
- margin: 16px 0;
+  margin: 16px 0;
 }
 
 #deliveryOptionDiv > a {
- color: #000;
- transition: color 0.5s;
+  color: #000;
+  transition: color 0.5s;
 }
 
 #deliveryOptionDiv > a:hover {

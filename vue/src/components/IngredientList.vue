@@ -28,9 +28,9 @@
     <div class="ingredientList">
       <div>
         <h3 id="meatId">Meats</h3>
-        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
-            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)" />
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
             <label :for="ingredient"></label>
           </div>
           <div>
@@ -41,7 +41,7 @@
       </div>
       <div>
         <h3 id="veggieId">Veggies</h3>
-        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
             <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
             <label :for="ingredient"></label>
@@ -54,7 +54,7 @@
       </div>
       <div>
         <h3 id="sauceId">Sauces</h3>
-        <div class="sauces ingredientCategory" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+        <div class="sauces ingredientCategory" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
             <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
             <label :for="ingredient"></label>
@@ -67,7 +67,7 @@
       </div>
       <div>
         <h3 id="cheeseId">Cheeses</h3>
-        <div class="cheeses ingredientCategory" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId" v-bind:class="{ 'ingredientChecked': ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+        <div class="cheeses ingredientCategory" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
             <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
             <label :for="ingredient"></label>
@@ -155,23 +155,27 @@ export default {
       });
     },
     addToCart() {
-      let doughIngredientIndex = this.$store.state.ingredients.findIndex(ingredient => ingredient.ingredientName === "Dough");
+      let doughIngredientIndex = this.$store.state.ingredients.findIndex(
+        (ingredient) => ingredient.ingredientName === "Dough"
+      );
       let doughIngredient = this.$store.state.ingredients[doughIngredientIndex];
       this.customPizza.price = this.computedPrice;
       this.ingredientsToAdd.push(doughIngredient);
-      this.ingredientsToAdd.forEach(e => e.orderQuantity = 1);
+      this.ingredientsToAdd.forEach((e) => (e.orderQuantity = 1));
       this.customPizza.ingredients = this.ingredientsToAdd;
       this.getCustomPizzaId(this.customPizza);
       this.customPizza.itemSize = this.pizzaSize;
       this.customPizza.itemType = "Custom";
-      this.customPizza.itemCategory = "Pizza"
+      this.customPizza.itemCategory = "Pizza";
       this.customPizza.orderQuantity = 1;
       this.customPizza.cartItemId = this.$store.state.currentCartItemId;
       this.$store.commit("ADD_CUSTOM_PIZZA_TO_CART", this.customPizza);
-      this.indexOfCustomPizza = this.$store.state.cart.findIndex(e => e.cartItemId === this.$store.state.currentCartItemId);
+      this.indexOfCustomPizza = this.$store.state.cart.findIndex(
+        (e) => e.cartItemId === this.$store.state.currentCartItemId
+      );
       this.$store.state.currentCartItemId++;
       this.customPizza = {};
-      this.ingredientsToAdd.forEach(e => this.checkedIngredients(e));
+      this.ingredientsToAdd.forEach((e) => this.checkedIngredients(e));
       this.ingredientsToAdd = [];
     },
     checkedIngredients(ingredient) {

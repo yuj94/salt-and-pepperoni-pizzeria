@@ -31,7 +31,7 @@ export default {
 .checkoutDiv {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas: 
+  grid-template-areas:
     "banner banner banner"
     "navigation checkout cart"
     "footer footer footer";
@@ -47,7 +47,7 @@ export default {
 }
 
 .checkout {
-    grid-area: checkout;
+  grid-area: checkout;
 }
 
 .cart {

@@ -1,13 +1,15 @@
 <template>
   <div class="cartDiv">
     <h2>Cart</h2>
-    <div class="emptyCart" v-if="this.$store.state.cart.length == 0"><p>Your cart is empty.</p></div>
+    <div class="emptyCart" v-if="this.$store.state.cart.length == 0">
+      <p>Your cart is empty.</p>
+    </div>
     <div v-else>
       <div class="customerCart">
         <ul class="cartList" v-for="item in this.$store.state.cart" v-bind:key="item.cartItemId">
-          <li class="cartItem" v-if="isMenuItem(item) && !isMenuPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-          <li class="cartItem" v-else-if="isMenuPizza(item)">Qty: {{item.orderQuantity}} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
-          <li class="cartItem" v-else>Qty: {{item.orderQuantity}} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
+          <li class="cartItem" v-if="isMenuItem(item) && !isMenuPizza(item)">Qty: {{ item.orderQuantity }} - {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+          <li class="cartItem" v-else-if="isMenuPizza(item)">Qty: {{ item.orderQuantity }} - {{ item.itemSize }}" {{ item.itemName }} - ${{ Number(item.price).toFixed(2) }} each</li>
+          <li class="cartItem" v-else>Qty: {{ item.orderQuantity }} - Custom {{ item.itemSize }}" Pizza - ${{ Number(item.price).toFixed(2) }}</li>
           <button v-on:click="removeItem(item)">Remove</button>
         </ul>
       </div>
@@ -27,7 +29,7 @@ export default {
     totalPrice() {
       let totalPrice = 0;
       this.$store.state.cart.forEach((item) => {
-        totalPrice += (item.price * item.orderQuantity);
+        totalPrice += item.price * item.orderQuantity;
       });
       return Number(totalPrice).toFixed(2);
     },
@@ -45,11 +47,11 @@ export default {
       this.$store.commit("REMOVE_ITEM_FROM_CART", item);
     },
     isMenuItem(item) {
-      if (item.itemType == 'Menu') {
-        return true; 
-        } else {
-          return false;
-        }
+      if (item.itemType == "Menu") {
+        return true;
+      } else {
+        return false;
+      }
     },
     isMenuPizza(item) {
       if (item.itemCategory == "Pizza" && item.itemType == "Menu") {
@@ -57,7 +59,7 @@ export default {
       } else {
         return false;
       }
-    }
+    },
   },
 };
 </script>

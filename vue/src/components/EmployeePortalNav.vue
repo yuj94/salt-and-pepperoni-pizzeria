@@ -18,6 +18,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  /* width: 100%;
+  position: fixed;
+  margin-top: 96px;
+  padding: 24px;
+  background-color: #f6f2ed; */
   z-index: 5;
 }
 

@@ -23,15 +23,13 @@
             <td>
               <input type="text" id="orderIdFilter" v-model="filter.orderId" placeholder="Order Id" />
             </td>
-            <td>Hrs:Mins:Secs</td>
+            <td class="center">Hrs:Mins:Secs</td>
             <td class="center">
-              
               <input type="checkbox" id="deliveryFilter" v-model="filter.isDelivery" v-on:click="isDeliveryFilter()"/>
             </td>
             <td>
               <input type="text" id="firstNameFilter" v-model="filter.firstName" placeholder="First name" />
             </td>
-          
             <td>
               <input type="text" id="lastNameFilter" v-model="filter.lastName" placeholder="Last name" />
             </td>
@@ -137,14 +135,16 @@ export default {
 
 <style scoped>
 .pendingOrdersDiv {
+  /* padding: 192px 24px 0 24px; */
   padding: 0 24px;
 }
 
 .styled-table {
   border-collapse: collapse;
-  width: 100%;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .styled-table > thead > tr {
@@ -173,6 +173,7 @@ export default {
   border: 1px solid;
   padding: 16px;
   border-radius: 8px;
+  width: 100%;
 }
 
 .center {
