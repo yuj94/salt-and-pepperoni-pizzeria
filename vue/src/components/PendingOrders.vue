@@ -1,5 +1,5 @@
 <template>
-  <div onLoad=" LoadOnce()">
+  <div>
     <pending-modal v-show="showModal" v-bind:orderId="orderId" @toggle="toggleModal(orderId)"></pending-modal>
     <div class="pendingOrdersDiv">
       <table class="styled-table">

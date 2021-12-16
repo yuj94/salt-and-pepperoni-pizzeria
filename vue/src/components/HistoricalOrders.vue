@@ -1,5 +1,5 @@
 <template>
-  <div onLoad=" LoadOnce()">
+  <div>
     <historical-modal v-show="showModal" v-bind:orderId="orderId" @toggle="toggleModal(orderId)"></historical-modal>
     <div class="historicalOrdersDiv">
       <table class="styled-table">
