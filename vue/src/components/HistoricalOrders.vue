@@ -7,6 +7,7 @@
           <tr>
             <th></th>
             <th>Order Id</th>
+            <th>Time to Fulfill</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email Address</th>
@@ -21,6 +22,7 @@
             <td>
               <input type="text" id="orderIdFilter" v-model="filter.orderId" placeholder="Order Id" />
             </td>
+            <td>Hrs:Mins:Secs</td>
             <td>
               <input type="text" id="firstNameFilter" v-model="filter.firstName" placeholder="First Name" />
             </td>
@@ -39,27 +41,18 @@
             <td></td>
           </tr>
           <tr v-for="order in this.filteredList" v-bind:key="order.orderId" v-bind:filter="filter">
-            <button class="toggle-modal-button" v-on:click="toggleModal(order.orderId)">View Order Details</button>
-            <td>{{ order.orderId }}</td>
+            <button class="toggle-modal-button" v-on:click="toggleModal(order.orderId)">Order Details</button>
+            <td class="center">{{ order.orderId }}</td>
+            <td  class="center">{{order.timeElapsed.substring(1, 8)}}</td>
             <td>{{ order.firstName }}</td>
             <td>{{ order.lastName }}</td>
             <td>{{ order.email }}</td>
-            <td>{{ order.phoneNumber }}</td>
-            <td>{{ order.orderTotal }}</td>
-            <button type="button" class="notCompletedButton" v-on:click="markAsNotCompleted(order.orderId)">Mark As Not Completed</button>
+            <td class="center">{{ order.phoneNumber }}</td>
+            <td class="center">${{ Number(order.orderTotal).toFixed(2) }}</td>
+            <button type="button" class="notCompletedButton" v-on:click="markAsNotCompleted(order.orderId)">Mark Not Completed</button>
           </tr>
         </tbody>
       </table>
-      <div>
-        <h2>Customer Name:</h2>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].firstName }}</p>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].lastName }}</p>
-        <h2>Customer Address:</h2>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].addressLine }}</p>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].addressState }}</p>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].addressCity }}</p>
-        <p>{{ this.$store.state.historicalOrders[indexOfOrderId].addressZipCode }}</p>
-      </div>
     </div>
   </div>
 </template>
@@ -132,68 +125,63 @@ export default {
 
 <style scoped>
 
-
-
-
-
-.toggle-modal-button {
-  width: 100px;
-  height: 50px;
-}
-
-#orderIdFilter {
-  width: 60px;
-}
-
-#stateFilter {
-  width: 60px;
-}
-
-#phoneNumberFilter {
-  width: 105px;
-}
-
-#orderTotalFilter {
-  width: 75px;
-}
-
 .historicalOrdersDiv {
-  padding-top: 192px;
+  padding: 0 24px;
 }
 
 .styled-table {
   border-collapse: collapse;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
   width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.styled-table thead tr {
+.styled-table > thead > tr {
   background-color: #d20201;
   color: #ffffff;
-  text-align: left;
 }
 
-.styled-table th,
-.styled-table td {
-  padding: 12px 15px;
+.styled-table > thead > tr > th,
+.styled-table > tbody > tr > td {
+  padding: 16px;
 }
 
-.styled-table tbody tr {
-  border-bottom: thin solid #f6f2ed;
+.styled-table > tbody > tr > button {
+  margin: 16px;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+.styled-table > tbody > tr:nth-of-type(odd) {
   background-color: #fff;
 }
 
-.styled-table tbody tr:last-of-type {
-  border-bottom: thin solid #d20201;
+.styled-table > tbody > tr:nth-of-type(even) {
+  background-color: rgb(225, 225, 225);
 }
 
-.styled-table tbody tr.active-row {
-  font-weight: bold;
-  color: #d20201;
+.styled-table > tbody > tr > td > input {
+  border: 1px solid;
+  padding: 16px;
+  border-radius: 8px;
 }
+
+.center {
+  text-align: center;
+}
+
+.toggle-modal-button,
+.notCompletedButton {
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  background-color: #d20201;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.toggle-modal-button:hover,
+.notCompletedButton:hover {
+  background-color: rgba(210, 2, 1, 0.5);
+  }
 </style>

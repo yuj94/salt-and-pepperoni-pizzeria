@@ -11,6 +11,7 @@ public class Order {
     private String addressLine;
     private String addressState;
     private String addressCity;
+    private String timeElapsed;
     private int addressZipCode;
     private String email;
     private String phoneNumber;
@@ -26,6 +27,14 @@ public class Order {
 
     public Order() {
 
+    }
+
+    public String getTimeElapsed() {
+        return timeElapsed;
+    }
+
+    public void setTimeElapsed(String timeElapsed) {
+        this.timeElapsed = timeElapsed;
     }
 
     public int getOrderId() {
@@ -124,11 +133,11 @@ public class Order {
         isDelivery = delivery;
     }
 
-    public boolean isCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setIsCompleted(boolean completed) {
         isCompleted = completed;
     }
 

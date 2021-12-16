@@ -60,7 +60,7 @@
           </div>
           <div id="creditCardExpYearDiv">
             <label for="creditCardExpYear"></label>
-            <input type="number" id="creditCardExpYear" min="21" max="40" placeholder="Expiration year" v-model="order.creditCardExpYear" required/>
+            <input type="number" id="creditCardExpYear" min="22" max="40" placeholder="Expiration year" v-model="order.creditCardExpYear" required/>
           </div>
         </div>
       </div>
