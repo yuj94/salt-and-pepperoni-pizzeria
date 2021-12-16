@@ -72,12 +72,12 @@ export default {
 }
 
 .nonHomepageFooter {
-    color: #000;
+  color: #000;
 }
 
 .nonHomepageFooter > p > a {
-    color: #000;
-    transition: color 0.5s;
+  color: #000;
+  transition: color 0.5s;
 }
 
 .nonHomepageFooter > p > a:hover {

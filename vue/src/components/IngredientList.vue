@@ -15,19 +15,13 @@
       </div>
       <div class="pizzaDescription">
         <p>
-          For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas,
-          our prices start at <span class="bold">${{ this.basePrice }}</span> for
-          the dough plus the cost of the ingredients selected.
+          For our <span class="bold">{{ this.pizzaSize }}"</span> custom pizzas, our prices start at <span class="bold">${{ this.basePrice }}</span> for the dough plus the cost of the ingredients selected.
         </p>
         <p>
-          Your current custom pizza costs:
-          <span class="bold">${{ this.computedPrice }}</span
-          >.
+          Your current custom pizza costs: <span class="bold">${{ this.computedPrice }}</span>.
         </p>
         <p>
-          You can select up to
-          <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients
-          for your custom pizza.
+          You can select up to <span class="bold">{{ this.toppingsRemaining }}</span> more ingredients for your custom pizza.
         </p>
       </div>
     </div>
@@ -41,9 +35,7 @@
           </div>
           <div>
             <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">
-              Price: ${{ Number(ingredient.price).toFixed(2) }}
-            </p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -56,9 +48,7 @@
           </div>
           <div>
             <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">
-              Price: ${{ Number(ingredient.price).toFixed(2) }}
-            </p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -71,9 +61,7 @@
           </div>
           <div>
             <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">
-              Price: ${{ Number(ingredient.price).toFixed(2) }}
-            </p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -86,9 +74,7 @@
           </div>
           <div>
             <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">
-              Price: ${{ Number(ingredient.price).toFixed(2) }}
-            </p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
           </div>
         </div>
       </div>

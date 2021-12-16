@@ -67,7 +67,7 @@
       <input type="submit" value="Submit Order" class="checkoutSubmit"/>
     </form>
     <div class="orderSubmitted" v-else>
-      <p>Thanks for your order! Your order number is: {{this.orderId}}</p>
+      <p>Thanks for your order! Your order number is: {{ this.orderId }}</p>
     </div>
   </div>
 </template>

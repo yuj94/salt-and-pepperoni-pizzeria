@@ -84,7 +84,8 @@ export default {
   font-size: 40px;
 }
 
-.form-signin > .alert-danger {
+.form-signin > .alert-danger,
+.form-signin > .alert-success {
   padding-top: 16px;
 }
 

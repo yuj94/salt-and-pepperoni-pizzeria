@@ -12,9 +12,7 @@
         </ul>
       </div>
       <h3 class="cartPrice">Total Price: ${{ this.totalPrice }}</h3>
-      <button type="button" id="buttonCart" v-on:click="goToRoute" v-if="!isAtCheckout">
-        Proceed to Checkout
-      </button>
+      <button type="button" id="buttonCart" v-on:click="goToRoute" v-if="!isAtCheckout">Proceed to Checkout</button>
     </div>
   </div>
 </template>
@@ -33,9 +31,6 @@ export default {
       });
       return Number(totalPrice).toFixed(2);
     },
-    // isCartEmpty() {
-    //   if (this.$store.state.cart.length )
-    // },
   },
   methods: {
     goToRoute() {
