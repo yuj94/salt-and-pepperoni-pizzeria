@@ -33,6 +33,7 @@ export default {
     "employeePortalNav"
     "pendingOrders"
     "footer";
+  gap: 24px;
 }
 
 .employeePortalBanner {

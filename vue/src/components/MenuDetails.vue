@@ -13,7 +13,7 @@
       </div>
     </div>
     <h3 id="itemName" v-if="!isPizza">{{ menuObj.itemName }}</h3>
-    <h3 id="itemPrice">$ {{ Number(pizzaPrice(menuObj.price)).toFixed(2) }}</h3>
+    <h3 id="itemPrice">${{ Number(pizzaPrice(menuObj.price)).toFixed(2) }}</h3>
     <p id="itemDescription">{{ menuObj.itemDescription }}</p>
     <button type="button" id="itemCart" v-on:click="addItemToCart(menuObj)">Add to Cart</button>
   </div>
