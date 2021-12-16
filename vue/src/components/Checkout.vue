@@ -37,7 +37,7 @@
           </div>
           <div id="addressStateDiv">
             <label for="addressState"></label>
-            <input type="text" id="addressState" placeholder="State"  v-model="order.addressState" required/>
+            <input type="text" id="addressState" placeholder="State"  v-model="order.addressState" maxlength="2" required/>
           </div>
           <div id="addressZipCodeDiv">
             <label for="addressZipCode"></label>

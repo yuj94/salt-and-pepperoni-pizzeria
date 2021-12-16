@@ -69,7 +69,7 @@ VALUES ('Dough', 'Dough'),
            ('Philly Steak', 'Meat'),
            ('Anchovies', 'Meat'),
            ('Green Peppers', 'Veggies'),
-           ('Jalepeno Peppers', 'Veggies'),
+           ('Jalapeño Peppers', 'Veggies'),
            ('Mushrooms', 'Veggies'),
            ('Roma Tomatoes', 'Veggies'),
            ('Black Olives', 'Veggies'),
@@ -126,7 +126,7 @@ CREATE TABLE custom_pizza (
 
 INSERT INTO menu (item_name, item_description, item_category, image_url)
 VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with pepperoni, this is one of our most popular pizzas', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/pepperoni-slate-compressed.png'),
-       ('Sausage Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with sausage, this is our clasic Italian sausage pizza', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/sausage-slate-compressed.png'),
+       ('Sausage Pizza', 'Starting with our signature pizza sauce, adding on real cheese made from mozzarella, and finishing off with sausage, this is our classic Italian sausage pizza', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/sausage-slate-compressed.png'),
        ('3-Cheese Pizza', 'Our base pizza with rich tomato sauce base and a delightful 3-cheese blend', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/cheese-slate-compressed.png'),
        ('The Works Pizza', 'It is everything you want on a pizza and then some with pepperoni, Canadian bacon, spicy Italian sausage, fresh-cut onions, crisp green peppers, mushrooms, ripe black olives, and real cheese made from mozzarella', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/the-works-slate-compressed.png'),
        ('Fresh Spinach & Tomato Alfredo Pizza', 'Crafted with fresh cream and Parmesan and Romano cheeses, topped with fresh baby spinach, fresh-cut Roma tomatoes, sun-dried tomatoes, crisp green peppers, mushrooms, ripe black olives, real cheese made from mozzarella, plus classic Italian seasoning for an extra dash of flavor', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/fresh-spinach-tomato-compressed.png'),
@@ -139,12 +139,12 @@ VALUES ('Pepperoni Pizza', 'Starting with our signature pizza sauce, adding on r
        ('Fiery Buffalo Chicken Pizza', 'We are bringing the heat with more of the bold buffalo flavor you love. Our original crust is covered in ranch and a new buffalo sauce with a hint of buttery richness and a tangy, craveable kick. Piled high with grilled chicken, hickory-smoked bacon, fresh-cut onions, and real cheese made from mozzarella', 'Pizza', 'https://www.papajohns.com/static-assets/a/images/compressed/product/pizzas/fiery-buffalo-chicken-slate-compressed.png');
           
 INSERT INTO menu (item_name, item_description, item_category, price, image_url)
-VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa salami, kalamata olives, green sicilian olives, drizzle of extra virgin olive oil, basil leaf garnish & bread', 'Appetizer', 13, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240dc2b7eContent_ContentFile_mobile_Antipasto_1170.png_companyCode_GRPI001_designId_1'),
+VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa salami, Kalamata olives, green Sicilian olives, drizzle of extra virgin olive oil, basil leaf garnish & bread', 'Appetizer', 13, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240dc2b7eContent_ContentFile_mobile_Antipasto_1170.png_companyCode_GRPI001_designId_1'),
        ('Bruschetta', 'Our bruschetta is served trio style', 'Appetizer', 12, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240df2c18Content_ContentFile_mobile_BruschettaTrio_1170.png_companyCode_GRPI001_designId_1'), 
        ('Caprese', 'Slices of fresh mozzarella, tomatoes, fresh basil, drizzled with extra virgin olive oil & fresh cracked black pepper', 'Appetizer', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240eb4492Content_ContentFile_mobile_Caprese_1170.png_companyCode_GRPI001_designId_1'),
        ('Mediterranean Salad', 'Romaine lettuce, cucumbers, tomatoes, Kalamata olives, feta cheese, red onion served with house vinaigrette dressing on the side', 'Salad', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e1d690Content_ContentFile_MediterraneanSalad_1170.png_companyCode_GRPI001_designId_1'),
        ('Spinach Salad', 'Baby spinach, red onion, cherry tomatoes, bacon, crumbled Gorgonzola cheese served with balsamic vinaigrette dressing on the side', 'Salad', 11, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e4a544Content_ContentFile_mobile_SpinachSalad_1170.png_companyCode_GRPI001_designId_1'),
-       ('Caesar Salad', 'Romaine lettuce, imported Parmesan Cheese, coal oven baked croutons served with traditional caesar dressing on the side', 'Salad', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e6de38Content_ContentFile_mobile_CaesarSalad_1170.png_companyCode_GRPI001_designId_1'),
+       ('Caesar Salad', 'Romaine lettuce, imported Parmesan cheese, coal oven baked croutons served with traditional Caesar dressing on the side', 'Salad', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e6de38Content_ContentFile_mobile_CaesarSalad_1170.png_companyCode_GRPI001_designId_1'),
        ('House Salad', 'Romaine lettuce, red onion, cherry tomatoes, oven roasted sweet red peppers, mushrooms, Sicilian green olives served with house vinaigrette dressing on the side', 'Salad', 9, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240e98b78Content_ContentFile_mobile_HouseSalad_1170.png_companyCode_GRPI001_designId_1'),
        ('Lemon Arugula Salad', 'Arugula, shaved Italian cheese, coal oven baked croutons served with lemon vinaigrette dressing on the side and garnished with lemon wedges', 'Salad', 10, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b4240ee462dContent_ContentFile_mobile_LemonArugulaSalad_1170.png_companyCode_GRPI001_designId_1'),
        ('Cannoli', 'Fried pastry dough filled with sweet ricotta cheese and chocolate chips', 'Dessert', 5, 'https://d1ouk4tp1vcuss.cloudfront.net/s3.amazonaws.com/ODNUploads/61b42412bc24aContent_ContentFile_mobile_Cannoli_1170.png_companyCode_GRPI001_designId_1'),
@@ -159,7 +159,7 @@ VALUES ('Antipasto', 'Fresh mozzarella, oven roasted sweet red peppers, genoa sa
        ('Fanta', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/71wrRjcdrDL._SL1500_.jpg'),
        ('Powerade', '20 FL OZ', 'Drink', 2,'https://m.media-amazon.com/images/I/71s7s4d6KcL._SL1500_.jpg'),
        ('Dasani', '20 FL OZ', 'Drink', 2, 'https://m.media-amazon.com/images/I/31Fo4PL7BVL.jpg'),
-       ('Root Beer', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/81pRfPL1WxL._SL1500_.jpg'),
+       ('Root Beer', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/71nOtozS0yL._SL1500_.jpg'),
        ('Dr. Pepper', '2 Liter', 'Drink', 3, 'https://m.media-amazon.com/images/I/719IvqhnvTL._SL1500_.jpg');
        
 UPDATE menu SET total_quantity = 50;
