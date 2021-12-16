@@ -60,6 +60,7 @@ export default {
   padding: 16px;
   border-radius: 8px;
   color: #fff;
+  text-align: center;
 }
 
 .homepageFooter > p > a {

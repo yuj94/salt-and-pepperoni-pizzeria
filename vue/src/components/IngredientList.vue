@@ -27,32 +27,6 @@
     </div>
     <div class="ingredientList">
       <div>
-        <h3 id="meatId">Meats</h3>
-        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
-          <div class="ingredientCheckbox">
-            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
-            <label :for="ingredient"></label>
-          </div>
-          <div>
-            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h3 id="veggieId">Veggies</h3>
-        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
-          <div class="ingredientCheckbox">
-            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
-            <label :for="ingredient"></label>
-          </div>
-          <div>
-            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
-            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
-          </div>
-        </div>
-      </div>
-      <div>
         <h3 id="sauceId">Sauces</h3>
         <div class="sauces ingredientCategory" v-for="ingredient in sauces" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
@@ -68,6 +42,32 @@
       <div>
         <h3 id="cheeseId">Cheeses</h3>
         <div class="cheeses ingredientCategory" v-for="ingredient in cheeses" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 id="meatId">Meats</h3>
+        <div class="meats ingredientCategory" v-for="ingredient in meats" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
+          <div class="ingredientCheckbox">
+            <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
+            <label :for="ingredient"></label>
+          </div>
+          <div>
+            <p id="ingredientName"><span class="bold">{{ ingredient.ingredientName }}</span></p>
+            <p id="ingredientPrice">Price: ${{ Number(ingredient.price).toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 id="veggieId">Veggies</h3>
+        <div class="veggies ingredientCategory" v-for="ingredient in veggies" v-bind:key="ingredient.ingredientId" v-bind:class="{ ingredientChecked: ingredient.checked }" v-show="toppingsRemaining > 0 || ingredient.checked">
           <div class="ingredientCheckbox">
             <input type="checkbox" :id="ingredient" :name="ingredient.ingredientName" :value="ingredient" v-model="ingredientsToAdd" v-bind:checked="ingredient.checked" v-on:change="checkedIngredients(ingredient)"/>
             <label :for="ingredient"></label>
@@ -238,20 +238,8 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "meatId veggieId sauceId cheeseId"
-    "meat veggies sauce cheese";
+    "sauce cheese meat veggies";
   gap: 16px;
-}
-
-#meatId {
-  grid-area: meatId;
-  color: #d20201;
-  text-align: center;
-}
-
-#veggieId {
-  grid-area: veggieId;
-  color: #d20201;
-  text-align: center;
 }
 
 #sauceId {
@@ -266,12 +254,16 @@ export default {
   text-align: center;
 }
 
-.meats {
-  grid-area: meat;
+#meatId {
+  grid-area: meatId;
+  color: #d20201;
+  text-align: center;
 }
 
-.veggies {
-  grid-area: veggies;
+#veggieId {
+  grid-area: veggieId;
+  color: #d20201;
+  text-align: center;
 }
 
 .sauces {
@@ -280,6 +272,14 @@ export default {
 
 .cheeses {
   grid-area: cheese;
+}
+
+.meats {
+  grid-area: meat;
+}
+
+.veggies {
+  grid-area: veggies;
 }
 
 .ingredientCategory {
