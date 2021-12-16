@@ -28,14 +28,14 @@
       </table>
       <div class="customerDetails">
         <div class="customerInformation">
-          <h2>Customer Information:</h2>
+          <h2>Customer Information</h2>
           <p>First name: {{ this.$store.state.historicalOrders[indexOfOrderId].firstName }}</p>
           <p>Last name: {{ this.$store.state.historicalOrders[indexOfOrderId].lastName }}</p>
           <p>Email: {{ this.$store.state.historicalOrders[indexOfOrderId].email }}</p>
           <p>Phone: {{ this.$store.state.historicalOrders[indexOfOrderId].phoneNumber }}</p>
         </div>
         <div class="customerAddress" v-if="this.$store.state.historicalOrders[indexOfOrderId].isDelivery">
-          <h2>Customer Address:</h2>
+          <h2>Customer Address</h2>
           <p>Address: {{ this.$store.state.historicalOrders[indexOfOrderId].addressLine }}</p>
           <p>City: {{ this.$store.state.historicalOrders[indexOfOrderId].addressCity }}</p>
           <p>State: {{ this.$store.state.historicalOrders[indexOfOrderId].addressState }}</p>
