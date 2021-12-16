@@ -135,6 +135,7 @@ export default {
   overflow: hidden;
   width: 100%;
   table-layout: fixed;
+  word-wrap: break-word;
 }
 
 .styled-table > thead > tr {

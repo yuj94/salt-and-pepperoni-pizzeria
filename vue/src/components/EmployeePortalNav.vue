@@ -2,8 +2,8 @@
   <div class="employeePortalNavDiv">
     <router-link v-bind:to="{ name: 'pending-orders' }"><h3>Pending Orders</h3></router-link>
     <router-link v-bind:to="{ name: 'historical-orders' }"><h3>Historical Orders</h3></router-link>
-    <router-link v-bind:to="{ name: 'manage-inventory' }"><h3>Inventory</h3></router-link>
-    <router-link v-bind:to="{ name: 'manage-menu-items' }"><h3>Menu Items</h3></router-link>
+    <!-- <router-link v-bind:to="{ name: 'manage-inventory' }"><h3>Inventory</h3></router-link>
+    <router-link v-bind:to="{ name: 'manage-menu-items' }"><h3>Menu Items</h3></router-link> -->
   </div>
 </template>
 
