@@ -27,14 +27,18 @@
         </tbody>
       </table>
       <div>
-        <h2>Customer Name:</h2>
+        <h2>Customer Information:</h2>
         <p>{{ this.$store.state.pendingOrders[indexOfOrderId].firstName }}</p>
         <p>{{ this.$store.state.pendingOrders[indexOfOrderId].lastName }}</p>
-        <h2>Customer Address:</h2>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressLine }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressState }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressCity }}</p>
-        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressZipCode }}</p>
+        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].email }}</p>
+        <p>{{ this.$store.state.pendingOrders[indexOfOrderId].phoneNumber }}</p>
+        <div v-if="this.$store.state.pendingOrders[indexOfOrderId].isDelivery">
+          <h2>Customer Address:</h2>
+          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressLine }}</p>
+          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressState }}</p>
+          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressCity }}</p>
+          <p>{{ this.$store.state.pendingOrders[indexOfOrderId].addressZipCode }}</p>
+        </div>
       </div>
       <button class="toggle-modal-button" v-on:click="toggleModal()">Return</button>
     </div>
