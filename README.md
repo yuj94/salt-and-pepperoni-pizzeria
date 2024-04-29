@@ -17,7 +17,7 @@ Project was built with:
 - Vue.js
 
 ## Feature List
-Explore parts of application with the following pages:
+Explore parts of application locally with the following pages:
 
 - Landing page: http://localhost:8080/
 - View pizzas: http://localhost:8080/pizzas
