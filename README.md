@@ -5,6 +5,12 @@ _Duration: 14 Days_
 An online pizza ordering application that offers various functionalities based on role-based permissions. (TE Capstone)
 - A full-stack application using Spring Boot for the backend and Vue.js for the frontend. It is connected to a PostgreSQL database, allowing guests to browse the menu and place orders, while authorized users can track orders, modify the menu, and adjust prices.
 
+## Screenshot
+![preview of landing page](./resources/salt-and-pepperoni-pizzeria.jpg)
+
+## Visit
+To view this application live, please visit [here](https://salt-and-pepperoni-pizzeria.netlify.app/).
+
 ## Technologies Used
 Project was built with:
 - Java
