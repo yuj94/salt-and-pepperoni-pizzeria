@@ -30,7 +30,7 @@
               <input type="text" id="lastNameFilter" v-model="filter.lastName" placeholder="Last Name" />
             </td>
             <td>
-              <input type="text" id="emailFilter" v-model="filter.email" placeholder="E-Mail" />
+              <input type="text" id="emailFilter" v-model="filter.email" placeholder="Email" />
             </td>
             <td>
               <input type="text" id="phoneNumberFilter" v-model="filter.phoneNumber" placeholder="Phone Number" />
